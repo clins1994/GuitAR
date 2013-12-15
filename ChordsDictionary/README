@@ -1,0 +1,5 @@
+######
+README
+######
+
+Galeris, esse programa simples roda no linux. É só usar 'make' to terminal pra compilar e depois './ChordsDictionary' pra rodar.

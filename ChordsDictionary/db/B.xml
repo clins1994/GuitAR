@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>		
+<Chords>Chords
+    <Chord>B or Bmaj<Strings E="-1" A="2" D="4" G="4" B="4" e="2" /></Chord>
+    <Chord>B #5 or Baug 1<Strings E="3" A="2" D="1" G="0" B="0" e="3" /></Chord>
+    <Chord>B #5 or Baug 2<Strings E="3" A="-1" D="1" G="0" B="0" e="3" /></Chord>
+    <Chord>B/A 1<Strings E="2" A="-1" D="1" G="2" B="0" e="2" /></Chord>
+    <Chord>B/A 2<Strings E="-1" A="0" D="1" G="2" B="0" e="2" /></Chord>
+    <Chord>B/A 3<Strings E="-1" A="2" D="1" G="2" B="0" e="2" /></Chord>
+    <Chord>B/A 4<Strings E="-1" A="2" D="4" G="2" B="4" e="2" /></Chord>
+    <Chord>B/Ab<Strings E="-1" A="-1" D="4" G="4" B="4" e="4" /></Chord>
+    <Chord>B/E 1<Strings E="-1" A="2" D="2" G="4" B="4" e="2" /></Chord>
+    <Chord>B/E 2<Strings E="-1" A="-1" D="4" G="4" B="4" e="0" /></Chord>
+    <Chord>B5 or B(no 3rd) 1<Strings E="7" A="9" D="9" G="-1" B="-1" e="2" /></Chord>
+    <Chord>B5 or B(no 3rd) 2<Strings E="-1" A="2" D="4" G="4" B="-1" e="2" /></Chord>
+    <Chord>B6<Strings E="-1" A="-1" D="4" G="4" B="4" e="4" /></Chord>
+    <Chord>B7 or Bdom 7 1<Strings E="2" A="-1" D="1" G="2" B="0" e="2" /></Chord>
+    <Chord>B7 or Bdom 7 2<Strings E="-1" A="0" D="1" G="2" B="0" e="2" /></Chord>
+    <Chord>B7 or Bdom 7 3<Strings E="-1" A="2" D="1" G="2" B="0" e="2" /></Chord>
+    <Chord>B7 or Bdom 7 4<Strings E="-1" A="2" D="4" G="2" B="4" e="2" /></Chord>
+    <Chord>B7/add11 or B7/11 1<Strings E="0" A="0" D="4" G="4" B="4" e="0" /></Chord>
+    <Chord>B7/add11 or B7/11 2<Strings E="0" A="2" D="1" G="2" B="0" e="2" /></Chord>
+    <Chord>B7sus4 1<Strings E="-1" A="0" D="4" G="4" B="0" e="0" /></Chord>
+    <Chord>B7sus4 2<Strings E="-1" A="2" D="4" G="2" B="5" e="2" /></Chord>
+    <Chord>Baug/E 1<Strings E="3" A="-1" D="1" G="0" B="0" e="0" /></Chord>
+    <Chord>Baug/E 2<Strings E="-1" A="-1" D="1" G="0" B="0" e="0" /></Chord>
+    <Chord>Bb or Bbmaj 1<Strings E="1" A="1" D="3" G="3" B="3" e="1" /></Chord>
+    <Chord>Bb or Bbmaj 2<Strings E="-1" A="1" D="3" G="3" B="3" e="1" /></Chord>
+    <Chord>Bb or Bbmaj 3<Strings E="-1" A="-1" D="0" G="3" B="3" e="1" /></Chord>
+    <Chord>Bb #5 or Bbaug<Strings E="-1" A="-1" D="0" G="3" B="3" e="2" /></Chord>
+    <Chord>Bb b5<Strings E="-1" A="-1" D="0" G="3" B="-1" e="0" /></Chord>
+    <Chord>Bb/A<Strings E="1" A="1" D="3" G="2" B="3" e="1" /></Chord>
+    <Chord>Bb/Ab 1<Strings E="-1" A="1" D="3" G="1" B="3" e="1" /></Chord>
+    <Chord>Bb/Ab 2<Strings E="-1" A="-1" D="3" G="3" B="3" e="4" /></Chord>
+    <Chord>Bb/Db<Strings E="-1" A="-1" D="0" G="6" B="6" e="6" /></Chord>
+    <Chord>Bb/E<Strings E="-1" A="1" D="3" G="3" B="3" e="0" /></Chord>
+    <Chord>Bb/G 1<Strings E="3" A="5" D="3" G="3" B="3" e="3" /></Chord>
+    <Chord>Bb/G 2<Strings E="-1" A="-1" D="3" G="3" B="3" e="3" /></Chord>
+    <Chord>Bb5 or Bb(no 3rd) 1<Strings E="6" A="8" D="8" G="-1" B="-1" e="6" /></Chord>
+    <Chord>Bb5 or Bb(no 3rd) 2<Strings E="-1" A="1" D="3" G="3" B="-1" e="6" /></Chord>
+    <Chord>Bb6 1<Strings E="3" A="5" D="3" G="3" B="3" e="3" /></Chord>
+    <Chord>Bb6 2<Strings E="-1" A="-1" D="3" G="3" B="3" e="3" /></Chord>
+    <Chord>Bb6/add9 or Bb6/9<Strings E="-1" A="3" D="3" G="3" B="3" e="3" /></Chord>
+    <Chord>Bb7 or Bbdom 7 1<Strings E="-1" A="1" D="3" G="1" B="3" e="1" /></Chord>
+    <Chord>Bb7 or Bbdom 7 2<Strings E="-1" A="-1" D="3" G="3" B="3" e="4" /></Chord>
+    <Chord>Bb7sus4<Strings E="-1" A="1" D="3" G="1" B="4" e="1" /></Chord>
+    <Chord>Bbadd#11<Strings E="-1" A="1" D="3" G="3" B="3" e="0" /></Chord>
+    <Chord>Bbaug/E<Strings E="2" A="-1" D="4" G="3" B="3" e="0" /></Chord>
+    <Chord>Bbdim/C<Strings E="-1" A="3" D="-1" G="3" B="2" e="0" /></Chord>
+    <Chord>Bbdim/D<Strings E="-1" A="-1" D="0" G="3" B="2" e="0" /></Chord>
+    <Chord>Bbdim/G 1<Strings E="-1" A="1" D="2" G="0" B="2" e="0" /></Chord>
+    <Chord>Bbdim/G 2<Strings E="-1" A="-1" D="2" G="3" B="2" e="3" /></Chord>
+    <Chord>Bbdim/Gb 1<Strings E="2" A="4" D="2" G="3" B="2" e="2" /></Chord>
+    <Chord>Bbdim/Gb 2<Strings E="-1" A="-1" D="4" G="3" B="2" e="0" /></Chord>
+    <Chord>Bbdim7 1<Strings E="-1" A="1" D="2" G="0" B="2" e="0" /></Chord>
+    <Chord>Bbdim7 2<Strings E="-1" A="-1" D="2" G="3" B="2" e="3" /></Chord>
+    <Chord>Bbm<Strings E="1" A="1" D="3" G="3" B="2" e="1" /></Chord>
+    <Chord>Bbm/Ab<Strings E="-1" A="1" D="3" G="1" B="2" e="1" /></Chord>
+    <Chord>Bbm/D<Strings E="-1" A="-1" D="0" G="6" B="6" e="6" /></Chord>
+    <Chord>Bbm/Gb<Strings E="-1" A="-1" D="3" G="3" B="2" e="2" /></Chord>
+    <Chord>Bbm7<Strings E="-1" A="1" D="3" G="1" B="2" e="1" /></Chord>
+    <Chord>Bbmaj7 or Bb#7<Strings E="1" A="1" D="3" G="2" B="3" e="1" /></Chord>
+    <Chord>Bbmaj9 or Bb9(#7)<Strings E="-1" A="3" D="3" G="3" B="3" e="5" /></Chord>
+    <Chord>Bbsus2 or Bbadd9(no3)<Strings E="-1" A="-1" D="3" G="3" B="1" e="1" /></Chord>
+    <Chord>Bbsus2/G<Strings E="-1" A="3" D="5" G="3" B="6" e="3" /></Chord>
+    <Chord>Bbsus4/Ab<Strings E="-1" A="1" D="3" G="1" B="4" e="1" /></Chord>
+    <Chord>Bdim/A 1<Strings E="1" A="2" D="3" G="2" B="3" e="1" /></Chord>
+    <Chord>Bdim/A 2<Strings E="-1" A="2" D="0" G="2" B="0" e="1" /></Chord>
+    <Chord>Bdim/A 3<Strings E="-1" A="-1" D="0" G="2" B="0" e="1" /></Chord>
+    <Chord>Bdim/Ab 1<Strings E="-1" A="2" D="0" G="1" B="0" e="1" /></Chord>
+    <Chord>Bdim/Ab 2<Strings E="-1" A="-1" D="0" G="1" B="0" e="1" /></Chord>
+    <Chord>Bdim/Ab 3<Strings E="-1" A="-1" D="3" G="4" B="3" e="4" /></Chord>
+    <Chord>Bdim/G 1<Strings E="1" A="-1" D="0" G="0" B="0" e="3" /></Chord>
+    <Chord>Bdim/G 2<Strings E="3" A="2" D="0" G="0" B="0" e="1" /></Chord>
+    <Chord>Bdim/G 3<Strings E="-1" A="-1" D="0" G="0" B="0" e="1" /></Chord>
+    <Chord>Bdim7 1<Strings E="-1" A="2" D="0" G="1" B="0" e="1" /></Chord>
+    <Chord>Bdim7 2<Strings E="-1" A="-1" D="0" G="1" B="0" e="1" /></Chord>
+    <Chord>Bdim7 3<Strings E="-1" A="-1" D="3" G="4" B="3" e="4" /></Chord>
+    <Chord>Bm 1<Strings E="2" A="2" D="4" G="4" B="3" e="2" /></Chord>
+    <Chord>Bm 2<Strings E="-1" A="2" D="4" G="4" B="3" e="2" /></Chord>
+    <Chord>Bm 3<Strings E="-1" A="-1" D="0" G="4" B="3" e="2" /></Chord>
+    <Chord>Bm/A 1<Strings E="-1" A="0" D="4" G="4" B="3" e="2" /></Chord>
+    <Chord>Bm/A 2<Strings E="-1" A="2" D="0" G="2" B="0" e="2" /></Chord>
+    <Chord>Bm/A 3<Strings E="-1" A="2" D="0" G="2" B="3" e="2" /></Chord>
+    <Chord>Bm/A 4<Strings E="-1" A="2" D="4" G="2" B="3" e="2" /></Chord>
+    <Chord>Bm/A 5<Strings E="-1" A="-1" D="0" G="2" B="0" e="2" /></Chord>
+    <Chord>Bm/G 1<Strings E="2" A="2" D="0" G="0" B="0" e="3" /></Chord>
+    <Chord>Bm/G 2<Strings E="2" A="2" D="0" G="0" B="3" e="3" /></Chord>
+    <Chord>Bm/G 3<Strings E="3" A="2" D="0" G="0" B="0" e="2" /></Chord>
+    <Chord>Bm/G 4<Strings E="-1" A="-1" D="4" G="4" B="3" e="3" /></Chord>
+    <Chord>Bm7 1<Strings E="-1" A="0" D="4" G="4" B="3" e="2" /></Chord>
+    <Chord>Bm7 2<Strings E="-1" A="2" D="0" G="2" B="0" e="2" /></Chord>
+    <Chord>Bm7 3<Strings E="-1" A="2" D="0" G="2" B="3" e="2" /></Chord>
+    <Chord>Bm7 4<Strings E="-1" A="2" D="4" G="2" B="3" e="2" /></Chord>
+    <Chord>Bm7 5<Strings E="-1" A="-1" D="0" G="2" B="0" e="2" /></Chord>
+    <Chord>Bm7(b5) or Bo7 1<Strings E="1" A="2" D="3" G="2" B="3" e="1" /></Chord>
+    <Chord>Bm7(b5) or Bo7 2<Strings E="-1" A="2" D="0" G="2" B="0" e="1" /></Chord>
+    <Chord>Bm7(b5) or Bo7 3<Strings E="-1" A="-1" D="0" G="2" B="0" e="1" /></Chord>
+    <Chord>Bm7/add11 or Bm7/11 1<Strings E="0" A="0" D="2" G="4" B="3" e="2" /></Chord>
+    <Chord>Bm7/add11 or Bm7/11 2<Strings E="0" A="2" D="0" G="2" B="0" e="2" /></Chord>
+    <Chord>Bmaj7/#11<Strings E="-1" A="2" D="3" G="3" B="4" e="2" /></Chord>
+    <Chord>Bsus or Bsus4 1<Strings E="7" A="9" D="9" G="-1" B="-1" e="0" /></Chord>
+    <Chord>Bsus or Bsus4 2<Strings E="-1" A="2" D="4" G="4" B="-1" e="0" /></Chord>
+    <Chord>Bsus2 or Badd9(no3) 1<Strings E="-1" A="4" D="4" G="4" B="-1" e="2" /></Chord>
+    <Chord>Bsus2 or Badd9(no3) 2<Strings E="-1" A="-1" D="4" G="4" B="2" e="2" /></Chord>
+    <Chord>Bsus2/E<Strings E="-1" A="4" D="4" G="4" B="-1" e="0" /></Chord>
+    <Chord>Bsus4/A 1<Strings E="-1" A="0" D="4" G="4" B="0" e="0" /></Chord>
+    <Chord>Bsus4/A 2<Strings E="-1" A="2" D="4" G="2" B="5" e="2" /></Chord>
+    <Chord>Bsus4/Ab 1<Strings E="0" A="2" D="2" G="1" B="0" e="2" /></Chord>
+    <Chord>Bsus4/Ab 2<Strings E="0" A="-1" D="4" G="1" B="0" e="0" /></Chord>
+    <Chord>Bsus4/Ab 3<Strings E="2" A="2" D="2" G="1" B="0" e="0" /></Chord>
+    <Chord>Bsus4/Db<Strings E="-1" A="4" D="4" G="4" B="-1" e="0" /></Chord>
+    <Chord>Bsus4/Eb 1<Strings E="-1" A="2" D="2" G="4" B="4" e="2" /></Chord>
+    <Chord>Bsus4/Eb 2<Strings E="-1" A="-1" D="4" G="4" B="4" e="0" /></Chord>
+    <Chord>Bsus4/G 1<Strings E="0" A="2" D="2" G="0" B="0" e="2" /></Chord>
+    <Chord>Bsus4/G 2<Strings E="0" A="2" D="4" G="0" B="0" e="0" /></Chord>
+    <Chord>Bsus4/G 3<Strings E="0" A="-1" D="4" G="0" B="0" e="0" /></Chord>
+    <Chord>Bsus4/G 4<Strings E="2" A="2" D="2" G="0" B="0" e="0" /></Chord>
+</Chords>
