@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
+#include "Chord.hpp"
+#include <list>
 
 namespace Ui {
 class MainWindow;
@@ -19,9 +21,14 @@ public:
 private slots:
     void on_lineEdit_textEdited(const QString &arg1);
 
+    void on_btnNextChord_clicked();
+
+    void on_btnPrevChord_clicked();
+
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
+    std::list<Chord*> chordsFound;
 };
 
 #endif // MAINWINDOW_H

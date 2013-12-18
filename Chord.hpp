@@ -1,17 +1,17 @@
+#include <QString>
+
 #ifndef CHORD_HPP
 #define CHORD_HPP
-
-#include <string>
-using namespace std;
 
 class Chord
 {
     public:
-        Chord(string name);
-        string name;
+        Chord(QString name);
+        QString name;
         int * frets;
 
         void setFrets(int e, int B, int G, int D, int A, int E);
+        int getFret(int string);
 };
 
 #endif

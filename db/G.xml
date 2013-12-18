@@ -94,8 +94,8 @@
     <Chord>Gbm7<Strings E="2" A="-1" D="2" G="2" B="2" e="0" /></Chord>
     <Chord>Gbm7<Strings E="-1" A="0" D="4" G="2" B="2" e="0" /></Chord>
     <Chord>Gbm7<Strings E="-1" A="-1" D="2" G="2" B="2" e="2" /></Chord>
-    <Chord>Gbm7(b5) or Gbo7 1<Strings E="-1" A="0" D="2" G="2" B="1" e="2" /></Chord>
-    <Chord>Gbm7(b5) or Gbo7 2<Strings E="-1" A="-1" D="2" G="2" B="1" e="2" /></Chord>
+    <Chord>Gbm7(b5)<Strings E="-1" A="0" D="2" G="2" B="1" e="2" /></Chord>
+    <Chord>Gbm7(b5)<Strings E="-1" A="-1" D="2" G="2" B="1" e="2" /></Chord>
     <Chord>Gbm7/b9<Strings E="0" A="0" D="2" G="0" B="2" e="2" /></Chord>
     <Chord>Gb#7<Strings E="-1" A="-1" D="3" G="3" B="2" e="2" /></Chord>
     <Chord>Gbsus4<Strings E="-1" A="4" D="4" G="4" B="2" e="2" /></Chord>

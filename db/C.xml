@@ -55,9 +55,9 @@
     <Chord>Cm/Bb<Strings E="-1" A="3" D="5" G="3" B="4" e="3" /></Chord>
     <Chord>Cm6<Strings E="-1" A="-1" D="1" G="2" B="1" e="3" /></Chord>
     <Chord>Cm7<Strings E="-1" A="3" D="5" G="3" B="4" e="3" /></Chord>
-    <Chord>C7 1<Strings E="0" A="3" D="2" G="0" B="0" e="0" /></Chord>
-    <Chord>C#7 2<Strings E="-1" A="2" D="2" G="0" B="1" e="0" /></Chord>
-    <Chord>C#7 3<Strings E="-1" A="3" D="5" G="4" B="5" e="3" /></Chord>
+    <Chord>C7<Strings E="0" A="3" D="2" G="0" B="0" e="0" /></Chord>
+    <Chord>C#7<Strings E="-1" A="2" D="2" G="0" B="1" e="0" /></Chord>
+    <Chord>C#7<Strings E="-1" A="3" D="5" G="4" B="5" e="3" /></Chord>
     <Chord>C9(#7)<Strings E="-1" A="3" D="0" G="0" B="0" e="0" /></Chord>
     <Chord>Csus4<Strings E="-1" A="3" D="3" G="0" B="1" e="1" /></Chord>
     <Chord>Csus4<Strings E="-1" A="-1" D="3" G="0" B="1" e="1" /></Chord>
