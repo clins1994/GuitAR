@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui xml
+QT       += core gui xml declarative
 
 TARGET = ChordsDictionary
 TEMPLATE = app
@@ -12,13 +12,10 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    Chord.cpp \
-    include/pugixml/src/pugixml.cpp
+    Chord.cpp
 
 HEADERS  += mainwindow.h \
-    Chord.hpp \
-    include/pugixml/src/pugixml.hpp \
-    include/pugixml/src/pugiconfig.hpp
+    Chord.hpp
 
 FORMS    += mainwindow.ui
 

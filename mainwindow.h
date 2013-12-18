@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
-#include <include/pugixml/src/pugixml.hpp>
 
 namespace Ui {
 class MainWindow;
@@ -23,7 +22,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
-    pugi::xml_document doc;
 };
 
 #endif // MAINWINDOW_H

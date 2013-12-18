@@ -45,7 +45,7 @@ struct Braco {
     }
 
     Point* getPoint(int corda, int casa) {
-       Point* point = new Point(corda * cordaDistance, casaPosition[casa]);
+       Point* point = new Point(15 + casaPosition[casa], 55 + corda * cordaDistance);
        return point;
     }
 
@@ -96,22 +96,8 @@ void MainWindow::on_lineEdit_textEdited(const QString &chord_str)
     for(QDomNode node = rootElement.firstChild(); !node.isNull(); node = node.nextSibling())
     {
         chord = node.toElement();
-        if (chord.text() == chord_str)
-        {
+        if (chord.text().indexOf(chord_str) != -1)
             break;
-        }
-        else
-        {
-            unsigned found = chord.text().indexOf(" or ");
-            if (found != -1)
-            {
-                if (chord_str == chord.text().section(" or ", 0, 0))
-                    break;
-
-                if (chord_str == chord.text().section(" or ", 1, 1))
-                    break;
-            }
-        }
     }
 
     Braco * braco = new Braco(1320, 15);
@@ -125,7 +111,7 @@ void MainWindow::on_lineEdit_textEdited(const QString &chord_str)
         {
             qDebug() << map.item(i).toAttr().name() << " " << map.item(i).toAttr().value();
 
-            if (map.item(i).toAttr().value() != "0")
+            if (map.item(i).toAttr().value() != "0" && map.item(i).toAttr().value() != "-1")
             {
                 int y;
                 switch (map.item(i).toAttr().name().toStdString().at(0))
@@ -151,18 +137,11 @@ void MainWindow::on_lineEdit_textEdited(const QString &chord_str)
                 }
                 Point * point = braco->getPoint(y, map.item(i).toAttr().value().toDouble());
                 qDebug() << point->X << " " << point->Y;
-                scene->addEllipse(point->X, point->Y, 15, 15, QPen(Qt::red), QBrush(Qt::red));
+                scene->addEllipse(point->X - 8, point->Y - 8, 16, 16, QPen(Qt::red), QBrush(Qt::red));
+                delete point;
             }
         }
-
-//        for (pugi::xml_attribute attr = chord.child("Strings").first_attribute(); attr; attr = attr.next_attribute())
-//        {
-//            cout << attr.name() << " |---";
-//            if (strcmp(attr.value(), "-1") == 0)
-//                cout << "-";
-//            else
-//                cout << attr.value();
-//            cout << "---|" << endl;
-//        }
     }
+
+    delete braco;
 }

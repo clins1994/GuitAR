@@ -8,6 +8,5 @@
         <file>db/E.xml</file>
         <file>db/F.xml</file>
         <file>db/G.xml</file>
-        <file>db/l.xml</file>
     </qresource>
 </RCC>
