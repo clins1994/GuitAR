@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete scene;
 }
 
 struct Point {
@@ -45,7 +46,7 @@ struct Braco {
     }
 
     Point * getPoint(int corda, int casa) {
-       Point* point = new Point(15 + casaPosition[casa], 55 + corda * (cordaDistance - trastePosition[casa] / casaPosition[casa]));
+       Point * point = new Point(15 + casaPosition[casa], 50 + corda * (cordaDistance + 1 - trastePosition[casa] / casaPosition[casa]));
        return point;
     }
 
@@ -87,10 +88,7 @@ void MainWindow::on_lineEdit_textEdited(const QString &chord_str)
     }
     file.close();
 
-    QDomNode root = document.firstChild();
-    QDomElement rootElement = document.firstChild().toElement();
-//    if (rootElement.isProcessingInstruction())
-        rootElement = root.nextSibling().toElement();
+    QDomNode rootElement = document.documentElement();
 
     QDomElement chord;
     for(QDomNode node = rootElement.firstChild(); !node.isNull(); node = node.nextSibling())
@@ -104,12 +102,12 @@ void MainWindow::on_lineEdit_textEdited(const QString &chord_str)
 
     if (!chord.isNull())
     {
-        qDebug() << chord.text();
+        //qDebug() << chord.text();
         QDomNamedNodeMap map = chord.firstChildElement().attributes();
 
         for (int i = 0; i < map.count(); i++)
         {
-            qDebug() << map.item(i).toAttr().name() << " " << map.item(i).toAttr().value();
+            //qDebug() << map.item(i).toAttr().name() << " " << map.item(i).toAttr().value();
 
             if (map.item(i).toAttr().value() != "0" && map.item(i).toAttr().value() != "-1")
             {
@@ -136,7 +134,6 @@ void MainWindow::on_lineEdit_textEdited(const QString &chord_str)
                     break;
                 }
                 Point * point = braco->getPoint(y, map.item(i).toAttr().value().toDouble());
-                qDebug() << point->X << " " << point->Y;
                 scene->addEllipse(point->X - 8, point->Y - 8, 16, 16, QPen(Qt::red), QBrush(Qt::red));
                 delete point;
             }

@@ -120,10 +120,10 @@
     <Chord>Gm7<Strings E="-1" A="-1" D="3" G="3" B="3" e="3" /></Chord>
     <Chord>Gm7/11<Strings E="-1" A="3" D="3" G="3" B="3" e="3" /></Chord>
     <Chord>Gm9<Strings E="3" A="5" D="3" G="3" B="3" e="5" /></Chord>
-    <Chord>G#7 1<Strings E="2" A="2" D="0" G="0" B="0" e="3" /></Chord>
-    <Chord>G#7 2<Strings E="2" A="2" D="0" G="0" B="3" e="3" /></Chord>
-    <Chord>G#7 3<Strings E="3" A="2" D="0" G="0" B="0" e="2" /></Chord>
-    <Chord>G#7 4<Strings E="-1" A="-1" D="4" G="4" B="3" e="3" /></Chord>
+    <Chord>G#7<Strings E="2" A="2" D="0" G="0" B="0" e="3" /></Chord>
+    <Chord>G#7<Strings E="2" A="2" D="0" G="0" B="3" e="3" /></Chord>
+    <Chord>G#7<Strings E="3" A="2" D="0" G="0" B="0" e="2" /></Chord>
+    <Chord>G#7<Strings E="-1" A="-1" D="4" G="4" B="3" e="3" /></Chord>
     <Chord>Gsus4<Strings E="-1" A="3" D="0" G="0" B="3" e="3" /></Chord>
     <Chord>Gsus4<Strings E="-1" A="3" D="5" G="5" B="3" e="3" /></Chord>
     <Chord>Gsus4<Strings E="-1" A="5" D="5" G="5" B="3" e="3" /></Chord>
