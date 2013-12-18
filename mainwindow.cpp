@@ -44,8 +44,8 @@ struct Braco {
            casaPosition[i] = (trastePosition[i] + trastePosition[i - 1]) / 2;
     }
 
-    Point* getPoint(int corda, int casa) {
-       Point* point = new Point(15 + casaPosition[casa], 55 + corda * cordaDistance);
+    Point * getPoint(int corda, int casa) {
+       Point* point = new Point(15 + casaPosition[casa], 55 + corda * (cordaDistance - trastePosition[casa] / casaPosition[casa]));
        return point;
     }
 
@@ -100,7 +100,7 @@ void MainWindow::on_lineEdit_textEdited(const QString &chord_str)
             break;
     }
 
-    Braco * braco = new Braco(1320, 15);
+    Braco * braco = new Braco(1320, 17);
 
     if (!chord.isNull())
     {
