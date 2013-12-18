@@ -19,11 +19,13 @@ public:
     ~MainWindow();
     
 private slots:
-    void on_lineEdit_textEdited(const QString &arg1);
-
     void on_btnNextChord_clicked();
 
     void on_btnPrevChord_clicked();
+
+    void controle();
+
+    void on_txtChord_textEdited(const QString &chord_str);
 
 private:
     Ui::MainWindow *ui;

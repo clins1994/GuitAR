@@ -60,13 +60,15 @@ struct Braco {
         return l * (1 - (1 / p));
     }
 };
-
-void MainWindow::on_lineEdit_textEdited(const QString &chord_str)
+void MainWindow::on_txtChord_textEdited(const QString &chord_str)
 {
     scene->addPixmap(QPixmap(":/images/guitar-arm.jpg"));
     ui->graphicsView->setTransform(QTransform());
-
+    chordsFound.clear();
+    ui->btnNextChord->setEnabled(false);
+    ui->btnPrevChord->setEnabled(false);
     ui->statusBar->showMessage("");
+    ui->lblChord->setText("");
     if (chord_str.isEmpty())
         return;
 
@@ -77,7 +79,8 @@ void MainWindow::on_lineEdit_textEdited(const QString &chord_str)
 
     if (!file.exists() )
     {
-        ui->statusBar->showMessage("Acorde não encontrado");
+        ui->statusBar->showMessage("ERRO");
+        ui->lblChord->setText("Acorde não encontrado");
         return;
     }
 
@@ -135,18 +138,35 @@ void MainWindow::on_lineEdit_textEdited(const QString &chord_str)
             chordsFound.push_back(chord_new);
         }
     }
+    if(chordsFound.size()>1){
+        ui->btnNextChord->setEnabled(true);
+        ui->btnPrevChord->setEnabled(true);
+    }
+    controle();
+}
+
+void MainWindow::controle()
+{
+
+        scene->addPixmap(QPixmap(":/images/guitar-arm.jpg"));
+        ui->graphicsView->setTransform(QTransform());
+
+        ui->statusBar->showMessage("");
 
 
-    if (chordsFound.empty())
-        ui->statusBar->showMessage("Acorde não encontrado.");
+    if (chordsFound.empty()){
+        ui->statusBar->showMessage("ERRO");
+        ui->lblChord->setText("Acorde não encontrado");
+    }
     else
     {
         Braco * braco = new Braco(1320, 17);
         Chord * mychord = chordsFound.front();
-        Point * point;
+        ui->lblChord->setText(mychord->name);
+        Point * point = NULL;
         for (int i = 0; i < 6; i++)
         {
-            if (mychord->getFret(i) != 0 && mychord->getFret(i) != -1)
+            if (mychord->getFret(i) != -1 && mychord->getFret(i) != 0)
             {
                 point = braco->getPoint(5 - i, mychord->getFret(i));
                 qDebug() << mychord->name << " " << mychord->getFret(i);
@@ -154,18 +174,21 @@ void MainWindow::on_lineEdit_textEdited(const QString &chord_str)
             }
         }
         delete point;
-        delete mychord;
         delete braco;
     }
-
 }
 
 void MainWindow::on_btnNextChord_clicked()
 {
-
+    chordsFound.push_back(chordsFound.front());
+    chordsFound.pop_front();
+    controle();
 }
 
 void MainWindow::on_btnPrevChord_clicked()
 {
-
+    chordsFound.push_front(chordsFound.back());
+    chordsFound.pop_back();
+    controle();
 }
+
