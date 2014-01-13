@@ -2,3 +2,6 @@
 *~
 *.pro.user
 *.pro.user.*
+Win32/
+debug/
+release/
