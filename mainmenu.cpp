@@ -1,6 +1,7 @@
 #include "mainmenu.h"
 #include "ui_mainmenu.h"
 #include <QtXml>
+#include <Chord.hpp>
 
 MainMenu::MainMenu(QWidget *parent) :
     QMainWindow(parent),
@@ -17,6 +18,9 @@ MainMenu::MainMenu(QWidget *parent) :
     file = new QFile(":/assets/Chords.xml");
     file->open(QIODevice::ReadOnly);
     document.setContent(file);
+    rootElement = document.documentElement();
+
+    ui->chordsModificatorsComboBox->addItems(findChords(ui->normalChordsComboBox->currentText()));
 }
 
 MainMenu::~MainMenu()
@@ -26,26 +30,91 @@ MainMenu::~MainMenu()
     delete guitarArm;
 }
 
+QList<QString> MainMenu::findChords(QString mainChord)
+{
+    QDomElement chord;
+    QList<QString> list;
+    list << "M";
+
+    for (QDomNode node = rootElement.firstChild(); !node.isNull(); node = node.nextSibling())
+    {
+        chord = node.childNodes().at(0).toElement();
+        if (chord.text() == mainChord)
+        {
+            chord = node.childNodes().at(1).toElement();
+            if (chord.text() != "" && chord.text() != list.at(list.size() - 1))
+                list << chord.text();
+        }
+    }
+
+    return list;
+}
+
+QList<QString> MainMenu::getFrets(QString mainChord, QString modifier)
+{
+    QDomElement chord, chordModifier;
+    QList<QString> frets;
+    for (QDomNode node = rootElement.firstChild(); !node.isNull(); node = node.nextSibling())
+    {
+        chord = node.childNodes().at(0).toElement();
+        if (chord.text() == mainChord)
+        {
+            chordModifier = node.childNodes().at(1).toElement();
+            if (chordModifier.text() == modifier || (modifier == "M" && chordModifier.text() == ""))
+            {
+                frets = node.childNodes().at(2).toElement().text().split(" ");
+                break;
+            }
+        }
+    }
+
+    return frets;
+}
+
 void MainMenu::updateGraphics()
 {
     chordScene->clear();
     chordScene->addPixmap(*guitarArm);
     ui->chordGraphicsView->setTransform(QTransform());
 
+    if (ui->normalChordsRadioButton->isEnabled())
+    {
+        QString mainChord = ui->normalChordsComboBox->currentText();
+        QString modifier = ui->chordsModificatorsComboBox->currentText();
+        QList<QString> frets = getFrets(mainChord, modifier);
+        Chord * chord = new Chord();
+        chord->setFrets(frets);
 
+        Braco * braco = new Braco(475, 10);
+        Point * point = NULL;
+        qDebug() << mainChord << " " << modifier << " " << frets;
+        for (int i = 0; i < frets.size(); i++)
+        {
+            if (frets.at(i) != "0" && frets.at(i) != "X")
+            {
+                point = braco->getPoint(5 - i, chord->getFret(i));
+                chordScene->addEllipse(point->X, point->Y, 10, 10, QPen(Qt::NoPen), QBrush(QColor(255, 153, 0)));
+            }
+        }
+        delete point;
+        delete braco;
+    }
 }
 
-void MainMenu::on_normalChordsComboBox_currentIndexChanged(const QString &arg1)
+void MainMenu::on_normalChordsComboBox_activated(const QString &arg1)
+{
+    QList<QString> chordsFound = findChords(ui->normalChordsComboBox->currentText());
+    ui->chordsModificatorsComboBox->clear();
+    ui->chordsModificatorsComboBox->addItems(chordsFound);
+    updateGraphics();
+}
+
+void MainMenu::on_chordsModificatorsComboBox_activated(const QString &arg1)
 {
     updateGraphics();
 }
 
-void MainMenu::on_chordsModificatorsComboBox_currentIndexChanged(const QString &arg1)
-{
-    updateGraphics();
-}
-
-void MainMenu::on_splitChordsComboBox_currentIndexChanged(const QString &arg1)
+void MainMenu::on_splitChordsComboBox_activated(const QString &arg1)
 {
     updateGraphics();
 }

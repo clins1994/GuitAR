@@ -1,5 +1,12 @@
 #include "Chord.hpp"
 #include <cstdio>
+#include <QList>
+
+Chord::Chord()
+{
+    this->name = "";
+    this->frets = new int[6];
+}
 
 Chord::Chord(QString name)
 {
@@ -15,6 +22,15 @@ void Chord::setFrets(int e, int B, int G, int D, int A, int E)
     frets[3] = D;
     frets[4] = A;
     frets[5] = E;
+}
+
+void Chord::setFrets(QList<QString> frets_list)
+{
+    for (int i = 0; i < frets_list.size(); i++)
+        if (frets_list.at(i) == "X")
+            frets[i] = -1;
+        else
+            frets[i] = frets_list.at(i).toInt();
 }
 
 int Chord::getFret(int string)

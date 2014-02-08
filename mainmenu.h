@@ -45,19 +45,22 @@ private slots:
 
     void on_splitChordsRadioButton_clicked();
 
-    void on_normalChordsComboBox_currentIndexChanged(const QString &arg1);
+    void on_normalChordsComboBox_activated(const QString &arg1);
 
-    void on_chordsModificatorsComboBox_currentIndexChanged(const QString &arg1);
+    void on_chordsModificatorsComboBox_activated(const QString &arg1);
 
-    void on_splitChordsComboBox_currentIndexChanged(const QString &arg1);
+    void on_splitChordsComboBox_activated(const QString &arg1);
 
 private:
     void updateGraphics();
+    QList<QString> findChords(QString mainChord);
+    QList<QString> getFrets(QString mainChord, QString modifier);
 
     Ui::MainMenu *ui;
     QGraphicsScene * chordScene;
     const QPixmap * guitarArm;
     QDomDocument document;
+    QDomNode rootElement;
     QFile * file;
     QList<QString> mainChords;
 
@@ -88,9 +91,9 @@ private:
         Point * getPoint(int corda, int casa) {
             Point * point;
             if (corda != 0)
-                point = new Point(15 + casaPosition[casa], 50 + corda * (cordaDistance + 1 - trastePosition[casa] / casaPosition[casa]));
+                point = new Point(40 + casaPosition[casa], 150 + corda * (cordaDistance + 1 - trastePosition[casa] / casaPosition[casa]));
             else
-                point = new Point(15 + casaPosition[casa], 55 - 1 - trastePosition[casa] / casaPosition[casa]);
+                point = new Point(40 + casaPosition[casa], 155 - 1 - trastePosition[casa] / casaPosition[casa]);
             return point;
         }
 
