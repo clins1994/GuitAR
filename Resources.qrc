@@ -1,12 +1,17 @@
 <RCC>
     <qresource prefix="/">
-        <file>images/guitar-arm.jpg</file>
-        <file>db/A.xml</file>
-        <file>db/B.xml</file>
-        <file>db/C.xml</file>
-        <file>db/D.xml</file>
-        <file>db/E.xml</file>
-        <file>db/F.xml</file>
-        <file>db/G.xml</file>
+        <file>assets/guitAR.png</file>
+        <file>assets/orange_square.png</file>
+        <file>assets/vertical_lines.png</file>
+        <file>assets/guitAR_counterclockwise.png</file>
+        <file>assets/dot.png</file>
+        <file>assets/guitar_arm.png</file>
+        <file>assets/circulo_positionFinger.png</file>
+        <file>assets/seta_back.png</file>
+        <file>assets/seta_scrollDown.png</file>
+        <file>assets/seta_scrollUp.png</file>
+        <file>assets/xis_positionFinger.png</file>
+        <file>assets/box_selection.png</file>
+        <file>assets/tick_selection.png</file>
     </qresource>
 </RCC>
