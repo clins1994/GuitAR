@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT += core gui xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -14,11 +14,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
 	mainmenu.cpp \
-    Chord.cpp
+	Chord.cpp
 
 HEADERS  += \
 	mainmenu.h \
-    Chord.hpp
+	Chord.hpp
 
 FORMS    += \
 	mainmenu.ui

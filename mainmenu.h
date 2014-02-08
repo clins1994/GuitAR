@@ -4,6 +4,10 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <cmath>
+#include <QtXml>
+
+// Includes sharps
+#define NUMBER_OF_CHORDS 12
 
 namespace Ui {
 class MainMenu;
@@ -52,7 +56,10 @@ private:
 
     Ui::MainMenu *ui;
     QGraphicsScene * chordScene;
-    const QPixmap * guitarArm = new QPixmap(":/assets/guitar_arm.png");
+    const QPixmap * guitarArm;
+    QDomDocument document;
+    QFile * file;
+    QList<QString> mainChords;
 
     struct Point {
         double X;

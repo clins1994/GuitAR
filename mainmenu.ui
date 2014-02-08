@@ -462,43 +462,7 @@ QRadioButton::indicator:checked {
                         <number>0</number>
                        </property>
                        <item>
-                        <widget class="QComboBox" name="normalChordsComboBox">
-                         <item>
-                          <property name="text">
-                           <string>A</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>B</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>C</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>D</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>E</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>F</string>
-                          </property>
-                         </item>
-                         <item>
-                          <property name="text">
-                           <string>G</string>
-                          </property>
-                         </item>
-                        </widget>
+                        <widget class="QComboBox" name="normalChordsComboBox"/>
                        </item>
                        <item>
                         <widget class="QComboBox" name="chordsModificatorsComboBox"/>

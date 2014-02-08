@@ -1,5 +1,6 @@
 #include "mainmenu.h"
 #include "ui_mainmenu.h"
+#include <QtXml>
 
 MainMenu::MainMenu(QWidget *parent) :
     QMainWindow(parent),
@@ -8,18 +9,30 @@ MainMenu::MainMenu(QWidget *parent) :
     ui->setupUi(this);
     this->chordScene = new QGraphicsScene();
     ui->chordGraphicsView->setScene(this->chordScene);
+    guitarArm = new QPixmap(":/assets/guitar_arm.png");
     chordScene->addPixmap(*guitarArm);
+    mainChords << "C" << "C#" << "D" << "D#" << "E" <<  "F" << "F#" << "G" << "G#" << "A" << "A#" << "B";
+    ui->normalChordsComboBox->addItems(mainChords);
+
+    file = new QFile(":/assets/Chords.xml");
+    file->open(QIODevice::ReadOnly);
+    document.setContent(file);
 }
 
 MainMenu::~MainMenu()
 {
     delete ui;
+    delete chordScene;
+    delete guitarArm;
 }
 
 void MainMenu::updateGraphics()
 {
+    chordScene->clear();
     chordScene->addPixmap(*guitarArm);
     ui->chordGraphicsView->setTransform(QTransform());
+
+
 }
 
 void MainMenu::on_normalChordsComboBox_currentIndexChanged(const QString &arg1)
