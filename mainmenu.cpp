@@ -1,26 +1,36 @@
 #include "mainmenu.h"
 #include "ui_mainmenu.h"
 #include <QtXml>
-#include <Chord.hpp>
+#include <QGLWidget>
+#include "training_metaio.h"
+
+class Chord;
 
 MainMenu::MainMenu(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainMenu)
 {
     ui->setupUi(this);
+
+    // Dictionary
     this->chordScene = new QGraphicsScene();
     ui->chordGraphicsView->setScene(this->chordScene);
     guitarArm = new QPixmap(":/assets/guitar_arm.png");
     chordScene->addPixmap(*guitarArm);
     mainChords << "C" << "C#" << "D" << "D#" << "E" <<  "F" << "F#" << "G" << "G#" << "A" << "A#" << "B";
     ui->normalChordsComboBox->addItems(mainChords);
-
     file = new QFile(":/assets/Chords.xml");
     file->open(QIODevice::ReadOnly);
     document.setContent(file);
     rootElement = document.documentElement();
-
     ui->chordsModificatorsComboBox->addItems(findChords(ui->normalChordsComboBox->currentText()));
+
+    // Training
+    QGLWidget *glWidget = new QGLWidget(QGLFormat(QGL::SampleBuffers));
+    ui->trainigGraphicsView->setViewport(glWidget);
+    ui->trainigGraphicsView->setFrameShape(QFrame::NoFrame);
+    ui->trainigGraphicsView->setContextMenuPolicy(Qt::NoContextMenu);
+    ui->trainigGraphicsView->setScene(new TrainingMetaio());
 }
 
 MainMenu::~MainMenu()
@@ -82,8 +92,6 @@ void MainMenu::updateGraphics()
         QString mainChord = ui->normalChordsComboBox->currentText();
         QString modifier = ui->chordsModificatorsComboBox->currentText();
         QList<QString> frets = getFrets(mainChord, modifier);
-        Chord * chord = new Chord();
-        chord->setFrets(frets);
 
         Braco * braco = new Braco(475, 10);
         Point * point = NULL;
@@ -92,8 +100,8 @@ void MainMenu::updateGraphics()
         {
             if (frets.at(i) != "0" && frets.at(i) != "X")
             {
-                point = braco->getPoint(5 - i, chord->getFret(i));
-                chordScene->addEllipse(point->X, point->Y, 10, 10, QPen(Qt::NoPen), QBrush(QColor(255, 153, 0)));
+                point = braco->getPoint(i, frets.at(i).toInt());
+                chordScene->addEllipse(point->X, point->Y, 9, 9, QPen(Qt::NoPen), QBrush(QColor(255, 153, 0)));
             }
         }
         delete point;
@@ -127,6 +135,7 @@ void MainMenu::on_startTrainingButton_clicked()
 void MainMenu::on_consultChordButton_clicked()
 {
     ui->pages->setCurrentWidget(ui->consultChord);
+    updateGraphics();
 }
 
 void MainMenu::on_listMakerButton_clicked()
@@ -160,6 +169,11 @@ void MainMenu::on_backToMenuCreateList_clicked()
 }
 
 void MainMenu::on_backToMenuCreateBeat_clicked()
+{
+    ui->pages->setCurrentWidget(ui->mainMenu);
+}
+
+void MainMenu::on_backToMenuTraining_clicked()
 {
     ui->pages->setCurrentWidget(ui->mainMenu);
 }

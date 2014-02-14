@@ -51,7 +51,13 @@ private slots:
 
     void on_splitChordsComboBox_activated(const QString &arg1);
 
+    void on_backToMenuTraining_clicked();
+
 private:
+    // Training
+    void startTutorial();
+
+    // Dictionary
     void updateGraphics();
     QList<QString> findChords(QString mainChord);
     QList<QString> getFrets(QString mainChord, QString modifier);
@@ -89,11 +95,8 @@ private:
         }
 
         Point * getPoint(int corda, int casa) {
-            Point * point;
-            if (corda != 0)
-                point = new Point(40 + casaPosition[casa], 150 + corda * (cordaDistance + 1 - trastePosition[casa] / casaPosition[casa]));
-            else
-                point = new Point(40 + casaPosition[casa], 155 - 1 - trastePosition[casa] / casaPosition[casa]);
+            Point * point = new Point(40 + casaPosition[casa], 145 + corda * 8);
+            //point = new Point(40 + casaPosition[casa], 150 + corda * (cordaDistance + 1 - trastePosition[casa] / casaPosition[casa]));
             return point;
         }
 

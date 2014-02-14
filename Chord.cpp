@@ -1,5 +1,4 @@
-#include "Chord.hpp"
-#include <cstdio>
+#include "chord.h"
 #include <QList>
 
 Chord::Chord()

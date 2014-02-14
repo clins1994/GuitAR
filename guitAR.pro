@@ -4,24 +4,46 @@
 #
 #-------------------------------------------------
 
-QT += core gui xml
+QT += core gui xml opengl webkit network phonon
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = guitAR
 TEMPLATE = app
 
+CONFIG += release
 
-SOURCES += main.cpp \
-	mainmenu.cpp \
-	Chord.cpp
+INCLUDEPATH += $$_PRO_FILE_PWD_/metaioSDK/include
 
-HEADERS  += \
-	mainmenu.h \
-	Chord.hpp
+LIBS += \
+    -L"$$_PRO_FILE_PWD_/metaioSDK/bin" \
+    -lmetaioSDK \
+    -lwinmm
 
-FORMS    += \
-	mainmenu.ui
+SOURCES += \
+    main.cpp \
+    mainmenu.cpp \
+    chord.cpp \
+    training_metaio.cpp
+
+HEADERS += \
+    mainmenu.h \
+    chord.h \
+    training_metaio.h
+
+FORMS += \
+    mainmenu.ui
 
 RESOURCES += \
-	Resources.qrc
+    Resources.qrc
+
+OTHER_FILES += \
+    assets/TutorialHelloWorld/arelConfig.xml \
+    assets/TutorialHelloWorld/arelTutorial.html \
+    assets/TutorialHelloWorld/Assets/arelGlue.js \
+    assets/TutorialHelloWorld/Assets/metaioman.md2 \
+    assets/TutorialHelloWorld/Assets/TrackingData_MarkerlessFast.xml \
+    assets/TutorialHelloWorld/Assets/metaioman.png \
+    assets/TutorialHelloWorld/Assets/metaioman_target.png \
+    assets/TutorialHelloWorld/Assets/metaioman_target_original.png \
+    assets/TutorialHelloWorld/Assets/TrackingData_PictureMarker.xml
