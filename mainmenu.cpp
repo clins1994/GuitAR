@@ -30,7 +30,7 @@ MainMenu::MainMenu(QWidget *parent) :
     ui->trainigGraphicsView->setViewport(glWidget);
     ui->trainigGraphicsView->setFrameShape(QFrame::NoFrame);
     ui->trainigGraphicsView->setContextMenuPolicy(Qt::NoContextMenu);
-    ui->trainigGraphicsView->setScene(new TrainingMetaio());
+    ui->trainigGraphicsView->setScene(new TrainingMetaio(ui->trainigGraphicsView->size().width(), ui->trainigGraphicsView->size().height()));
 }
 
 MainMenu::~MainMenu()
@@ -143,17 +143,7 @@ void MainMenu::on_listMakerButton_clicked()
     ui->pages->setCurrentWidget(ui->selectList);
 }
 
-void MainMenu::on_beatMakerButton_clicked()
-{
-    ui->pages->setCurrentWidget(ui->selectBeat);
-}
-
 void MainMenu::on_backToMenuConsultChord_clicked()
-{
-    ui->pages->setCurrentWidget(ui->mainMenu);
-}
-
-void MainMenu::on_backToMenuSelectBeat_clicked()
 {
     ui->pages->setCurrentWidget(ui->mainMenu);
 }
@@ -164,11 +154,6 @@ void MainMenu::on_backToMenuSelectList_clicked()
 }
 
 void MainMenu::on_backToMenuCreateList_clicked()
-{
-    ui->pages->setCurrentWidget(ui->mainMenu);
-}
-
-void MainMenu::on_backToMenuCreateBeat_clicked()
 {
     ui->pages->setCurrentWidget(ui->mainMenu);
 }

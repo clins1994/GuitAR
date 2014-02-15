@@ -29,17 +29,11 @@ private slots:
 
     void on_listMakerButton_clicked();
 
-    void on_beatMakerButton_clicked();
-
     void on_backToMenuConsultChord_clicked();
-
-    void on_backToMenuSelectBeat_clicked();
 
     void on_backToMenuSelectList_clicked();
 
     void on_backToMenuCreateList_clicked();
-
-    void on_backToMenuCreateBeat_clicked();
 
     void on_normalChordsRadioButton_clicked();
 

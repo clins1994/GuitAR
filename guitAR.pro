@@ -27,7 +27,8 @@ SOURCES += \
     training_metaio.cpp \
     datamanager.cpp \
     chordset.cpp \
-    business.cpp
+    business.cpp \
+    serialize_hash.cpp
 
 HEADERS += \
     mainmenu.h \

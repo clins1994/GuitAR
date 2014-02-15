@@ -15,10 +15,12 @@ class TrainingMetaio : public QGraphicsScene
     Q_OBJECT
 
 public:
-    TrainingMetaio();
+    TrainingMetaio(int x, int y);
     ~TrainingMetaio();
 
 private:
+    int                         x;
+    int                         y;
     /// true if the tutorial has been initialized
     bool						m_initialized;
 
@@ -61,6 +63,8 @@ private:
     * \param mouseEvent the QGraphicsSceneMouseEvent mouse event
     */
     void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
+
+    void refreshGeometries();
 };
 
 #endif
