@@ -1,3 +1,8 @@
+#include <QFile>
+#include <QtXml>
+#include <QHash>
+#include <QDebug>
+#include "chord.h"
 
 void write()
 {

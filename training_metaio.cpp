@@ -32,57 +32,21 @@ TrainingMetaio::~TrainingMetaio()
 void TrainingMetaio::loadContent()
 {
     if(!m_pMetaioSDK->setTrackingConfiguration("ra/TrackingData_MarkerlessFast.xml"))
-		qCritical("Failed to load tracking configuration");
+        qCritical("Failed to load tracking configuration");
 
-
-    metaio::IGeometry* geometryPoint1= m_pMetaioSDK->createGeometryFromImage("ra/string1.png");
-    if(geometryPoint1)
+    QList<metaio::IGeometry *> geometries;
+    for (int i = 0; i < 6; i++)
     {
-        geometryPoint1->setScale(metaio::Vector3d(0.2, 0.2, 0.2));
-        geometryPoint1->setTranslation(metaio::Vector3d(-100.0, 0.0, 0.0));
+        metaio::IGeometry * geometry = m_pMetaioSDK->createGeometryFromImage("ra/string" + QString::number(i + 1).toStdString() + ".png");
+        geometries.append(geometry);
+        if(geometries.at(i))
+        {
+            geometries.at(i)->setScale(metaio::Vector3d(0.2, 0.2, 0.2));
+            geometries.at(i)->setTranslation(metaio::Vector3d(-100.0 * (i + 1), 0.0, 0.0));
+        }
+        else
+            qCritical("Failed to load MD2 model file");
     }
-    else
-        qCritical("Failed to load MD2 model file");
-    metaio::IGeometry* geometryPoint2 = m_pMetaioSDK->createGeometryFromImage("ra/string2.png");
-    if(geometryPoint2)
-    {
-        geometryPoint2->setScale(metaio::Vector3d(0.2, 0.2, 0.2));
-        geometryPoint2->setTranslation(metaio::Vector3d(-200.0, 0.0, 0.0));
-    }
-    else
-        qCritical("Failed to load MD2 model file");
-    metaio::IGeometry* geometryPoint3 = m_pMetaioSDK->createGeometryFromImage("ra/string3.png");
-    if(geometryPoint3)
-    {
-        geometryPoint3->setScale(metaio::Vector3d(0.2, 0.2, 0.2));
-        geometryPoint3->setTranslation(metaio::Vector3d(-300.0, 0.0, 0.0));
-    }
-    else
-        qCritical("Failed to load MD2 model file");
-    metaio::IGeometry* geometryPoint4 = m_pMetaioSDK->createGeometryFromImage("ra/string4.png");
-    if(geometryPoint4)
-    {
-        geometryPoint4->setScale(metaio::Vector3d(0.2, 0.2, 0.2));
-        geometryPoint4->setTranslation(metaio::Vector3d(-400.0, 0.0, 0.0));
-    }
-    else
-        qCritical("Failed to load MD2 model file");
-    metaio::IGeometry* geometryPoint5 = m_pMetaioSDK->createGeometryFromImage("ra/string5.png");
-    if(geometryPoint5)
-    {
-        geometryPoint5->setScale(metaio::Vector3d(0.2, 0.2, 0.2));
-        geometryPoint5->setTranslation(metaio::Vector3d(-500.0, 0.0, 0.0));
-    }
-    else
-        qCritical("Failed to load MD2 model file");
-    metaio::IGeometry* geometryPoint6 = m_pMetaioSDK->createGeometryFromImage("ra/string6.png");
-    if(geometryPoint6)
-    {
-        geometryPoint6->setScale(metaio::Vector3d(0.2, 0.2, 0.2));
-        geometryPoint6->setTranslation(metaio::Vector3d(-600.0, 0.0, 0.0));
-    }
-    else
-        qCritical("Failed to load MD2 model file");
 }
 
 void TrainingMetaio::drawBackground(QPainter* painter, const QRectF & rect)
@@ -97,7 +61,7 @@ void TrainingMetaio::drawBackground(QPainter* painter, const QRectF & rect)
     if (!m_initialized)
     {
         m_pMetaioSDK = metaio::CreateMetaioSDKWin32();
-        m_pMetaioSDK->initializeRenderer(800, 800 * this->y / this->x, metaio::ESCREEN_ROTATION_0, metaio::ERENDER_SYSTEM_OPENGL_EXTERNAL);
+        m_pMetaioSDK->initializeRenderer(this->x, this->y, metaio::ESCREEN_ROTATION_0, metaio::ERENDER_SYSTEM_OPENGL_EXTERNAL);
 
         // activate 1st camera
         std::vector<metaio::Camera> cameras = m_pMetaioSDK->getCameraList();
@@ -105,7 +69,7 @@ void TrainingMetaio::drawBackground(QPainter* painter, const QRectF & rect)
         {
             // set the resolution to 640x480
             qDebug() << x << " " << y;
-            cameras[0].resolution = metaio::Vector2di(this->x, this->y);
+            cameras[0].resolution = metaio::Vector2di(800, 800 * this->y / this->x);
             cameras[0].flip = metaio::Camera::FLIP_HORIZONTAL;
             m_pMetaioSDK->startCamera( cameras[0] );
         }
@@ -126,7 +90,7 @@ void TrainingMetaio::drawBackground(QPainter* painter, const QRectF & rect)
     glEnable(GL_MULTISAMPLE);
     glEnable(GL_LINE_SMOOTH);
 
-//    onDrawFrame();
+    //    onDrawFrame();
 
     m_pMetaioSDK->render();
 
@@ -149,8 +113,8 @@ void TrainingMetaio::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 
     // mouseEvent->screenPos() and mouseEvent->pos() seem to be always return (0,0) and scenePos()
     // has its origin in the middle of the rendering pane
-    const int x = mouseEvent->scenePos().x() + 800/2;
-    const int y = mouseEvent->scenePos().y() + 600/2;
+    const int x = mouseEvent->scenePos().x() + this->x / 2;
+    const int y = mouseEvent->scenePos().y() + this->y / 2;
 
     // Forward event to gesture handler (needed for drag gesture, just like the mouse press/release events)
     if(m_pGestureHandler)
