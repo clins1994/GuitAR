@@ -1,38 +1,38 @@
 #include "chord.h"
-#include <QList>
-
-Chord::Chord()
-{
-    this->name = "";
-    this->frets = new int[6];
-}
 
 Chord::Chord(QString name)
 {
     this->name = name;
-    this->frets = new int[6];
 }
 
-void Chord::setFrets(int e, int B, int G, int D, int A, int E)
+int* Chord::getCurrentVariation()
 {
-    frets[0] = e;
-    frets[1] = B;
-    frets[2] = G;
-    frets[3] = D;
-    frets[4] = A;
-    frets[5] = E;
+    int* aux = variations.first();
+    return aux;
 }
 
-void Chord::setFrets(QList<QString> frets_list)
+int* Chord::nextVariation()
 {
-    for (int i = 0; i < frets_list.size(); i++)
-        if (frets_list.at(i) == "X")
-            frets[i] = -1;
-        else
-            frets[i] = frets_list.at(i).toInt();
+    int* aux = variations.first();
+    variations.pop_front();
+    variations.push_back(aux);
+    return aux;
 }
 
-int Chord::getFret(int string)
+int* Chord::previousVariation()
 {
-    return frets[string];
+    int* aux = variations.last();
+    variations.pop_back();
+    variations.push_front(aux);
+    return aux;
+}
+
+void Chord::addVariation(int* frets)
+{
+    variations.push_front(frets);
+}
+
+void Chord::deleteCurrentVariation()
+{
+    variations.pop_front();
 }

@@ -1,19 +1,20 @@
 #ifndef CHORD_H
 #define CHORD_H
 
+#include <QList>
 #include <QString>
-
 class Chord
 {
 public:
-    Chord(QString name);
-    Chord();
+    Chord(QString);
+    int* getCurrentVariation();
+    int* nextVariation();
+    int* previousVariation();
+    void addVariation(int* frets);
+    void deleteCurrentVariation();
     QString name;
-    int * frets;
-
-    void setFrets(int e, int B, int G, int D, int A, int E);
-    void setFrets(QList<QString> frets);
-    int getFret(int string);
+private:
+    QList<int*> variations;
 };
 
 #endif // CHORD_H

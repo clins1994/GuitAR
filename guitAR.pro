@@ -24,12 +24,18 @@ SOURCES += \
     main.cpp \
     mainmenu.cpp \
     chord.cpp \
-    training_metaio.cpp
+    training_metaio.cpp \
+    datamanager.cpp \
+    chordset.cpp \
+    business.cpp
 
 HEADERS += \
     mainmenu.h \
     chord.h \
-    training_metaio.h
+    training_metaio.h \
+    datamanager.h \
+    chordset.h \
+    business.h
 
 FORMS += \
     mainmenu.ui
