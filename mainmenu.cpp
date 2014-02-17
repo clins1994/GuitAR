@@ -30,7 +30,7 @@ MainMenu::MainMenu(QWidget *parent) :
     ui->trainigGraphicsView->setViewport(glWidget);
     ui->trainigGraphicsView->setFrameShape(QFrame::NoFrame);
     ui->trainigGraphicsView->setContextMenuPolicy(Qt::NoContextMenu);
-    ui->trainigGraphicsView->setScene(new TrainingMetaio(ui->trainigGraphicsView->size().width(), ui->trainigGraphicsView->size().height()));
+    ui->trainigGraphicsView->setScene(new TrainingMetaio(ui->trainigGraphicsView->width(), ui->trainigGraphicsView->height()));
 }
 
 MainMenu::~MainMenu()
