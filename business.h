@@ -7,6 +7,7 @@
 #include "chord.h"
 #include "chordset.h"
 #include "datamanager.h"
+#include "datamanager.cpp"
 
 using namespace std;
 
@@ -15,7 +16,7 @@ class Business
 {
     public:
         Business();
-        virtual ~Business();
+        ~Business();
         QList<QString> getAllChordSetsName();
         void createChordSet (QString chordSetName);
         ChordSet getChordSet (QString chordSetName);
@@ -27,8 +28,7 @@ class Business
     private:
         QHash<QString, Chord> chordsTable;
         QHash<QString, ChordSet> chordSetsTable;
-        DataManager * dataManagerChords;
-        DataManager * dataManagerChordSets;
+        DataManager * dataManager;
 };
 
 #endif // BUSINES_H

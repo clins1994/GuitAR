@@ -1,5 +1,6 @@
 #include "mainmenu.h"
 #include <QApplication>
+#include "business.h"
 
 int main(int argc, char *argv[])
 {

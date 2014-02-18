@@ -1,5 +1,5 @@
 #ifndef CHORDSET_H
-#define CHORDSET_
+#define CHORDSET_H
 
 #include <QString>
 #include "chord.h"
@@ -8,6 +8,7 @@ class ChordSet
 {
 
 public:
+    ChordSet();
     ChordSet(QString name);
     QString name;
     QList<Chord> chords;
@@ -15,6 +16,7 @@ public:
     Chord nextChord();
     Chord previdousChord();
     Chord currentChord();
+    QString toString() const;
     int size();
     void addBeforeCurrent(Chord chord);
     void addOnEndList(Chord chord);
@@ -24,5 +26,8 @@ public:
 private:
     int current;
 };
+
+QDataStream &operator<<(QDataStream &out,  const ChordSet &chordset);
+QDataStream &operator>>(QDataStream &in, ChordSet &chordset);
 
 #endif // CHORDSET_H
