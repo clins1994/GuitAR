@@ -5,12 +5,13 @@
 #include <QHash>
 #include "chord.h"
 
-template <class T>
 class DataManager
 {
 public:
-    DataManager();
+    template <class T>
     QHash<QString, T> getData(QString hashtablename);
+
+    template <class T>
     void refreshData(QString hashtablename, QHash<QString, T> hash);
 };
 

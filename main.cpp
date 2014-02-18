@@ -1,4 +1,4 @@
-#include "mainmenu.h"
+#include "mainwindow.h"
 #include <QApplication>
 #include "business.h"
 
@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    MainMenu mm;
+    MainWindow mm;
     mm.show();
 
     return a.exec();

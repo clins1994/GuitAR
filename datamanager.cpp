@@ -4,12 +4,7 @@
 #include <QStringList>
 
 template <class T>
-DataManager<T>::DataManager()
-{
-}
-
-template <class T>
-QHash<QString, T> DataManager<T>::getData(QString hashtablename)
+QHash<QString, T> DataManager::getData(QString hashtablename)
 {
     QFile file("C:/temp/" + hashtablename + ".txt");
     QHash<QString, T> hashmucholoco;
@@ -28,7 +23,7 @@ QHash<QString, T> DataManager<T>::getData(QString hashtablename)
 }
 
 template <class T>
-void DataManager<T>::refreshData(QString hashtablename, QHash<QString, T> hash)
+void DataManager::refreshData(QString hashtablename, QHash<QString, T> hash)
 {
     QFile file("C:/temp/" + hashtablename + ".txt");
     file.open(QIODevice::WriteOnly);

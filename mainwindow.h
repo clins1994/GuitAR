@@ -1,5 +1,5 @@
-#ifndef MAINMENU_H
-#define MAINMENU_H
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
 #include <QMainWindow>
 #include <QGraphicsScene>
@@ -10,16 +10,16 @@
 #define NUMBER_OF_CHORDS 12
 
 namespace Ui {
-class MainMenu;
+class MainWindow;
 }
 
-class MainMenu : public QMainWindow
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainMenu(QWidget *parent = 0);
-    ~MainMenu();
+    explicit MainWindow(QWidget *parent = 0);
+    ~MainWindow();
 
 private slots:
 
@@ -56,7 +56,7 @@ private:
     QList<QString> findChords(QString mainChord);
     QList<QString> getFrets(QString mainChord, QString modifier);
 
-    Ui::MainMenu *ui;
+    Ui::MainWindow *ui;
     QGraphicsScene * chordScene;
     const QPixmap * guitarArm;
     QDomDocument document;
@@ -101,4 +101,4 @@ private:
     };
 };
 
-#endif // MAINMENU_H
+#endif // MAINWINDOW_H

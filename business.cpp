@@ -5,8 +5,8 @@ Business::Business()
 {
     //construtor
     dataManager = new DataManager();
-    chordsTable = dataManagerChords->getData("Chords");
-    chordSetsTable = dataManagerChordSets->getData("ChordSets");
+    chordsTable = dataManager->getData<Chord>("Chords");
+    chordSetsTable = dataManager->getData<ChordSet>("ChordSets");
 }
 
 Business::~Business()

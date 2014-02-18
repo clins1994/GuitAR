@@ -1,14 +1,14 @@
-#include "mainmenu.h"
-#include "ui_mainmenu.h"
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
 #include <QtXml>
 #include <QGLWidget>
 #include "training_metaio.h"
 
 class Chord;
 
-MainMenu::MainMenu(QWidget *parent) :
+MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainMenu)
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
@@ -33,14 +33,14 @@ MainMenu::MainMenu(QWidget *parent) :
     ui->trainigGraphicsView->setScene(new TrainingMetaio(ui->trainigGraphicsView->width(), ui->trainigGraphicsView->height()));
 }
 
-MainMenu::~MainMenu()
+MainWindow::~MainWindow()
 {
     delete ui;
     delete chordScene;
     delete guitarArm;
 }
 
-QList<QString> MainMenu::findChords(QString mainChord)
+QList<QString> MainWindow::findChords(QString mainChord)
 {
     QDomElement chord;
     QList<QString> list;
@@ -60,7 +60,7 @@ QList<QString> MainMenu::findChords(QString mainChord)
     return list;
 }
 
-QList<QString> MainMenu::getFrets(QString mainChord, QString modifier)
+QList<QString> MainWindow::getFrets(QString mainChord, QString modifier)
 {
     QDomElement chord, chordModifier;
     QList<QString> frets;
@@ -81,7 +81,7 @@ QList<QString> MainMenu::getFrets(QString mainChord, QString modifier)
     return frets;
 }
 
-void MainMenu::updateGraphics()
+void MainWindow::updateGraphics()
 {
     chordScene->clear();
     chordScene->addPixmap(*guitarArm);
@@ -109,7 +109,7 @@ void MainMenu::updateGraphics()
     }
 }
 
-void MainMenu::on_normalChordsComboBox_activated(const QString &arg1)
+void MainWindow::on_normalChordsComboBox_activated(const QString &arg1)
 {
     QList<QString> chordsFound = findChords(ui->normalChordsComboBox->currentText());
     ui->chordsModificatorsComboBox->clear();
@@ -117,60 +117,60 @@ void MainMenu::on_normalChordsComboBox_activated(const QString &arg1)
     updateGraphics();
 }
 
-void MainMenu::on_chordsModificatorsComboBox_activated(const QString &arg1)
+void MainWindow::on_chordsModificatorsComboBox_activated(const QString &arg1)
 {
     updateGraphics();
 }
 
-void MainMenu::on_splitChordsComboBox_activated(const QString &arg1)
+void MainWindow::on_splitChordsComboBox_activated(const QString &arg1)
 {
     updateGraphics();
 }
 
-void MainMenu::on_startTrainingButton_clicked()
+void MainWindow::on_startTrainingButton_clicked()
 {
     ui->pages->setCurrentWidget(ui->training);
 }
 
-void MainMenu::on_consultChordButton_clicked()
+void MainWindow::on_consultChordButton_clicked()
 {
     ui->pages->setCurrentWidget(ui->consultChord);
     updateGraphics();
 }
 
-void MainMenu::on_listMakerButton_clicked()
+void MainWindow::on_listMakerButton_clicked()
 {
     ui->pages->setCurrentWidget(ui->selectList);
 }
 
-void MainMenu::on_backToMenuConsultChord_clicked()
+void MainWindow::on_backToMenuConsultChord_clicked()
 {
     ui->pages->setCurrentWidget(ui->mainMenu);
 }
 
-void MainMenu::on_backToMenuSelectList_clicked()
+void MainWindow::on_backToMenuSelectList_clicked()
 {
     ui->pages->setCurrentWidget(ui->mainMenu);
 }
 
-void MainMenu::on_backToMenuCreateList_clicked()
+void MainWindow::on_backToMenuCreateList_clicked()
 {
     ui->pages->setCurrentWidget(ui->mainMenu);
 }
 
-void MainMenu::on_backToMenuTraining_clicked()
+void MainWindow::on_backToMenuTraining_clicked()
 {
     ui->pages->setCurrentWidget(ui->mainMenu);
 }
 
-void MainMenu::on_normalChordsRadioButton_clicked()
+void MainWindow::on_normalChordsRadioButton_clicked()
 {
     ui->normalChordsComboBox->setEnabled(true);
     ui->chordsModificatorsComboBox->setEnabled(true);
     ui->splitChordsComboBox->setEnabled(false);
 }
 
-void MainMenu::on_splitChordsRadioButton_clicked()
+void MainWindow::on_splitChordsRadioButton_clicked()
 {
     ui->splitChordsComboBox->setEnabled(true);
     ui->normalChordsComboBox->setEnabled(false);

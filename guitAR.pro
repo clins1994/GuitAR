@@ -22,35 +22,24 @@ LIBS += \
 
 SOURCES += \
     main.cpp \
-    mainmenu.cpp \
     chord.cpp \
     training_metaio.cpp \
     datamanager.cpp \
     chordset.cpp \
     business.cpp \
-    serialize_hash.cpp
+    serialize_hash.cpp \
+    mainwindow.cpp
 
 HEADERS += \
-    mainmenu.h \
     chord.h \
     training_metaio.h \
     datamanager.h \
     chordset.h \
-    business.h
+    business.h \
+    mainwindow.h
 
 FORMS += \
-    mainmenu.ui
+    mainwindow.ui
 
 RESOURCES += \
     Resources.qrc
-
-OTHER_FILES += \
-    assets/TutorialHelloWorld/arelConfig.xml \
-    assets/TutorialHelloWorld/arelTutorial.html \
-    assets/TutorialHelloWorld/Assets/arelGlue.js \
-    assets/TutorialHelloWorld/Assets/metaioman.md2 \
-    assets/TutorialHelloWorld/Assets/TrackingData_MarkerlessFast.xml \
-    assets/TutorialHelloWorld/Assets/metaioman.png \
-    assets/TutorialHelloWorld/Assets/metaioman_target.png \
-    assets/TutorialHelloWorld/Assets/metaioman_target_original.png \
-    assets/TutorialHelloWorld/Assets/TrackingData_PictureMarker.xml
