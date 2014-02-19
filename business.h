@@ -41,7 +41,7 @@ class Business
     private:
         QHash<QString, Chord> chordsTable;
         QHash<QString, ChordSet> chordSetsTable;
-        DataManager * dataManager;
+        DataManager dataManager;
 };
 
 #endif // BUSINES_H

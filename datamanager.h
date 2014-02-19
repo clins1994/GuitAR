@@ -8,6 +8,12 @@
 class DataManager
 {
 public:
+    QString basePath;
+    DataManager();
+
+    template <class T>
+    DataManager();
+
     template <class T>
     QHash<QString, T> getData(QString hashtablename);
 

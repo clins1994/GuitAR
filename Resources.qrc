@@ -14,5 +14,6 @@
         <file>assets/box_selection.png</file>
         <file>assets/tick_selection.png</file>
         <file>assets/Chords.xml</file>
+        <file>assets/Chords.guitAR</file>
     </qresource>
 </RCC>

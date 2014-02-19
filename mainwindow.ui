@@ -39,7 +39,7 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="training">
        <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -1389,6 +1389,9 @@ border: none;</string>
            <item>
             <widget class="QWidget" name="widget_7" native="true">
              <layout class="QHBoxLayout" name="horizontalLayout_15">
+              <property name="leftMargin">
+               <number>20</number>
+              </property>
               <property name="topMargin">
                <number>0</number>
               </property>

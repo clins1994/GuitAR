@@ -2,11 +2,26 @@
 #include "chord.h"
 #include "chordset.h"
 #include <QStringList>
+#include <QDesktopServices>
+#include <QDir>
+#include <QDebug>
+
+inline DataManager::DataManager()
+{
+    basePath = QDesktopServices::storageLocation(QDesktopServices::DataLocation) + "\\guitAR";
+    QDir dir(basePath);
+    if (!dir.exists())
+        dir.mkpath(".");
+    basePath += "\\";
+
+    QFile chords(":/assets/Chords.guitAR");
+    chords.copy(basePath + "Chords.guitAR");
+}
 
 template <class T>
 QHash<QString, T> DataManager::getData(QString hashtablename)
 {
-    QFile file("C:/temp/" + hashtablename + ".txt");
+    QFile file(basePath + hashtablename + ".guitAR");
     QHash<QString, T> hashmucholoco;
     if (file.exists())
     {
@@ -25,7 +40,7 @@ QHash<QString, T> DataManager::getData(QString hashtablename)
 template <class T>
 void DataManager::refreshData(QString hashtablename, QHash<QString, T> hash)
 {
-    QFile file("C:/temp/" + hashtablename + ".txt");
+    QFile file(basePath + hashtablename + ".guitAR");
     file.open(QIODevice::WriteOnly);
     QDataStream out(&file);
     out.setVersion(QDataStream::Qt_4_8);

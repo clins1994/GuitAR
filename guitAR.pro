@@ -6,12 +6,10 @@
 
 QT += core gui xml opengl webkit network phonon
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
 TARGET = guitAR
 TEMPLATE = app
 
-CONFIG += release
+CONFIG += release static embed_manifest_exe
 
 INCLUDEPATH += $$_PRO_FILE_PWD_/metaioSDK/include
 

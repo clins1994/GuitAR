@@ -1,18 +1,16 @@
 #include "business.h"
 #include <QDebug>
+#include <QStringList>
 
 Business::Business()
 {
-    //construtor
-    dataManager = new DataManager();
-    chordsTable = dataManager->getData<Chord>("Chords");
-    chordSetsTable = dataManager->getData<ChordSet>("ChordSets");
+    dataManager = DataManager();
+    chordsTable = dataManager.getData<Chord>("Chords");
+    chordSetsTable = dataManager.getData<ChordSet>("ChordSets");
 }
 
 Business::~Business()
 {
-    //destrutor
-    delete dataManager;
 }
 
 QList<QString> Business::getAllChordSetsNames()
@@ -143,6 +141,6 @@ void Business::setChordPreviousVariation(QString chordName)
 
 void Business::storeData()
 {
-    dataManager->refreshData<Chord>("Chords", chordsTable);
-    dataManager->refreshData<ChordSet>("ChordSets", chordSetsTable);
+    dataManager.refreshData<Chord>("Chords", chordsTable);
+    dataManager.refreshData<ChordSet>("ChordSets", chordSetsTable);
 }
