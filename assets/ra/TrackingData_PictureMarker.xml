@@ -94,7 +94,7 @@
                             correctly relate the marker pixel size to world 
                             coordinates. The size is specified in millimeters. 
                             -->
-                    <Size>300</Size>
+                    <Size>200</Size>
 
                     <!--    Description of the marker properties. -->
                     <MarkerParameters>
@@ -110,21 +110,10 @@
                                 their values. It is advised to set these 
                                 attributes to augment the image independently 
                                 of the reference image resolution. -->
-                        <referenceImage qualityThreshold="0.70">glue_picture_marker_2.png</referenceImage>
+                        <referenceImage qualityThreshold="0.70">metaioflip.png</referenceImage>
                     </MarkerParameters>
                 </Parameters>
-            </SensorCOS>
-            
-            <SensorCOS>
-                <SensorCosID>Marker2</SensorCosID>
-                <Parameters>
-				    <Size>300</Size>
-                    <MarkerParameters>
-                        <referenceImage qualityThreshold="0.70">glue_picture_marker_5.png</referenceImage>
-                    </MarkerParameters>
-                </Parameters>
-            </SensorCOS>
-            
+            </SensorCOS>            
         </Sensor>
     </Sensors>
 </TrackingData>

@@ -63,7 +63,7 @@ Chord ChordSet::nextChord()
     return currentChord();
 }
 
-Chord ChordSet::previdousChord()
+Chord ChordSet::previousChord()
 {
     current--;
     if (current == -1)

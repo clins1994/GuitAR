@@ -10,14 +10,60 @@
 #include <metaioSDK/IMetaioSDKWin32.h>
 #include <metaioSDK/GestureHandler.h>
 
-TrainingMetaio::TrainingMetaio(int goX, int goY) :
+/*
+ *
+ _____ ____      _    _   _ _  ___     ___ _   _
+|  ___|  _ \    / \  | \ | | |/ / |   |_ _| \ | |
+| |_  | |_) |  / _ \ |  \| | ' /| |    | ||  \| |
+|  _| |  _ <  / ___ \| |\  | . \| |___ | || |\  |_
+|_|   |_| \_\/_/   \_\_| \_|_|\_\_____|___|_| \_( )
+                                                |/
+ ____  ____   ___   ____ _   _ ____  _____
+|  _ \|  _ \ / _ \ / ___| | | |  _ \| ____|
+| |_) | |_) | | | | |   | | | | |_) |  _|
+|  __/|  _ <| |_| | |___| |_| |  _ <| |___
+|_|   |_| \_\\___/ \____|\___/|_| \_\_____|
+
+ _   _    _    ____  _   _ _____  _    ____ ____
+| | | |  / \  / ___|| | | |_   _|/ \  / ___/ ___|
+| |_| | / _ \ \___ \| |_| | | | / _ \| |  _\___ \
+|  _  |/ ___ \ ___) |  _  | | |/ ___ \ |_| |___) |
+|_| |_/_/   \_\____/|_| |_| |_/_/   \_\____|____/
+
+*/
+
+TrainingMetaio::TrainingMetaio(int goX, int goY, ChordSet* inputChordSet) :
     QGraphicsScene(),
     m_initialized(false),
     m_pGestureHandler(0),
     m_pMetaioSDK(0),
     x(goX),
-    y(goY)
+    y(goY),
+    offsetX(0),
+    offsetY(0),
+    offsetZ(0),
+    offsetString(0),
+    currentChord(0),
+    chordSet(inputChordSet)
 {
+    // ###############BUG DO CHORD#################
+    /*ChordSet cs = ChordSet("CS");
+    Chord c = Chord("C");
+    QVarLengthArray<int> frets;
+    frets.append(-1);
+    frets.append(3);
+    frets.append(2);
+    frets.append(0);
+    frets.append(1);
+    frets.append(0);
+    QList<QVarLengthArray<int>> list;
+    list.append(frets);
+    c.setVariations(list);
+    cs.addOnFirstList(c);
+    chordSet = &cs;*/
+
+    // ###############CALCULAR OFFSETS E BOTAR NO fretOffsets#################
+    // fretOffsets = calculos doidao da formula de física
 }
 
 TrainingMetaio::~TrainingMetaio()
@@ -34,15 +80,14 @@ void TrainingMetaio::loadContent()
     if(!m_pMetaioSDK->setTrackingConfiguration("ra/TrackingData_MarkerlessFast.xml"))
         qCritical("Failed to load tracking configuration");
 
-    QList<metaio::IGeometry *> geometries;
     for (int i = 0; i < 6; i++)
     {
-        metaio::IGeometry * geometry = m_pMetaioSDK->createGeometryFromImage("ra/string" + QString::number(i + 1).toStdString() + ".png");
+        metaio::IGeometry * geometry = m_pMetaioSDK->createGeometryFromImage("ra/string" + QString::number(i + 1).toStdString() + "2.png");
         geometries.append(geometry);
         if(geometries.at(i))
         {
-            geometries.at(i)->setScale(metaio::Vector3d(0.2, 0.2, 0.2));
-            geometries.at(i)->setTranslation(metaio::Vector3d(-100.0 * (i + 1), 0.0, 0.0));
+            geometries.at(i)->setScale(metaio::Vector3d(0.3,0.3,0.3));
+            geometries.at(i)->setVisible(FALSE);
         }
         else
             qCritical("Failed to load MD2 model file");
@@ -54,7 +99,7 @@ void TrainingMetaio::drawBackground(QPainter* painter, const QRectF & rect)
     painter->save();
     if (painter->paintEngine()->type()	!= QPaintEngine::OpenGL2)
     {
-        qWarning("TutorialHelloWorld: drawBackground needs a QGLWidget to be set as viewport on the graphics view");
+        qWarning("GuitAR: drawBackground needs a QGLWidget to be set as viewport on the graphics view");
         return;
     }
 
@@ -69,13 +114,10 @@ void TrainingMetaio::drawBackground(QPainter* painter, const QRectF & rect)
         {
             // set the resolution to 640x480
             qDebug() << x << " " << y;
-            cameras[0].resolution = metaio::Vector2di(800, 800 * this->y / this->x);
+            cameras[0].resolution = metaio::Vector2di(640, 480 * this->y / this->x);
             cameras[0].flip = metaio::Camera::FLIP_HORIZONTAL;
             m_pMetaioSDK->startCamera( cameras[0] );
         }
-
-        //if(!m_pMetaioSDK->loadEnvironmentMap("assets/TutorialContentTypes/Assets/env_map.zip"));
-        //    qCritical("Failed to load environment map");
 
         m_initialized = true;
 
@@ -124,6 +166,31 @@ void TrainingMetaio::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 
 void TrainingMetaio::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
+    // ###############DEBUGANDO#################
+    /*Qt::MouseButtons mouseButtons = mouseEvent->buttons();
+    if(mouseButtons == Qt::LeftButton)
+    {
+        offsetZ += 10;
+        qDebug() << "left " << offsetZ;
+    } else if(mouseButtons == Qt::RightButton)
+    {
+        offsetZ -= 10;
+        qDebug() << "right " << offsetZ;
+    }
+
+    if(mouseButtons == Qt::LeftButton || mouseButtons == Qt::RightButton)
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            if(geometries.at(i))
+            {
+                geometries.at(i)->setTranslation(metaio::Vector3d(offsetX, offsetY + (i * offsetString), offsetZ));
+            }else
+                qCritical("Failed to translate");
+        }
+    }*/
+    // ###############DEBUGANDO#################
+
     QGraphicsScene::mousePressEvent(mouseEvent);
 
     // See comment in mouseMoveEvent()
@@ -147,4 +214,43 @@ void TrainingMetaio::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
     // Forward event to gesture handler
     if(m_pGestureHandler)
         m_pGestureHandler->touchesEnded(x, y);
+}
+
+void TrainingMetaio::prepareAwesomeGeometries()
+{
+    QVarLengthArray<int> aux = currentAwesomeChord();
+    for(int i = 0; i < aux.size(); i++)
+    {
+        if(aux.at(i) == -1)
+        {
+            geometries.at(i)->setVisible(FALSE);
+        } else
+        {
+            geometries.at(i)->setVisible(TRUE);
+            geometries.at(i)->setTranslation(metaio::Vector3d(offsetX + fretOffsets.at(aux.at(i)), offsetY + (i * offsetString), offsetZ));
+        }
+    }
+}
+
+void TrainingMetaio::previousAwesomeChord()
+{
+    //mudar entre acordes (resolver o bug do Chord / include "chord.h")
+}
+
+void TrainingMetaio::nextAwesomeChord()
+{
+    //mudar entre acordes (resolver o bug do Chord / include "chord.h")
+}
+
+QVarLengthArray<int> TrainingMetaio::currentAwesomeChord()
+{
+    QVarLengthArray<int> retorno;
+    retorno.append(-1);
+    retorno.append(3);
+    retorno.append(2);
+    retorno.append(0);
+    retorno.append(1);
+    retorno.append(0);
+    // resolver o bug do Chord
+    return retorno;
 }
