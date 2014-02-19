@@ -3,6 +3,8 @@
 
 #include <QGraphicsScene>
 #include <metaioSDK/IGestureHandlerCallback.h>
+#include <QVarLengthArray>
+#include "chordset.h"
 
 namespace metaio
 {
@@ -15,12 +17,26 @@ class TrainingMetaio : public QGraphicsScene
     Q_OBJECT
 
 public:
-    TrainingMetaio(int x, int y);
+    TrainingMetaio(int x, int y, ChordSet* inputChordSet);
     ~TrainingMetaio();
 
 private:
     int                         x;
     int                         y;
+
+    int                         offsetX;
+    int                         offsetY;
+    int                         offsetZ;
+    int                         offsetString;
+    int                         currentChord;
+
+    ChordSet*                   chordSet;
+
+    QVarLengthArray<int>        fretOffsets;
+	
+    QList<metaio::IGeometry *> geometries;
+    //metaio::BoundingBox* auxBox;
+
     /// true if the tutorial has been initialized
     bool						m_initialized;
 
@@ -64,7 +80,13 @@ private:
     */
     void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
 
-    void refreshGeometries();
+    void prepareAwesomeGeometries();
+
+    void previousAwesomeChord();
+
+    void nextAwesomeChord();
+
+    QVarLengthArray<int> currentAwesomeChord();
 };
 
 #endif

@@ -6,8 +6,6 @@
 #include <QMessageBox>
 #include "training_metaio.h"
 
-class Chord;
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -30,7 +28,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->trainigGraphicsView->setViewport(glWidget);
     ui->trainigGraphicsView->setFrameShape(QFrame::NoFrame);
     ui->trainigGraphicsView->setContextMenuPolicy(Qt::NoContextMenu);
-    ui->trainigGraphicsView->setScene(new TrainingMetaio(ui->trainigGraphicsView->width(), ui->trainigGraphicsView->height()));
+    // ver como isso vai receber o chordSet
+
+    ui->trainigGraphicsView->setScene(new TrainingMetaio(ui->trainigGraphicsView->width(), ui->trainigGraphicsView->height(), NULL));
 
     // Lists
     updateListsList();

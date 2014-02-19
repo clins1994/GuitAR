@@ -14,7 +14,7 @@ public:
     QList<Chord> chords;
 
     Chord nextChord();
-    Chord previdousChord();
+    Chord previousChord();
     Chord currentChord();
     QString toString() const;
     int size();
