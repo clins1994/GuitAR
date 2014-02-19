@@ -17,13 +17,19 @@ class Business
     public:
         Business();
         ~Business();
-        QList<QString> getAllChordSetsName();
+        QList<QString> getAllChordSetsNames();
         void createChordSet (QString chordSetName);
+        void createChordSet (QString chordSetName, ChordSet chordSet);
         ChordSet getChordSet (QString chordSetName);
         void deleteChordSet (QString chordSetName);
         void updateChordSet (QString chordSetName, ChordSet chordSet);
         Chord getChord (QString chordName);
-        QList<QString> getChordsName();
+        QList<QString> getChordsNames();
+        QList<QString> getMainChordsNames();
+        QList<QString> getChordModificators(QString mainChord);
+        void setChordNextVariation(QString chordName);
+        void setChordPreviousVariation(QString chordName);
+        void storeData();
 
     private:
         QHash<QString, Chord> chordsTable;

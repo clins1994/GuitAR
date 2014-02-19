@@ -21,13 +21,25 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_19">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
     <item>
      <widget class="QStackedWidget" name="pages">
       <property name="enabled">
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="training">
        <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -428,6 +440,53 @@ QRadioButton::indicator:checked {
                  <property name="bottomMargin">
                   <number>0</number>
                  </property>
+                 <item>
+                  <widget class="QWidget" name="widget_6" native="true">
+                   <layout class="QVBoxLayout" name="verticalLayout_8">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <widget class="QPushButton" name="changeChordVariationUpButton">
+                      <property name="maximumSize">
+                       <size>
+                        <width>40</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>Up</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="changeChordVariationDownButton">
+                      <property name="maximumSize">
+                       <size>
+                        <width>40</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="text">
+                       <string>Down</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
                  <item>
                   <widget class="QWidget" name="widget_29" native="true">
                    <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -830,11 +889,12 @@ border: none;</string>
                <number>0</number>
               </property>
               <item>
-               <widget class="QListWidget" name="listWidget">
+               <widget class="QListWidget" name="listsList">
                 <property name="styleSheet">
                  <string notr="true">QListWidget {
 	background: &quot;#424242&quot;;
 	border: none;
+	padding: 10px;
 }
 
 QListWidget::item {
@@ -843,30 +903,21 @@ QListWidget::item {
 	padding: 5px 0;
 }</string>
                 </property>
-                <item>
-                 <property name="text">
-                  <string>List 1</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>List 2</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>List 3</string>
-                 </property>
-                </item>
                </widget>
               </item>
               <item>
                <widget class="QWidget" name="widget_3" native="true">
                 <layout class="QHBoxLayout" name="horizontalLayout_4">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
                  <item>
-                  <widget class="QPushButton" name="pushButton_11">
+                  <widget class="QPushButton" name="createNewListButton">
                    <property name="text">
-                    <string>C</string>
+                    <string>Create new</string>
                    </property>
                   </widget>
                  </item>
@@ -886,21 +937,21 @@ QListWidget::item {
                  <item>
                   <widget class="QPushButton" name="pushButton_10">
                    <property name="text">
-                    <string>E</string>
+                    <string>Edit</string>
                    </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="QPushButton" name="pushButton_9">
                    <property name="text">
-                    <string>D</string>
+                    <string>Delete</string>
                    </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="QPushButton" name="pushButton">
                    <property name="text">
-                    <string>S</string>
+                    <string>Train!</string>
                    </property>
                   </widget>
                  </item>
@@ -1122,12 +1173,12 @@ border: none;</string>
                     <string notr="true">margin: 0 10px 0 0;</string>
                    </property>
                    <property name="text">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Name&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Your&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;List&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Name&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Your&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;List&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit">
+                  <widget class="QLineEdit" name="newListText">
                    <property name="styleSheet">
                     <string notr="true">background: &quot;#424242&quot;;
 padding: 10px;
@@ -1142,9 +1193,20 @@ font-size: 16px;</string>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_6">
+                  <widget class="QPushButton" name="createListButton">
+                   <property name="maximumSize">
+                    <size>
+                     <width>80</width>
+                     <height>45</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>11</pointsize>
+                    </font>
+                   </property>
                    <property name="text">
-                    <string>Select</string>
+                    <string>Create!</string>
                    </property>
                   </widget>
                  </item>
@@ -1153,263 +1215,6 @@ font-size: 16px;</string>
               </item>
               <item>
                <spacer name="verticalSpacer_4">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="createBeat">
-       <layout class="QHBoxLayout" name="horizontalLayout_10">
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QWidget" name="widget_22" native="true">
-          <property name="minimumSize">
-           <size>
-            <width>300</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>300</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <widget class="QLabel" name="label_22">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>250</width>
-             <height>131</height>
-            </rect>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>250</width>
-             <height>150</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="pixmap">
-            <pixmap resource="Resources.qrc">:/assets/guitAR.png</pixmap>
-           </property>
-          </widget>
-          <widget class="QLabel" name="label_23">
-           <property name="geometry">
-            <rect>
-             <x>220</x>
-             <y>0</y>
-             <width>71</width>
-             <height>450</height>
-            </rect>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>450</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="pixmap">
-            <pixmap resource="Resources.qrc">:/assets/vertical_lines.png</pixmap>
-           </property>
-           <property name="scaledContents">
-            <bool>true</bool>
-           </property>
-          </widget>
-          <zorder>label_23</zorder>
-          <zorder>label_22</zorder>
-         </widget>
-        </item>
-        <item>
-         <widget class="QWidget" name="widget_20" native="true">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_14">
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>20</number>
-           </property>
-           <item>
-            <widget class="QWidget" name="widget_26" native="true">
-             <layout class="QHBoxLayout" name="horizontalLayout_15">
-              <item>
-               <widget class="QLabel" name="label_21">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="focusPolicy">
-                 <enum>Qt::NoFocus</enum>
-                </property>
-                <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/assets/orange_square.png&quot;/&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt; Creat Beat&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                </property>
-                <property name="scaledContents">
-                 <bool>false</bool>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer name="horizontalSpacer_6">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>217</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QPushButton" name="backToMenuCreateBeat">
-                <property name="minimumSize">
-                 <size>
-                  <width>40</width>
-                  <height>40</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>40</width>
-                  <height>40</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">background: url(:/assets/seta_back.png) no-repeat center center transparent;
-border: none;</string>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QWidget" name="widget_21" native="true">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_15">
-              <property name="leftMargin">
-               <number>30</number>
-              </property>
-              <property name="topMargin">
-               <number>20</number>
-              </property>
-              <property name="rightMargin">
-               <number>30</number>
-              </property>
-              <property name="bottomMargin">
-               <number>0</number>
-              </property>
-              <item>
-               <spacer name="verticalSpacer_5">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QWidget" name="widget_5" native="true">
-                <layout class="QHBoxLayout" name="horizontalLayout_9">
-                 <property name="leftMargin">
-                  <number>0</number>
-                 </property>
-                 <item>
-                  <widget class="QLabel" name="label_4">
-                   <property name="styleSheet">
-                    <string notr="true">margin: 0 10px 0 0;</string>
-                   </property>
-                   <property name="text">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Name&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Your&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Beat&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="lineEdit_2">
-                   <property name="styleSheet">
-                    <string notr="true">background: &quot;#424242&quot;;
-padding: 10px;
-border: 1px solid #CCC;
-text-align: center;
-color: white;
-font-size: 16px;</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="pushButton_7">
-                   <property name="text">
-                    <string>Select</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
-              </item>
-              <item>
-               <spacer name="verticalSpacer_6">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
                 </property>

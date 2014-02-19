@@ -5,6 +5,7 @@
 #include <QGraphicsScene>
 #include <cmath>
 #include <QtXml>
+#include "business.h"
 
 // Includes sharps
 #define NUMBER_OF_CHORDS 12
@@ -47,6 +48,14 @@ private slots:
 
     void on_backToMenuTraining_clicked();
 
+    void on_createNewListButton_clicked();
+
+    void on_createListButton_clicked();
+
+    void on_changeChordVariationUpButton_clicked();
+
+    void on_changeChordVariationDownButton_clicked();
+
 private:
     // Training
     void startTutorial();
@@ -54,14 +63,15 @@ private:
     // Dictionary
     void updateGraphics();
     QList<QString> findChords(QString mainChord);
-    QList<QString> getFrets(QString mainChord, QString modifier);
+    QVarLengthArray<int> getFrets(QString mainChord, QString modifier);
 
-    Ui::MainWindow *ui;
+    // Lists
+    void updateListsList();
+
+    Ui::MainWindow * ui;
+    Business * businessManager;
     QGraphicsScene * chordScene;
     const QPixmap * guitarArm;
-    QDomDocument document;
-    QDomNode rootElement;
-    QFile * file;
     QList<QString> mainChords;
 
     struct Point {
@@ -89,8 +99,7 @@ private:
         }
 
         Point * getPoint(int corda, int casa) {
-            Point * point = new Point(40 + casaPosition[casa], 145 + corda * 8);
-            //point = new Point(40 + casaPosition[casa], 150 + corda * (cordaDistance + 1 - trastePosition[casa] / casaPosition[casa]));
+            Point * point = new Point(40 + casaPosition[casa], 145 + corda * (cordaDistance + 1 - trastePosition[casa] / casaPosition[casa]));
             return point;
         }
 

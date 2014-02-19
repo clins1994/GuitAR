@@ -1,5 +1,6 @@
 #include "chordset.h"
 #include <QStringList>
+#include <QVarLengthArray>
 
 QDataStream &operator<<(QDataStream &out, const ChordSet &chordset)
 {
@@ -11,29 +12,29 @@ QDataStream &operator>>(QDataStream &in, ChordSet &chordset)
 {
     QString str;
     in >> str;
-    QList<QString> info = str.split("#");
-    chordset = ChordSet(info.at(0));
-    QList<QString> chords_str_list = info.at(1).split("|");
-    QList<Chord> chords_list;
+    QList<QString> firstSplit = str.split("#");
+    chordset = ChordSet(firstSplit.at(0));
+    QList<QString> chordsStrSplit = firstSplit.at(1).split("|");
+    QList<Chord> chordsList;
 
-    int size_chords_str_list = chords_str_list.size();
+    int size_chords_str_list = chordsStrSplit.size();
     for (int i = 0; i < size_chords_str_list; i++)
     {
-        QList<QString> infochord = chords_str_list.at(i).split("$");
-        Chord * mychord = new Chord(infochord.at(0));
-        QList<QString> variationslist = infochord.at(1).split("_");
-        QList<int *> variations;
-        int sizevariations = variationslist.size();
-        for (int j = 0; j < sizevariations; j++)
+        QList<QString> chordSplit = chordsStrSplit.at(i).split("$");
+        Chord * mychord = new Chord(chordSplit.at(0));
+        QList<QString> variationsSplit = chordSplit.at(1).split("_");
+        QList<QVarLengthArray<int>> variations;
+        int size_variations = variationsSplit.size();
+        for (int j = 0; j < size_variations; j++)
         {
-            int * frets = new int[6];
-            QList<QString> thisvariation = variationslist.at(j).split(" ");
+            QVarLengthArray<int> frets;
+            QList<QString> variationSplit = variationSplit.at(j).split(" ");
             for (int k = 0; k < 6; k++)
-                frets[k] = thisvariation.at(k).toInt();
+                frets.replace(k, variationSplit.at(k).toInt());
             variations.append(frets);
         }
         mychord->setVariations(variations);
-        chords_list.append(*mychord);
+        chordsList.append(*mychord);
     }
 
     return in;

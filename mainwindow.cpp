@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include <QtXml>
 #include <QGLWidget>
+#include <QDebug>
+#include <QMessageBox>
 #include "training_metaio.h"
 
 class Chord;
@@ -12,17 +14,15 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    businessManager = new Business();
+
     // Dictionary
     this->chordScene = new QGraphicsScene();
     ui->chordGraphicsView->setScene(this->chordScene);
     guitarArm = new QPixmap(":/assets/guitar_arm.png");
     chordScene->addPixmap(*guitarArm);
-    mainChords << "C" << "C#" << "D" << "D#" << "E" <<  "F" << "F#" << "G" << "G#" << "A" << "A#" << "B";
+    mainChords.append(businessManager->getMainChordsNames());
     ui->normalChordsComboBox->addItems(mainChords);
-    file = new QFile(":/assets/Chords.xml");
-    file->open(QIODevice::ReadOnly);
-    document.setContent(file);
-    rootElement = document.documentElement();
     ui->chordsModificatorsComboBox->addItems(findChords(ui->normalChordsComboBox->currentText()));
 
     // Training
@@ -31,54 +31,31 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->trainigGraphicsView->setFrameShape(QFrame::NoFrame);
     ui->trainigGraphicsView->setContextMenuPolicy(Qt::NoContextMenu);
     ui->trainigGraphicsView->setScene(new TrainingMetaio(ui->trainigGraphicsView->width(), ui->trainigGraphicsView->height()));
+
+    // Lists
+    updateListsList();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete businessManager;
     delete chordScene;
     delete guitarArm;
 }
 
 QList<QString> MainWindow::findChords(QString mainChord)
 {
-    QDomElement chord;
-    QList<QString> list;
-    list << "M";
-
-    for (QDomNode node = rootElement.firstChild(); !node.isNull(); node = node.nextSibling())
-    {
-        chord = node.childNodes().at(0).toElement();
-        if (chord.text() == mainChord)
-        {
-            chord = node.childNodes().at(1).toElement();
-            if (chord.text() != "" && chord.text() != list.at(list.size() - 1))
-                list << chord.text();
-        }
-    }
-
-    return list;
+    return businessManager->getChordModificators(mainChord);
 }
 
-QList<QString> MainWindow::getFrets(QString mainChord, QString modifier)
+QVarLengthArray<int> MainWindow::getFrets(QString mainChord, QString modifier)
 {
-    QDomElement chord, chordModifier;
-    QList<QString> frets;
-    for (QDomNode node = rootElement.firstChild(); !node.isNull(); node = node.nextSibling())
-    {
-        chord = node.childNodes().at(0).toElement();
-        if (chord.text() == mainChord)
-        {
-            chordModifier = node.childNodes().at(1).toElement();
-            if (chordModifier.text() == modifier || (modifier == "M" && chordModifier.text() == ""))
-            {
-                frets = node.childNodes().at(2).toElement().text().split(" ");
-                break;
-            }
-        }
-    }
+    QString chord_name = mainChord;
+    if (modifier != "M")
+        chord_name += " " + modifier;
 
-    return frets;
+    return businessManager->getChord(chord_name).getCurrentVariation();
 }
 
 void MainWindow::updateGraphics()
@@ -91,16 +68,16 @@ void MainWindow::updateGraphics()
     {
         QString mainChord = ui->normalChordsComboBox->currentText();
         QString modifier = ui->chordsModificatorsComboBox->currentText();
-        QList<QString> frets = getFrets(mainChord, modifier);
+        QVarLengthArray<int> frets = getFrets(mainChord, modifier);
 
         Braco * braco = new Braco(475, 10);
         Point * point = NULL;
-        qDebug() << mainChord << " " << modifier << " " << frets;
+//        qDebug() << mainChord << " " << modifier << " " << frets;
         for (int i = 0; i < frets.size(); i++)
         {
-            if (frets.at(i) != "0" && frets.at(i) != "X")
+            if (frets.at(i) != 0 && frets.at(i) != -1)
             {
-                point = braco->getPoint(i, frets.at(i).toInt());
+                point = braco->getPoint(i, frets.at(i));
                 chordScene->addEllipse(point->X, point->Y, 9, 9, QPen(Qt::NoPen), QBrush(QColor(255, 153, 0)));
             }
         }
@@ -125,6 +102,31 @@ void MainWindow::on_chordsModificatorsComboBox_activated(const QString &arg1)
 void MainWindow::on_splitChordsComboBox_activated(const QString &arg1)
 {
     updateGraphics();
+}
+
+void MainWindow::on_changeChordVariationUpButton_clicked()
+{
+    QString chord_name = ui->normalChordsComboBox->currentText();
+    QString modificator = ui->chordsModificatorsComboBox->currentText();
+    if (modificator != "M")
+        chord_name += " " + modificator;
+    businessManager->setChordPreviousVariation(chord_name);
+    updateGraphics();
+}
+
+void MainWindow::on_changeChordVariationDownButton_clicked()
+{
+    QString chord_name = ui->normalChordsComboBox->currentText();
+    QString modificator = ui->chordsModificatorsComboBox->currentText();
+    if (modificator != "M")
+        chord_name += " " + modificator;
+    businessManager->setChordNextVariation(chord_name);
+    updateGraphics();
+}
+
+void MainWindow::updateListsList()
+{
+    ui->listsList->addItems(businessManager->getAllChordSetsNames());
 }
 
 void MainWindow::on_startTrainingButton_clicked()
@@ -175,4 +177,17 @@ void MainWindow::on_splitChordsRadioButton_clicked()
     ui->splitChordsComboBox->setEnabled(true);
     ui->normalChordsComboBox->setEnabled(false);
     ui->chordsModificatorsComboBox->setEnabled(false);
+}
+
+void MainWindow::on_createNewListButton_clicked()
+{
+    ui->pages->setCurrentWidget(ui->creatList);
+}
+
+void MainWindow::on_createListButton_clicked()
+{
+    if (ui->newListText->text().isEmpty())
+        QMessageBox::warning(this, "Warning", "Nome nao pode ser em branco!");
+    else
+        businessManager->createChordSet(ui->newListText->text());
 }

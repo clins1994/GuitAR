@@ -1,6 +1,5 @@
 #include "chord.h"
 #include <QStringList>
-#include <QDebug>
 
 QDataStream &operator<<(QDataStream &out, const Chord &chord)
 {
@@ -12,21 +11,22 @@ QDataStream &operator>>(QDataStream &in, Chord &chord)
 {
     QString str;
     in >> str;
-    QList<QString> list1 = str.split("$");
-    chord = Chord(list1.at(0));
-    QList<QString> list2 = list1.at(1).split("_");
-    QList<int *> variations;
+    QList<QString> firstSplit = str.split("$");
+    chord = Chord(firstSplit.at(0));
+    QList<QString> variationsSplit = firstSplit.at(1).split("_");
+    QList<QVarLengthArray<int>> variations;
 
-    int sizeVariations = list2.size();
+    int sizeVariations = variationsSplit.size();
     for (int i = 0; i < sizeVariations; i++)
     {
-        int * frets = new int[6];
-        QList<QString> list3 = list2.at(i).split(" ");
+        QVarLengthArray<int> frets;
+        QList<QString> fretsSplit = variationsSplit.at(i).split(" ");
         for (int j = 0; j < 6; j++)
-            frets[j] = list3.at(j).toInt();
+            frets.append(fretsSplit.at(j).toInt());
 
-        variations.push_back(frets);
+        variations.push_front(frets);
     }
+
     chord.setVariations(variations);
     return in;
 }
@@ -41,29 +41,28 @@ Chord::Chord()
     this->name = "undefined";
 }
 
-int* Chord::getCurrentVariation()
+QVarLengthArray<int> Chord::getCurrentVariation()
 {
-    int* aux = variations.first();
-    return aux;
+    return variations.first();
 }
 
-int* Chord::nextVariation()
+QVarLengthArray<int> Chord::nextVariation()
 {
-    int* aux = variations.first();
+    QVarLengthArray<int> aux = variations.first();
     variations.pop_front();
     variations.push_back(aux);
     return aux;
 }
 
-int* Chord::previousVariation()
+QVarLengthArray<int> Chord::previousVariation()
 {
-    int* aux = variations.last();
+    QVarLengthArray<int> aux = variations.last();
     variations.pop_back();
     variations.push_front(aux);
     return aux;
 }
 
-void Chord::addVariation(int* frets)
+void Chord::addVariation(QVarLengthArray<int> frets)
 {
     variations.push_front(frets);
 }
@@ -73,7 +72,7 @@ void Chord::deleteCurrentVariation()
     variations.pop_front();
 }
 
-void Chord::setVariations(QList<int *> list)
+void Chord::setVariations(QList<QVarLengthArray<int>> list)
 {
     variations = list;
 }
@@ -84,12 +83,12 @@ QString Chord::toString() const
     int size = variations.size();
     for (int i = 0; i < size; i++)
     {
-        int* aux = variations.at(i);
-        for (int j = 0; j < 6; j++)
+        QVarLengthArray<int> aux = variations.at(i);
+        for (int j = 0; j < aux.size(); j++)
         {
             if (j != 0)
                 str += " ";
-            str += QString::number(aux[j]);
+            str += QString::number(aux.at(j));
         }
 
         if (i + 1 < size)
