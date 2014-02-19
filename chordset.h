@@ -27,7 +27,7 @@ private:
     int current;
 };
 
-QDataStream &operator<<(QDataStream &out,  const ChordSet &chordset);
-QDataStream &operator>>(QDataStream &in, ChordSet &chordset);
+QDataStream &operator<<(QDataStream &out,  const ChordSet &chordSet);
+QDataStream &operator>>(QDataStream &in, ChordSet &chordSet);
 
 #endif // CHORDSET_H

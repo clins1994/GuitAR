@@ -58,6 +58,16 @@ private slots:
 
     void on_deleteListButton_clicked();
 
+    void on_editListButton_clicked();
+
+    void on_backToMenuEditList_clicked();
+
+    void on_addChordToListButton_clicked();
+
+    void on_removeChordFromListButto_clicked();
+
+    void on_saveListButton_clicked();
+
 private:
     // Training
     void startTutorial();

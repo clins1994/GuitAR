@@ -1,19 +1,20 @@
 #include "chordset.h"
 #include <QStringList>
+#include <QDebug>
 #include <QVarLengthArray>
 
-QDataStream &operator<<(QDataStream &out, const ChordSet &chordset)
+QDataStream &operator<<(QDataStream &out, const ChordSet &chordSet)
 {
-    out << chordset.toString();
+    out << chordSet.toString();
     return out;
 }
 
-QDataStream &operator>>(QDataStream &in, ChordSet &chordset)
+QDataStream &operator>>(QDataStream &in, ChordSet &chordSet)
 {
     QString str;
     in >> str;
     QList<QString> firstSplit = str.split("#");
-    chordset = ChordSet(firstSplit.at(0));
+    chordSet = ChordSet(firstSplit.at(0));
     QList<QString> chordsStrSplit = firstSplit.at(1).split("|");
     QList<Chord> chordsList;
 
@@ -28,14 +29,16 @@ QDataStream &operator>>(QDataStream &in, ChordSet &chordset)
         for (int j = 0; j < size_variations; j++)
         {
             QVarLengthArray<int> frets;
-            QList<QString> variationSplit = variationSplit.at(j).split(" ");
+            QList<QString> variationSplit = variationsSplit.at(j).split(" ");
             for (int k = 0; k < 6; k++)
-                frets.replace(k, variationSplit.at(k).toInt());
+                frets.append(variationSplit.at(k).toInt());
             variations.append(frets);
         }
         mychord->setVariations(variations);
         chordsList.append(*mychord);
     }
+
+    chordSet.chords = chordsList;
 
     return in;
 }

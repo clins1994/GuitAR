@@ -8,7 +8,7 @@ QT += core gui xml opengl webkit network phonon
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = guitARRR
+TARGET = guitAR
 TEMPLATE = app
 
 CONFIG += release

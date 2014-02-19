@@ -46,9 +46,42 @@ void Business::deleteChordSet(QString chordSetName)
     chordSetsTable.remove(chordSetName);
 }
 
-void Business::updateChordSet(QString chordSetName, ChordSet chordSet)
+void Business::updateChordSet(QString chordSetName, QList<QString> chordsNames)
 {
+    ChordSet chordSet = chordSetsTable.take(chordSetName);
+    chordSet.chords.clear();
+    foreach (QString chordName, chordsNames)
+    {
+        Chord chord = chordsTable.take(chordName);
+        chordSet.addOnEndList(chord);
+        chordsTable.insert(chord.name, chord);
+    }
     chordSetsTable.insert(chordSetName, chordSet);
+}
+
+void Business::renameChordSet(QString oldName, QString newName)
+{
+    ChordSet chordSet = chordSetsTable.take(oldName);
+    chordSet.name = newName;
+    chordSetsTable.insert(chordSet.name, chordSet);
+}
+
+void Business::addChordToChordSet(QString chordSetName, QString chordName)
+{
+    ChordSet chordSet = chordSetsTable.take(chordSetName);
+    chordSet.addOnEndList(chordsTable.value(chordName));
+    chordSetsTable.insert(chordSet.name, chordSet);
+}
+
+QList<QString> Business::getChordSetChordsNames(QString chordSetName)
+{
+    QList<QString> chordSetChordsNames;
+    const QList<Chord> chords = chordSetsTable.value(chordSetName).chords;
+    int size = chords.size();
+    for (int i = 0; i < size; i++)
+        chordSetChordsNames.append(chords.at(i).name);
+
+    return chordSetChordsNames;
 }
 
 Chord Business::getChord(QString chordName)
@@ -96,11 +129,9 @@ QList<QString> Business::getChordModificators(QString mainChord)
 
 void Business::setChordNextVariation(QString chordName)
 {
-    qDebug() << "LOL";
     Chord chord = chordsTable.take(chordName);
     chord.nextVariation();
     chordsTable.insert(chord.name, chord);
-    qDebug() << "LOL";
 }
 
 void Business::setChordPreviousVariation(QString chordName)
@@ -113,5 +144,5 @@ void Business::setChordPreviousVariation(QString chordName)
 void Business::storeData()
 {
     dataManager->refreshData<Chord>("Chords", chordsTable);
-    dataManager->refreshData<ChordSet>("ChordSet", chordSetsTable);
+    dataManager->refreshData<ChordSet>("ChordSets", chordSetsTable);
 }

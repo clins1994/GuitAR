@@ -34,6 +34,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->trainigGraphicsView->setScene(new TrainingMetaio(ui->trainigGraphicsView->width(), ui->trainigGraphicsView->height(), NULL));
 
     // Lists
+    ui->editNormalChordsComboBox->addItems(businessManager->getMainChordsNames());
+    ui->editChordsModificatorsComboBox->addItems(findChords(ui->editNormalChordsComboBox->currentText()));
     updateListsList();
 }
 
@@ -75,15 +77,12 @@ void MainWindow::updateGraphics()
         Point * point = NULL;
 
         for (int i = 0; i < frets.size(); i++)
-        {
-            std::cout << frets.at(i) << " ";
             if (frets.at(i) != 0 && frets.at(i) != -1)
             {
                 point = braco->getPoint(i, frets.at(i));
                 chordScene->addEllipse(point->X, point->Y, 9, 9, QPen(Qt::NoPen), QBrush(QColor(255, 153, 0)));
             }
-        }
-        std::cout << std::endl;
+
         delete point;
         delete braco;
     }
@@ -129,7 +128,7 @@ void MainWindow::on_changeChordVariationDownButton_clicked()
 
 void MainWindow::updateListsList()
 {
-//    ui->listsList->clear();
+    ui->listsList->clear();
     ui->listsList->addItems(businessManager->getAllChordSetsNames());
 }
 
@@ -161,12 +160,17 @@ void MainWindow::on_backToMenuSelectList_clicked()
 
 void MainWindow::on_backToMenuCreateList_clicked()
 {
-    ui->pages->setCurrentWidget(ui->mainMenu);
+    ui->pages->setCurrentWidget(ui->selectList);
 }
 
 void MainWindow::on_backToMenuTraining_clicked()
 {
     ui->pages->setCurrentWidget(ui->mainMenu);
+}
+
+void MainWindow::on_backToMenuEditList_clicked()
+{
+    ui->pages->setCurrentWidget(ui->selectList);
 }
 
 void MainWindow::on_normalChordsRadioButton_clicked()
@@ -186,6 +190,8 @@ void MainWindow::on_splitChordsRadioButton_clicked()
 void MainWindow::on_createNewListButton_clicked()
 {
     ui->pages->setCurrentWidget(ui->creatList);
+    ui->newListText->clear();
+    ui->newListText->grabKeyboard();
 }
 
 void MainWindow::on_createListButton_clicked()
@@ -202,4 +208,55 @@ void MainWindow::on_deleteListButton_clicked()
 {
     businessManager->deleteChordSet(ui->listsList->currentItem()->text());
     updateListsList();
+}
+
+void MainWindow::on_editListButton_clicked()
+{
+    if (ui->listsList->count() > 0 && ui->listsList->currentRow() >= 0)
+    {
+        QString chordSetName = ui->listsList->currentItem()->text();
+        ui->pages->setCurrentWidget(ui->editList);
+
+        ui->listNameLabel->setText(chordSetName);
+        ui->editListsList->clear();
+        QList<QString> chordSetChordsNames = businessManager->getChordSetChordsNames(chordSetName);
+        for (int i = 0; i < chordSetChordsNames.size(); i++)
+            if (chordSetChordsNames.at(i).size() == 1)
+                ui->editListsList->addItem(chordSetChordsNames.at(i) + " M");
+            else
+                ui->editListsList->addItem(chordSetChordsNames.at(i));
+    }
+}
+
+void MainWindow::on_addChordToListButton_clicked()
+{
+    QString chordName = ui->editNormalChordsComboBox->currentText() + " " + ui->editChordsModificatorsComboBox->currentText();
+    ui->editListsList->addItem(chordName);
+}
+
+void MainWindow::on_removeChordFromListButto_clicked()
+{
+    ui->editListsList->takeItem(ui->editListsList->currentRow());
+}
+
+void MainWindow::on_saveListButton_clicked()
+{
+    QString listName = ui->listNameLabel->text();
+    QList<QString> listItemsNames;
+    for(int i = 0; i < ui->editListsList->count(); i++)
+    {
+        QList<QString> list = ui->editListsList->item(i)->text().split(" ");
+        if (list.at(1) != "M")
+            listItemsNames.append(ui->editListsList->item(i)->text());
+        else
+            listItemsNames.append(list.at(0));
+    }
+    businessManager->updateChordSet(listName, listItemsNames);
+
+    if (!ui->listNameEditText->text().isEmpty())
+        businessManager->renameChordSet(listName, ui->listNameEditText->text());
+
+    ui->pages->setCurrentWidget(ui->selectList);
+    updateListsList();
+    businessManager->storeData();
 }

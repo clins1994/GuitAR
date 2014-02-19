@@ -1,5 +1,6 @@
 #include "chord.h"
 #include <QStringList>
+#include <QDebug>
 
 QDataStream &operator<<(QDataStream &out, const Chord &chord)
 {
