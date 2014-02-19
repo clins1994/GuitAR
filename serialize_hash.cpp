@@ -1,8 +1,26 @@
-//#include <QFile>
-//#include <QtXml>
-//#include <QHash>
-//#include <QDebug>
-//#include "chord.h"
+#include <QFile>
+#include <QtXml>
+#include <QHash>
+#include <QDebug>
+#include "chordset.h"
+
+void caio()
+{
+    ChordSet cs = ChordSet("CS");
+    Chord c = Chord("C");
+    QVarLengthArray<int> frets;
+    frets.append(3);
+    frets.append(3);
+    frets.append(2);
+    frets.append(0);
+    frets.append(1);
+    frets.append(0);
+    QList<QVarLengthArray<int>> list;
+    list.append(frets);
+    c.setVariations(list);
+    cs.addOnFirstList(c);
+
+}
 
 //void write()
 //{

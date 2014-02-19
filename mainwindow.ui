@@ -903,6 +903,15 @@ QListWidget::item {
 	padding: 5px 0;
 }</string>
                 </property>
+                <property name="selectionBehavior">
+                 <enum>QAbstractItemView::SelectRows</enum>
+                </property>
+                <property name="currentRow">
+                 <number>-1</number>
+                </property>
+                <property name="sortingEnabled">
+                 <bool>true</bool>
+                </property>
                </widget>
               </item>
               <item>
@@ -942,7 +951,7 @@ QListWidget::item {
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_9">
+                  <widget class="QPushButton" name="deleteListButton">
                    <property name="text">
                     <string>Delete</string>
                    </property>

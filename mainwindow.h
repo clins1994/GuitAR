@@ -56,6 +56,8 @@ private slots:
 
     void on_changeChordVariationDownButton_clicked();
 
+    void on_deleteListButton_clicked();
+
 private:
     // Training
     void startTutorial();

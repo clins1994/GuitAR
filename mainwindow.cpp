@@ -4,6 +4,7 @@
 #include <QGLWidget>
 #include <QDebug>
 #include <QMessageBox>
+#include <iostream>
 #include "training_metaio.h"
 
 class Chord;
@@ -72,15 +73,17 @@ void MainWindow::updateGraphics()
 
         Braco * braco = new Braco(475, 10);
         Point * point = NULL;
-//        qDebug() << mainChord << " " << modifier << " " << frets;
+
         for (int i = 0; i < frets.size(); i++)
         {
+            std::cout << frets.at(i) << " ";
             if (frets.at(i) != 0 && frets.at(i) != -1)
             {
                 point = braco->getPoint(i, frets.at(i));
                 chordScene->addEllipse(point->X, point->Y, 9, 9, QPen(Qt::NoPen), QBrush(QColor(255, 153, 0)));
             }
         }
+        std::cout << std::endl;
         delete point;
         delete braco;
     }
@@ -126,6 +129,7 @@ void MainWindow::on_changeChordVariationDownButton_clicked()
 
 void MainWindow::updateListsList()
 {
+//    ui->listsList->clear();
     ui->listsList->addItems(businessManager->getAllChordSetsNames());
 }
 
@@ -190,4 +194,12 @@ void MainWindow::on_createListButton_clicked()
         QMessageBox::warning(this, "Warning", "Nome nao pode ser em branco!");
     else
         businessManager->createChordSet(ui->newListText->text());
+    updateListsList();
+    ui->pages->setCurrentWidget(ui->selectList);
+}
+
+void MainWindow::on_deleteListButton_clicked()
+{
+    businessManager->deleteChordSet(ui->listsList->currentItem()->text());
+    updateListsList();
 }
