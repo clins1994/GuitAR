@@ -28,6 +28,7 @@ class Business
         void renameChordSet(QString oldName, QString newName);
         void addChordToChordSet(QString chordSetName, QString chordName);
         QList<QString> getChordSetChordsNames(QString chordSetName);
+        bool findChordSet(QString chordSetName);
 
         // Chords
         void refreshChordsHash();

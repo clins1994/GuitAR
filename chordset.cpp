@@ -79,7 +79,7 @@ Chord ChordSet::currentChord()
     return chords.at(current);
 }
 
-const Chord *ChordSet::getChord(int index)
+const Chord *ChordSet::getChord(int index) const
 {
     return &chords.at(index);
 }
