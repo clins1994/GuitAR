@@ -80,6 +80,15 @@ QList<QString> Business::getChordSetChordsNames(QString chordSetName)
     return chordSetChordsNames;
 }
 
+bool Business::findChordSet(QString chordSetName)
+{
+    QHash<QString, ChordSet>::iterator i;
+    for (i = chordSetsTable.begin(); i != chordSetsTable.end(); i++)
+        if (i.value().name == chordSetName)
+            return true;
+    return false;
+}
+
 Chord Business::getChord(QString chordName)
 {
     QList<QString> list = chordName.split(" ");

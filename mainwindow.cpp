@@ -203,10 +203,14 @@ void MainWindow::on_createListButton_clicked()
 {
     if (ui->newListText->text().isEmpty())
         QMessageBox::warning(this, "Warning", "Nome nao pode ser em branco!");
+    else if (businessManager->findChordSet(ui->newListText->text()))
+        QMessageBox::warning(this, "Warning", "Ja existe uma lista com esse nome!");
     else
+    {
         businessManager->createChordSet(ui->newListText->text());
-    updateListsList();
-    ui->pages->setCurrentWidget(ui->selectList);
+        updateListsList();
+        ui->pages->setCurrentWidget(ui->selectList);
+    }
 }
 
 void MainWindow::on_deleteListButton_clicked()
@@ -228,10 +232,12 @@ void MainWindow::on_editListButton_clicked()
         ui->editListsList->clear();
 
         for (int i = 0; i < editListAuxChordSet.chords.size(); i++)
+        {
             if (editListAuxChordSet.chords.at(i).name.size() == 1)
                 ui->editListsList->addItem(editListAuxChordSet.chords.at(i).name + " M");
             else
                 ui->editListsList->addItem(editListAuxChordSet.chords.at(i).name);
+        }
     }
 }
 
@@ -245,15 +251,18 @@ void MainWindow::on_addChordToListButton_clicked()
 
 void MainWindow::on_removeChordFromListButton_clicked()
 {
+    editListAuxChordSet.chords.takeAt(ui->editListsList->currentRow());
     ui->editListsList->takeItem(ui->editListsList->currentRow());
 }
 
 void MainWindow::saveChordSet()
 {
-    businessManager->updateChordSet(editListAuxChordSet.name, editListAuxChordSet);
-    ui->pages->setCurrentWidget(ui->selectList);
-    updateListsList();
-    businessManager->storeData();
+    if(ui->editListsList->count() > 0)
+    {
+        businessManager->updateChordSet(editListAuxChordSet.name, editListAuxChordSet);
+        updateListsList();
+        businessManager->storeData();
+    }
 }
 
 void MainWindow::on_trainingMainChordComboBox_activated(const QString &arg1)
@@ -295,14 +304,7 @@ void MainWindow::on_editListNextChordVariation_clicked()
     editListUpdateGraphics();
 }
 
-void MainWindow::on_editListsList_activated(const QModelIndex &index)
-{
-    //Chord chord = editListAuxChordSet.chords.takeAt(index.row());
-//    QVarLengthArray<int> frets = editListAuxChordSet.getChord(index.row()).getCurrentVariation();
-//    editUpdateFromChord(frets);
-}
-
-void MainWindow::editUpdateFromChord(QVarLengthArray<int> frets) const
+void MainWindow::editUpdateFromChord(QVarLengthArray<int> frets)
 {
     editListChordScene->clear();
     editListChordScene->addPixmap(*guitarArm);

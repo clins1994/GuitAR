@@ -75,8 +75,6 @@ private slots:
 
     void on_editListNextChordVariation_clicked();
 
-    void on_editListsList_activated(const QModelIndex &index);
-
 private:
     // Training
     TrainingMetaio * trainingWidget;
@@ -93,7 +91,7 @@ private:
     void updateListsList();
     void editListUpdateGraphics();
     void saveChordSet();
-    void editUpdateFromChord(const QVarLengthArray<int> frets) const;
+    void editUpdateFromChord(QVarLengthArray<int> frets);
 
     Ui::MainWindow * ui;
     Business * businessManager;
