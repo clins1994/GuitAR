@@ -61,7 +61,7 @@
 							threshold can lead to failure. The value range for
 							the threshold is between 0 and 255.
 							-->
-                    <ThresholdOffset>128</ThresholdOffset>
+                    <ThresholdOffset>110</ThresholdOffset>
 
                     <!--    Number of search iterations which controls the 
                             number of attempts to find a marker with a new 
@@ -76,44 +76,92 @@
 
                 </MarkerTrackingParameters>
             </Parameters>
-            
-            <!--    Example configuration of a rectangular image is using an 
-					image to identify the marker.
-                    - The marker can be rectangular and not just square 
-                    - the marker does not have a black border like ID marker.
-                    To guarantee a correct detection the image needs to have a 
-                    clear rectangular contour, which can be distinguished from 
-                    the background. -->
+
+            <!--    The following XML nodes define the markers which are used 
+                    for marker tracking. Each node is independent from each 
+                    other. The following nodes are examples for each marker 
+                    type which can be defined in this file. For your 
+                    information, "COS" stands for "coordinate system" because 
+                    each marker is associated with an independent coordinate 
+                    system. -->
+
+            <!--    Example ID marker configuration, which uses a matrix ID 
+                    (similar to a 2D barcode) to identify the marker. The 
+                    matrix ID must be provided and should be unique for each 
+                    marker. Two markers cannot have the same matrix ID. -->
             <SensorCOS>
-			
-				<!--    ID string for uniquely identifying the marker. This ID 
+
+                <!--    ID string for uniquely identifying the marker. This ID 
                         string must not be assigned to another marker. -->
                 <SensorCosID>Marker1</SensorCosID>
+
                 <Parameters>
-                    <!--    Size of the marker which has to be provided to 
-                            correctly relate the marker pixel size to world 
-                            coordinates. The size is specified in millimeters. 
-                            -->
-                    <Size>78</Size>
 
                     <!--    Description of the marker properties. -->
                     <MarkerParameters>
 
-                        <!--    Reference image to identify the marker. The
-                                definition is very similar to the picture 
-                                marker configuration, except with two optional 
-                                attributes: "WidthMM" and "HeightMM". These 
-                                attributes specify the scale of the image in 
-                                millimeters in order to correctly relate pixel
-                                dimensions to real world dimensions. Per 
-                                default, the image resolution will be taken as 
-                                their values. It is advised to set these 
-                                attributes to augment the image independently 
-                                of the reference image resolution. -->
-                        <referenceImage qualityThreshold="0.70">marcador_flip.png</referenceImage>
+                        <!--    Size of the marker which has to be provided to 
+                                correctly relate the marker pixel size to world 
+                                coordinates. The size is specified in 
+                                millimeters. -->
+                        <Size>80</Size>
+
+                        <!--    Matrix ID to identify the marker. The ID is
+                                associated with the pattern on the marker and 
+                                is used to identify the marker in the camera 
+                                image. -->
+                        <MatrixID>1</MatrixID>
+
                     </MarkerParameters>
                 </Parameters>
             </SensorCOS>
-        </Sensor>
-    </Sensors>
+		</Sensor>
+	</Sensors>
+	<Connections>
+
+		<COS>
+			<Name>COS1</Name>
+			<Fuser type="SmoothingFuser">
+				<Parameters>
+					<!-- Alpha is in the range [0...1] and determines how strong a new pose is.
+				  alpha = 0.9: less smoothing
+				  alpha = 0.1: alot smoothing-->
+					<AlphaRotation>0.5</AlphaRotation> 
+					<AlphaTranslation>0.8</AlphaTranslation>
+					<!-- if we lose tracking, keep the old pose for several frames -->
+					<KeepPoseForNumberOfFrames>3</KeepPoseForNumberOfFrames> 
+				</Parameters>
+			</Fuser>
+			<SensorSource trigger="1">
+				<SensorID>Markertracking1</SensorID>
+				<SensorCosID>Marker1</SensorCosID>
+				<HandEyeCalibration>
+					<TranslationOffset>
+						<x>0</x>
+						<y>0</y>
+						<z>0</z>
+					</TranslationOffset>
+					<RotationOffset>
+						<x>0</x>
+						<y>0</y>
+						<z>0</z>
+						<w>1</w>
+					</RotationOffset>
+				</HandEyeCalibration>
+				<COSOffset>
+					<TranslationOffset>
+						<x>0</x>
+						<y>0</y>
+						<z>0</z>
+					</TranslationOffset>
+					<RotationOffset>
+						<x>0</x>
+						<y>0</y>
+						<z>0</z>
+						<w>1</w>
+					</RotationOffset>
+				</COSOffset>
+			</SensorSource>
+		</COS>
+	</Connections>
 </TrackingData>

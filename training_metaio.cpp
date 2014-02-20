@@ -1,5 +1,3 @@
-
-
 #include "training_metaio.h"
 #include <QtGui>
 #include <QtOpenGL>
@@ -16,61 +14,22 @@
 
 using namespace std;
 
-/*
- *
- _____ ____      _    _   _ _  ___     ___ _   _
-|  ___|  _ \    / \  | \ | | |/ / |   |_ _| \ | |
-| |_  | |_) |  / _ \ |  \| | ' /| |    | ||  \| |
-|  _| |  _ <  / ___ \| |\  | . \| |___ | || |\  |_
-|_|   |_| \_\/_/   \_\_| \_|_|\_\_____|___|_| \_( )
-                                                |/
- ____  ____   ___   ____ _   _ ____  _____
-|  _ \|  _ \ / _ \ / ___| | | |  _ \| ____|
-| |_) | |_) | | | | |   | | | | |_) |  _|
-|  __/|  _ <| |_| | |___| |_| |  _ <| |___
-|_|   |_| \_\\___/ \____|\___/|_| \_\_____|
-
- _   _    _    ____  _   _ _____  _    ____ ____
-| | | |  / \  / ___|| | | |_   _|/ \  / ___/ ___|
-| |_| | / _ \ \___ \| |_| | | | / _ \| |  _\___ \
-|  _  |/ ___ \ ___) |  _  | | |/ ___ \ |_| |___) |
-|_| |_/_/   \_\____/|_| |_| |_/_/   \_\____|____/
-
-*/
-
 TrainingMetaio::TrainingMetaio(int width_in, int height_in, Business * business_in, Ui::MainWindow * ui_in) :
     QGraphicsScene(),
     m_initialized(false),
     m_pGestureHandler(0),
     m_pMetaioSDK(0),
-    offsetX(0),
-    offsetY(-52),
+    offsetX(-600),
+    offsetY(-197),
     offsetZ(0),
-    offsetString(8),
+    offsetString(27),
     currentChord(0),
     width(width_in),
     height(height_in),
     business(business_in),
-    ui(ui_in)
+    ui(ui_in),
+    fretOffsets(0)
 {
-    // ###############BUG DO CHORD#################
-    /*ChordSet cs = ChordSet("CS");
-    Chord c = Chord("C");
-    QVarLengthArray<int> frets;
-    frets.append(-1);
-    frets.append(3);
-    frets.append(2);
-    frets.append(0);
-    frets.append(1);
-    frets.append(0);
-    QList<QVarLengthArray<int>> list;
-    list.append(frets);
-    c.setVariations(list);
-    cs.addOnFirstList(c);
-    chordSet = &cs;*/
-
-    // ###############CALCULAR OFFSETS E BOTAR NO fretOffsets#################
-    // fretOffsets = calculos doidao da formula de física
 }
 
 TrainingMetaio::~TrainingMetaio()
@@ -84,22 +43,24 @@ TrainingMetaio::~TrainingMetaio()
 
 void TrainingMetaio::loadContent()
 {
-    if(!m_pMetaioSDK->setTrackingConfiguration(business->getDataBasePath().toStdString() + "ra\\TrackingData_MarkerlessFast.xml")
+    if(!m_pMetaioSDK->setTrackingConfiguration(business->getDataBasePath().toStdString() + "ra\\TrackingData_PictureMarker.xml"))
         qCritical("Failed to load tracking configuration");
 
     for (int i = 0; i < 6; i++)
     {
-        metaio::IGeometry * geometry = m_pMetaioSDK->createGeometryFromImage(business->getDataBasePath().toStdString() + "ra\\string" + QString::number(i + 1).toStdString() + "2.png");
+        metaio::IGeometry * geometry = m_pMetaioSDK->createGeometryFromImage(business->getDataBasePath().toStdString() + "ra\\string" + QString::number(i + 1).toStdString() + ".png");
+        //metaio::IGeometry * geometry = m_pMetaioSDK->createGeometryFromImage(business->getDataBasePath().toStdString() + "ra\\string1.png");
         geometries.append(geometry);
         if(geometries.at(i))
         {
-            geometries.at(i)->setScale(metaio::Vector3d(0.3,0.3,0.3));
-            geometries.at(i)->setVisible(TRUE);
-            geometries.at(i)->setTranslation(metaio::Vector3d(offsetX, offsetY, offsetZ));
+            geometries.at(i)->setScale(metaio::Vector3d(0.15,0.15,0.15));
+            geometries.at(i)->setVisible(FALSE);
         }
         else
             qCritical("Failed to load MD2 model file");
     }
+
+    prepareFretOffsets(2400);
 }
 
 void TrainingMetaio::drawBackground(QPainter* painter, const QRectF & rect)
@@ -173,36 +134,17 @@ void TrainingMetaio::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 
 void TrainingMetaio::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
-    // ###############DEBUGANDO#################
     Qt::MouseButtons mouseButtons = mouseEvent->buttons();
-    if(mouseButtons == Qt::LeftButton)
+
+    if(mouseButtons == Qt::RightButton)
     {
-        offsetZ += 10;
-        qDebug() << "left " << offsetZ;
-    } else if(mouseButtons == Qt::RightButton)
-    {
-        offsetZ -= 10;
-        qDebug() << "right " << offsetZ;
+//        for(int i = 0; i < 17; i++)
+//        {
+//            geometries.at(i)->setTranslation(metaio::Vector3d(offsetX + fretOffsets.at(i), offsetY, offsetZ));
+//        }
+        currentChordArray = business->getChord(ui->trainingMainChordComboBox->currentText() + " " + ui->trainingChordModificatorComboBox->currentText()).getCurrentVariation();
+        prepareAwesomeGeometries();
     }
-
-    if(mouseButtons == Qt::LeftButton || mouseButtons == Qt::RightButton)
-    {
-        fretOffsets = business->getChord(ui->trainingMainChordComboBox->currentText() + " " + ui->trainingChordModificatorComboBox->currentText()).getCurrentVariation();
-
-        for (int i = 0; i < 6; i++)
-        {
-            if(geometries.at(i))
-            {
-                geometries.at(i)->setTranslation(metaio::Vector3d(offsetX, offsetY + (i * offsetString), offsetZ));
-            }else
-                qCritical("Failed to translate");
-
-        }
-        for(int i=0; i<6; i++)
-            cout << fretOffsets.at(i) << " ";
-        cout << endl;
-    }
-    // ###############DEBUGANDO#################
 
     QGraphicsScene::mousePressEvent(mouseEvent);
 
@@ -232,16 +174,26 @@ void TrainingMetaio::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
 void TrainingMetaio::prepareAwesomeGeometries()
 {
     QVarLengthArray<int> aux = currentAwesomeChord();
-    for(int i = 0; i < aux.size(); i++)
+    if(currentAwesomeChord().size() > 0)
     {
-        if(aux.at(i) == -1)
+        qDebug() << "start";
+        for(int i = 0; i < aux.size(); i++)
         {
-            geometries.at(i)->setVisible(FALSE);
-        } else
-        {
-            geometries.at(i)->setVisible(TRUE);
-            geometries.at(i)->setTranslation(metaio::Vector3d(offsetX + fretOffsets.at(aux.at(i)), offsetY + (i * offsetString), offsetZ));
+            qDebug() << aux.at(i);
+            if(aux.at(i) == -1 || aux.at(i) == 0)
+            {
+                geometries.at(i)->setVisible(FALSE);
+            } else if(aux.at(i) == 1)
+            {
+                geometries.at(i)->setVisible(TRUE);
+                geometries.at(i)->setTranslation(metaio::Vector3d(offsetX, offsetY + (-i * offsetString), offsetZ));
+            } else
+            {
+                geometries.at(i)->setVisible(TRUE);
+                geometries.at(i)->setTranslation(metaio::Vector3d(offsetX + fretOffsets.at(aux.at(i) - 1), offsetY + (-i * offsetString), offsetZ));
+            }
         }
+        qDebug() << "end";
     }
 }
 
@@ -258,12 +210,46 @@ void TrainingMetaio::nextAwesomeChord()
 QVarLengthArray<int> TrainingMetaio::currentAwesomeChord()
 {
     QVarLengthArray<int> retorno;
-    retorno.append(-1);
-    retorno.append(3);
-    retorno.append(2);
-    retorno.append(0);
-    retorno.append(1);
-    retorno.append(0);
+    retorno = currentChordArray;
     return retorno;
 }
 
+void TrainingMetaio::prepareFretOffsets(double cordaSizeIn)
+{
+    for(int i = 0; i < 17; i++)
+    {
+        // get distance between fret
+        double p = pow(2, ((double) i / 12));
+        fretOffsets.append(cordaSizeIn * (1 - (1 / p)));
+        qDebug() << fretOffsets.at(i);
+    }
+}
+
+//    struct BracoRA {
+//        double trastePosition[17];
+//        double casaPosition[17];
+//        double cordaSize;
+//        double cordaDistance;
+//        double start;
+
+//        BracoRA(double cordaSizeIn, double cordaDistanceIn, double startIn):
+//            cordaSize(cordaSizeIn), cordaDistance(cordaDistanceIn), start(startIn) {
+//            int trastes = 17;
+//            int casas = 17;
+//            for (int i = 0; i < trastes; i++)
+//                trastePosition[i] = getDistanceTraste(cordaSize, i);
+
+//            for (int i = 1; i < casas; i++)
+//                casaPosition[i] = (trastePosition[i] + trastePosition[i - 1]) / 2;
+//        }
+
+//        PointRA * getPoint(int corda, int casa) {
+//            PointRA * point = new PointRA(27 + casaPosition[casa], start - (casaPosition[casa] / 75) + corda * (cordaDistance +(trastePosition[casa]*1.5 - 15) / casaPosition[casa]) + corda * (trastePosition[casa]/150));
+//            return point;
+//        }
+
+//        double getDistanceTraste(double l, int n) {
+//            double p = pow(2, ((double) n / 12));
+//            return l * (1 - (1 / p));
+//        }
+//    };

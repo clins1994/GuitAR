@@ -74,7 +74,7 @@ void MainWindow::updateGraphics()
     QString modifier = ui->chordsModificatorsComboBox->currentText();
     QVarLengthArray<int> frets = getFrets(mainChord, modifier);
 
-    Braco * braco = new Braco(475, 10);
+    Braco * braco = new Braco(648, 6, 144);
     Point * point = NULL;
 
     for (int i = 0; i < frets.size(); i++)
@@ -98,7 +98,7 @@ void MainWindow::editListUpdateGraphics()
     QString modifier = ui->editChordsModificatorsComboBox->currentText();
     QVarLengthArray<int> frets = getFrets(mainChord, modifier);
 
-    Braco * braco = new Braco(475, 10);
+    Braco * braco = new Braco(648, 6, 144);
     Point * point = NULL;
 
     for (int i = 0; i < frets.size(); i++)
@@ -308,7 +308,7 @@ void MainWindow::editUpdateFromChord(QVarLengthArray<int> frets) const
     editListChordScene->addPixmap(*guitarArm);
     ui->editChordGraphicsView->setTransform(QTransform());
 
-    Braco * braco = new Braco(475, 10);
+    Braco * braco = new Braco(648, 6, 144);
     Point * point = NULL;
 
     for (int i = 0; i < frets.size(); i++)

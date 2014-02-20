@@ -101,41 +101,41 @@ private:
     QGraphicsScene * editListChordScene;
     const QPixmap * guitarArm;
     QList<QString> mainChords;
+};
 
-    struct Point {
-        double X;
-        double Y;
-        Point(double x, double y): X(x), Y(y) {}
-    };
+struct Point {
+    double X;
+    double Y;
+    Point(double x, double y): X(x), Y(y) {}
+};
 
-    struct Braco {
-        double trastePosition[17];
-        double casaPosition[17];
-        double cordaSize;
-        double cordaDistance;
+struct Braco {
+    double trastePosition[17];
+    double casaPosition[17];
+    double cordaSize;
+    double cordaDistance;
+    double start;
 
-        Braco(double cordaSizeIn, double cordaDistanceIn):
-            cordaSize(cordaSizeIn), cordaDistance(cordaDistanceIn) {
+    Braco(double cordaSizeIn, double cordaDistanceIn, double startIn):
+        cordaSize(cordaSizeIn), cordaDistance(cordaDistanceIn), start(startIn) {
+        int trastes = 17;
+        int casas = 17;
+        for (int i = 0; i < trastes; i++)
+            trastePosition[i] = getDistanceTraste(cordaSize, i);
 
-            int trastes = 17;
-            int casas = 17;
-            for (int i = 0; i < trastes; i++)
-                trastePosition[i] = getDistanceTraste(cordaSize, i);
+        for (int i = 1; i < casas; i++)
+            casaPosition[i] = (trastePosition[i] + trastePosition[i - 1]) / 2;
+    }
 
-            for (int i = 1; i < casas; i++)
-                casaPosition[i] = (trastePosition[i] + trastePosition[i - 1]) / 2;
-        }
+    Point * getPoint(int corda, int casa) {
+        Point * point = new Point(27 + casaPosition[casa], start - (casaPosition[casa] / 75) + corda * (cordaDistance +(trastePosition[casa]*1.5 - 15) / casaPosition[casa]) + corda * (trastePosition[casa]/150));
+        return point;
+    }
 
-        Point * getPoint(int corda, int casa) {
-            Point * point = new Point(40 + casaPosition[casa], 145 + corda * (cordaDistance + 1 - trastePosition[casa] / casaPosition[casa]));
-            return point;
-        }
-
-        double getDistanceTraste(double l, int n) {
-            double p = pow(2, ((double) n / 12));
-            return l * (1 - (1 / p));
-        }
-    };
+    double getDistanceTraste(double l, int n) {
+        double p = pow(2, ((double) n / 12));
+        return l * (1 - (1 / p));
+    }
 };
 
 #endif // MAINWINDOW_H

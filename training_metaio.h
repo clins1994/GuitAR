@@ -8,13 +8,13 @@
 #include "ui_mainwindow.h"
 
 namespace Ui {
-    class MainWindow;
+class MainWindow;
 }
 
 namespace metaio
 {
-    class IMetaioSDKWin32;
-    class GestureHandler;
+class IMetaioSDKWin32;
+class GestureHandler;
 }
 
 class TrainingMetaio : public QGraphicsScene
@@ -36,9 +36,12 @@ private:
     int                         currentChord;
 
     Business * business;
+
     Ui::MainWindow * ui;
 
-    QVarLengthArray<int>        fretOffsets;
+    QVarLengthArray<double>        fretOffsets;
+
+    QVarLengthArray<int>        currentChordArray;
 
     QList<metaio::IGeometry *> geometries;
     //metaio::BoundingBox* auxBox;
@@ -93,7 +96,38 @@ private:
     void nextAwesomeChord();
 
     QVarLengthArray<int> currentAwesomeChord();
+
+    void prepareFretOffsets(double cordaSizeIn);
 };
+
+//    struct BracoRA {
+//        double trastePosition[17];
+//        double casaPosition[17];
+//        double cordaSize;
+//        double cordaDistance;
+//        double start;
+
+//        BracoRA(double cordaSizeIn, double cordaDistanceIn, double startIn):
+//            cordaSize(cordaSizeIn), cordaDistance(cordaDistanceIn), start(startIn) {
+//            int trastes = 17;
+//            int casas = 17;
+//            for (int i = 0; i < trastes; i++)
+//                trastePosition[i] = getDistanceTraste(cordaSize, i);
+
+//            for (int i = 1; i < casas; i++)
+//                casaPosition[i] = (trastePosition[i] + trastePosition[i - 1]) / 2;
+//        }
+
+//        PointRA * getPoint(int corda, int casa) {
+//            PointRA * point = new PointRA(27 + casaPosition[casa], start - (casaPosition[casa] / 75) + corda * (cordaDistance +(trastePosition[casa]*1.5 - 15) / casaPosition[casa]) + corda * (trastePosition[casa]/150));
+//            return point;
+//        }
+
+//        double getDistanceTraste(double l, int n) {
+//            double p = pow(2, ((double) n / 12));
+//            return l * (1 - (1 / p));
+//        }
+//    };
 
 #endif
 
