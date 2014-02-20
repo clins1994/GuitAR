@@ -15,5 +15,25 @@
         <file>assets/tick_selection.png</file>
         <file>assets/Chords.xml</file>
         <file>assets/Chords.guitAR</file>
+        <file>assets/ra/metaioflip.png</file>
+        <file>assets/ra/metaioman.md2</file>
+        <file>assets/ra/metaioman.png</file>
+        <file>assets/ra/metaioman_target.png</file>
+        <file>assets/ra/metaioman_target_original.png</file>
+        <file>assets/ra/string1.png</file>
+        <file>assets/ra/string2.png</file>
+        <file>assets/ra/string3.png</file>
+        <file>assets/ra/string4.png</file>
+        <file>assets/ra/string5.png</file>
+        <file>assets/ra/string6.png</file>
+        <file>assets/ra/string12.png</file>
+        <file>assets/ra/string22.png</file>
+        <file>assets/ra/string32.png</file>
+        <file>assets/ra/string42.png</file>
+        <file>assets/ra/string52.png</file>
+        <file>assets/ra/string62.png</file>
+        <file>assets/ra/Thumbs.db</file>
+        <file>assets/ra/TrackingData_MarkerlessFast.xml</file>
+        <file>assets/ra/TrackingData_PictureMarker.xml</file>
     </qresource>
 </RCC>

@@ -79,6 +79,11 @@ Chord ChordSet::currentChord()
     return chords.at(current);
 }
 
+const Chord *ChordSet::getChord(int index)
+{
+    return &chords.at(index);
+}
+
 void ChordSet::addBeforeCurrent(Chord chord)
 {
     chords.insert(current, chord);

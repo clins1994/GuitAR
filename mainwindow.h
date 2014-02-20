@@ -6,6 +6,7 @@
 #include <cmath>
 #include <QtXml>
 #include "business.h"
+#include "training_metaio.h"
 
 // Includes sharps
 #define NUMBER_OF_CHORDS 12
@@ -36,15 +37,9 @@ private slots:
 
     void on_backToMenuCreateList_clicked();
 
-    void on_normalChordsRadioButton_clicked();
-
-    void on_splitChordsRadioButton_clicked();
-
     void on_normalChordsComboBox_activated(const QString &arg1);
 
     void on_chordsModificatorsComboBox_activated(const QString &arg1);
-
-    void on_splitChordsComboBox_activated(const QString &arg1);
 
     void on_backToMenuTraining_clicked();
 
@@ -64,13 +59,29 @@ private slots:
 
     void on_addChordToListButton_clicked();
 
-    void on_removeChordFromListButto_clicked();
+    void on_removeChordFromListButton_clicked();
 
-    void on_saveListButton_clicked();
+    void on_trainingMainChordComboBox_activated(const QString &arg1);
+
+    void on_trainingPreviousVariation_clicked();
+
+    void on_trainingNextVariation_clicked();
+
+    void on_editNormalChordsComboBox_activated(const QString &arg1);
+
+    void on_editChordsModificatorsComboBox_activated(const QString &arg1);
+
+    void on_editListPreviousChordVariation_clicked();
+
+    void on_editListNextChordVariation_clicked();
+
+    void on_editListsList_activated(const QModelIndex &index);
 
 private:
     // Training
+    TrainingMetaio * trainingWidget;
     void startTutorial();
+    void updateTrainingChord();
 
     // Dictionary
     void updateGraphics();
@@ -78,11 +89,16 @@ private:
     QVarLengthArray<int> getFrets(QString mainChord, QString modifier);
 
     // Lists
+    ChordSet editListAuxChordSet;
     void updateListsList();
+    void editListUpdateGraphics();
+    void saveChordSet();
+    void editUpdateFromChord(const QVarLengthArray<int> frets) const;
 
     Ui::MainWindow * ui;
     Business * businessManager;
     QGraphicsScene * chordScene;
+    QGraphicsScene * editListChordScene;
     const QPixmap * guitarArm;
     QList<QString> mainChords;
 

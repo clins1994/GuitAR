@@ -16,6 +16,7 @@ public:
     Chord nextChord();
     Chord previousChord();
     Chord currentChord();
+    const Chord * getChord(int index);
     QString toString() const;
     int size();
     void addBeforeCurrent(Chord chord);

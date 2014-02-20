@@ -59,9 +59,34 @@
          <widget class="QWidget" name="widget_33" native="true">
           <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
-            <widget class="QLabel" name="currentChordDisplay">
+            <widget class="QComboBox" name="trainingMainChordComboBox"/>
+           </item>
+           <item>
+            <widget class="QComboBox" name="trainingChordModificatorComboBox"/>
+           </item>
+           <item>
+            <widget class="QPushButton" name="trainingPreviousVariation">
+             <property name="maximumSize">
+              <size>
+               <width>40</width>
+               <height>16777215</height>
+              </size>
+             </property>
              <property name="text">
-              <string>TextLabel</string>
+              <string>&lt;&lt;</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="trainingNextVariation">
+             <property name="maximumSize">
+              <size>
+               <width>40</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>&gt;&gt;</string>
              </property>
             </widget>
            </item>
@@ -397,6 +422,19 @@ border: none;</string>
             </widget>
            </item>
            <item>
+            <spacer name="verticalSpacer_7">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
             <widget class="QWidget" name="widget_12" native="true">
              <layout class="QVBoxLayout" name="verticalLayout_2">
               <property name="spacing">
@@ -441,180 +479,35 @@ QRadioButton::indicator:checked {
                   <number>0</number>
                  </property>
                  <item>
-                  <widget class="QWidget" name="widget_6" native="true">
-                   <layout class="QVBoxLayout" name="verticalLayout_8">
-                    <property name="spacing">
-                     <number>0</number>
-                    </property>
-                    <property name="leftMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="topMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="rightMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>0</number>
-                    </property>
-                    <item>
-                     <widget class="QPushButton" name="changeChordVariationUpButton">
-                      <property name="maximumSize">
-                       <size>
-                        <width>40</width>
-                        <height>16777215</height>
-                       </size>
-                      </property>
-                      <property name="text">
-                       <string>Up</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="changeChordVariationDownButton">
-                      <property name="maximumSize">
-                       <size>
-                        <width>40</width>
-                        <height>16777215</height>
-                       </size>
-                      </property>
-                      <property name="text">
-                       <string>Down</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
+                  <widget class="QComboBox" name="normalChordsComboBox"/>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="chordsModificatorsComboBox"/>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="changeChordVariationDownButton">
+                   <property name="maximumSize">
+                    <size>
+                     <width>40</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>&lt;&lt;</string>
+                   </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QWidget" name="widget_29" native="true">
-                   <layout class="QVBoxLayout" name="verticalLayout_4">
-                    <property name="leftMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="topMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="rightMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>0</number>
-                    </property>
-                    <item>
-                     <widget class="QRadioButton" name="normalChordsRadioButton">
-                      <property name="text">
-                       <string>Normal Chords</string>
-                      </property>
-                      <property name="checked">
-                       <bool>true</bool>
-                      </property>
-                      <attribute name="buttonGroup">
-                       <string notr="true">buttonGroup</string>
-                      </attribute>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QWidget" name="widget_31" native="true">
-                      <layout class="QHBoxLayout" name="horizontalLayout_16">
-                       <property name="leftMargin">
-                        <number>0</number>
-                       </property>
-                       <property name="topMargin">
-                        <number>0</number>
-                       </property>
-                       <property name="rightMargin">
-                        <number>0</number>
-                       </property>
-                       <property name="bottomMargin">
-                        <number>0</number>
-                       </property>
-                       <item>
-                        <widget class="QComboBox" name="normalChordsComboBox"/>
-                       </item>
-                       <item>
-                        <widget class="QComboBox" name="chordsModificatorsComboBox"/>
-                       </item>
-                       <item>
-                        <spacer name="horizontalSpacer_9">
-                         <property name="orientation">
-                          <enum>Qt::Horizontal</enum>
-                         </property>
-                         <property name="sizeHint" stdset="0">
-                          <size>
-                           <width>40</width>
-                           <height>20</height>
-                          </size>
-                         </property>
-                        </spacer>
-                       </item>
-                      </layout>
-                     </widget>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QWidget" name="widget_30" native="true">
-                   <layout class="QVBoxLayout" name="verticalLayout_5">
-                    <property name="leftMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="topMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="rightMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>0</number>
-                    </property>
-                    <item>
-                     <widget class="QRadioButton" name="splitChordsRadioButton">
-                      <property name="text">
-                       <string>Split Chords</string>
-                      </property>
-                      <attribute name="buttonGroup">
-                       <string notr="true">buttonGroup</string>
-                      </attribute>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QWidget" name="widget_32" native="true">
-                      <layout class="QHBoxLayout" name="horizontalLayout_17">
-                       <property name="leftMargin">
-                        <number>0</number>
-                       </property>
-                       <property name="topMargin">
-                        <number>0</number>
-                       </property>
-                       <property name="rightMargin">
-                        <number>0</number>
-                       </property>
-                       <property name="bottomMargin">
-                        <number>0</number>
-                       </property>
-                       <item>
-                        <widget class="QComboBox" name="splitChordsComboBox"/>
-                       </item>
-                       <item>
-                        <spacer name="horizontalSpacer_10">
-                         <property name="orientation">
-                          <enum>Qt::Horizontal</enum>
-                         </property>
-                         <property name="sizeHint" stdset="0">
-                          <size>
-                           <width>40</width>
-                           <height>20</height>
-                          </size>
-                         </property>
-                        </spacer>
-                       </item>
-                      </layout>
-                     </widget>
-                    </item>
-                   </layout>
+                  <widget class="QPushButton" name="changeChordVariationUpButton">
+                   <property name="maximumSize">
+                    <size>
+                     <width>40</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>&gt;&gt;</string>
+                   </property>
                   </widget>
                  </item>
                  <item>
@@ -654,19 +547,6 @@ QRadioButton::indicator:checked {
                  <property name="bottomMargin">
                   <number>0</number>
                  </property>
-                 <item>
-                  <spacer name="verticalSpacer_7">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>40</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
                  <item>
                   <widget class="QGraphicsView" name="chordGraphicsView">
                    <property name="sizePolicy">
@@ -1245,6 +1125,9 @@ font-size: 16px;</string>
       </widget>
       <widget class="QWidget" name="editList">
        <layout class="QHBoxLayout" name="horizontalLayout_10">
+        <property name="spacing">
+         <number>6</number>
+        </property>
         <property name="leftMargin">
          <number>0</number>
         </property>
@@ -1310,6 +1193,9 @@ font-size: 16px;</string>
         <item>
          <widget class="QWidget" name="widget_20" native="true">
           <layout class="QVBoxLayout" name="verticalLayout_9">
+           <property name="spacing">
+            <number>0</number>
+           </property>
            <property name="leftMargin">
             <number>0</number>
            </property>
@@ -1343,7 +1229,41 @@ font-size: 16px;</string>
               <item>
                <widget class="QLabel" name="label_12">
                 <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/assets/orange_square.png&quot;/&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt; Edit List&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/assets/orange_square.png&quot;/&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt; Edit List:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_9">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Minimum</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QLabel" name="listNameLabel">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <pointsize>16</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>list name</string>
                 </property>
                </widget>
               </item>
@@ -1387,47 +1307,13 @@ border: none;</string>
             </widget>
            </item>
            <item>
-            <widget class="QWidget" name="widget_7" native="true">
-             <layout class="QHBoxLayout" name="horizontalLayout_15">
-              <property name="leftMargin">
-               <number>20</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>0</number>
-              </property>
-              <item>
-               <widget class="QLabel" name="listNameLabel">
-                <property name="font">
-                 <font>
-                  <pointsize>12</pointsize>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>list name</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer name="horizontalSpacer_12">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
             <widget class="QWidget" name="widget_34" native="true">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="styleSheet">
               <string notr="true">QRadioButton::indicator:unchecked {
   width: 15px;
@@ -1443,6 +1329,9 @@ QRadioButton::indicator:checked {
 </string>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_11">
+              <property name="spacing">
+               <number>0</number>
+              </property>
               <property name="leftMargin">
                <number>20</number>
               </property>
@@ -1454,7 +1343,16 @@ QRadioButton::indicator:checked {
               </property>
               <item>
                <widget class="QWidget" name="widget_35" native="true">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
                 <layout class="QVBoxLayout" name="verticalLayout_16">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
                  <property name="leftMargin">
                   <number>0</number>
                  </property>
@@ -1468,63 +1366,113 @@ QRadioButton::indicator:checked {
                   <number>0</number>
                  </property>
                  <item>
-                  <spacer name="verticalSpacer_6">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
+                  <widget class="QWidget" name="widget_6" native="true">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
                    </property>
-                   <property name="sizeType">
-                    <enum>QSizePolicy::Minimum</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>50</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="normalChordsRadioButton_2">
-                   <property name="text">
-                    <string>Normal Chords</string>
-                   </property>
-                   <property name="checked">
-                    <bool>true</bool>
-                   </property>
+                   <layout class="QHBoxLayout" name="horizontalLayout_16">
+                    <property name="spacing">
+                     <number>4</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <widget class="QComboBox" name="editNormalChordsComboBox"/>
+                    </item>
+                    <item>
+                     <widget class="QComboBox" name="editChordsModificatorsComboBox"/>
+                    </item>
+                   </layout>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="editNormalChordsComboBox"/>
-                 </item>
-                 <item>
-                  <widget class="QComboBox" name="editChordsModificatorsComboBox"/>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="addChordToListButton">
-                   <property name="text">
-                    <string>Adicionar</string>
-                   </property>
+                  <widget class="QWidget" name="widget_22" native="true">
+                   <layout class="QHBoxLayout" name="horizontalLayout_20">
+                    <property name="spacing">
+                     <number>4</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <widget class="QPushButton" name="editListPreviousChordVariation">
+                      <property name="text">
+                       <string>&lt;&lt;</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="editListNextChordVariation">
+                      <property name="text">
+                       <string>&gt;&gt;</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="removeChordFromListButto">
-                   <property name="text">
-                    <string>Remover</string>
+                  <widget class="QWidget" name="widget_24" native="true">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
                    </property>
+                   <layout class="QHBoxLayout" name="horizontalLayout_17">
+                    <property name="spacing">
+                     <number>4</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <widget class="QPushButton" name="addChordToListButton">
+                      <property name="text">
+                       <string>Adicionar</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="removeChordFromListButton">
+                      <property name="text">
+                       <string>Remover</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
                   </widget>
-                 </item>
-                 <item>
-                  <spacer name="verticalSpacer_5">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
                  </item>
                 </layout>
                </widget>
@@ -1539,7 +1487,7 @@ QRadioButton::indicator:checked {
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>40</width>
+                  <width>20</width>
                   <height>15</height>
                  </size>
                 </property>
@@ -1547,6 +1495,18 @@ QRadioButton::indicator:checked {
               </item>
               <item>
                <widget class="QListWidget" name="editListsList">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>90</height>
+                 </size>
+                </property>
                 <property name="font">
                  <font>
                   <pointsize>11</pointsize>
@@ -1566,13 +1526,16 @@ QListWidget::item {
 	text-align: center;
 	color: white;
 	font-weight: bold;
-	padding: 5px 0;
-	margin: 5px 0;
+	padding: 5px;
+	margin: 0 5px 10px;
 }
 
 QListWidget::item:selected {
 	background: &quot;#AD6800&quot;;
 }</string>
+                </property>
+                <property name="horizontalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAlwaysOn</enum>
                 </property>
                 <property name="dragEnabled">
                  <bool>true</bool>
@@ -1580,63 +1543,27 @@ QListWidget::item:selected {
                 <property name="dragDropMode">
                  <enum>QAbstractItemView::InternalMove</enum>
                 </property>
+                <property name="flow">
+                 <enum>QListView::LeftToRight</enum>
+                </property>
                </widget>
-              </item>
-              <item>
-               <spacer name="horizontalSpacer_11">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeType">
-                 <enum>QSizePolicy::Minimum</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
               </item>
              </layout>
             </widget>
            </item>
            <item>
             <widget class="QWidget" name="widget_5" native="true">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <layout class="QHBoxLayout" name="horizontalLayout_12">
-              <property name="spacing">
-               <number>10</number>
-              </property>
-              <item>
-               <widget class="QLabel" name="label_4">
-                <property name="text">
-                 <string>New list name:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="listNameEditText"/>
-              </item>
-              <item>
-               <widget class="QPushButton" name="saveListButton">
-                <property name="text">
-                 <string>Save</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QWidget" name="widget_22" native="true">
-             <layout class="QVBoxLayout" name="verticalLayout_14">
               <property name="spacing">
                <number>0</number>
               </property>
               <property name="leftMargin">
-               <number>0</number>
-              </property>
-              <property name="topMargin">
                <number>0</number>
               </property>
               <property name="rightMargin">
@@ -1646,27 +1573,29 @@ QListWidget::item:selected {
                <number>0</number>
               </property>
               <item>
-               <widget class="QWidget" name="widget_39" native="true">
+               <widget class="QGraphicsView" name="editChordGraphicsView">
                 <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
-                <layout class="QVBoxLayout" name="verticalLayout_18">
-                 <property name="leftMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="topMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="rightMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="bottomMargin">
-                  <number>0</number>
-                 </property>
-                </layout>
+                <property name="minimumSize">
+                 <size>
+                  <width>505</width>
+                  <height>265</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">border: none;
+background-color: transparent;</string>
+                </property>
+                <property name="verticalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                </property>
+                <property name="horizontalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                </property>
                </widget>
               </item>
              </layout>
@@ -1686,7 +1615,4 @@ QListWidget::item:selected {
   <include location="Resources.qrc"/>
  </resources>
  <connections/>
- <buttongroups>
-  <buttongroup name="buttonGroup"/>
- </buttongroups>
 </ui>

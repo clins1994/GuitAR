@@ -13,6 +13,11 @@ Business::~Business()
 {
 }
 
+void Business::refreshChordsHash()
+{
+    chordsTable = dataManager.getData<Chord>("Chords");
+}
+
 QList<QString> Business::getAllChordSetsNames()
 {
     QList<QString> allChordSetsNames;
@@ -44,16 +49,9 @@ void Business::deleteChordSet(QString chordSetName)
     chordSetsTable.remove(chordSetName);
 }
 
-void Business::updateChordSet(QString chordSetName, QList<QString> chordsNames)
+void Business::updateChordSet(QString chordSetName, ChordSet chordSet)
 {
-    ChordSet chordSet = chordSetsTable.take(chordSetName);
-    chordSet.chords.clear();
-    foreach (QString chordName, chordsNames)
-    {
-        Chord chord = chordsTable.take(chordName);
-        chordSet.addOnEndList(chord);
-        chordsTable.insert(chord.name, chord);
-    }
+    chordSetsTable.take(chordSetName);
     chordSetsTable.insert(chordSetName, chordSet);
 }
 
@@ -84,7 +82,11 @@ QList<QString> Business::getChordSetChordsNames(QString chordSetName)
 
 Chord Business::getChord(QString chordName)
 {
-    return chordsTable.value(chordName);
+    QList<QString> list = chordName.split(" ");
+    if (list.at(1) != "M")
+        return chordsTable.value(chordName);
+    else
+        return chordsTable.value(list.at(0));
 }
 
 QList<QString> Business::getChordsNames()
@@ -127,20 +129,35 @@ QList<QString> Business::getChordModificators(QString mainChord)
 
 void Business::setChordNextVariation(QString chordName)
 {
-    Chord chord = chordsTable.take(chordName);
+    Chord chord;
+    QList<QString> chord_name = chordName.split(" ");
+    if (chord_name.at(1) != "M")
+        chord = chordsTable.take(chordName);
+    else
+        chord = chordsTable.take(chordName.at(0));
     chord.nextVariation();
     chordsTable.insert(chord.name, chord);
 }
 
 void Business::setChordPreviousVariation(QString chordName)
 {
-    Chord chord = chordsTable.take(chordName);
+    Chord chord;
+    QList<QString> chord_name = chordName.split(" ");
+    if (chord_name.at(1) != "M")
+        chord = chordsTable.take(chordName);
+    else
+        chord = chordsTable.take(chordName.at(0));
     chord.previousVariation();
     chordsTable.insert(chord.name, chord);
 }
 
 void Business::storeData()
 {
-    dataManager.refreshData<Chord>("Chords", chordsTable);
+//    dataManager.refreshData<Chord>("Chords", chordsTable);
     dataManager.refreshData<ChordSet>("ChordSets", chordSetsTable);
+}
+
+QString Business::getDataBasePath()
+{
+    return dataManager.basePath;
 }

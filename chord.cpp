@@ -44,7 +44,9 @@ Chord::Chord()
 
 QVarLengthArray<int> Chord::getCurrentVariation()
 {
-    return variations.first();
+    QVarLengthArray<int> curr_frets = variations.takeFirst();
+    variations.push_front(curr_frets);
+    return curr_frets;
 }
 
 QVarLengthArray<int> Chord::nextVariation()
