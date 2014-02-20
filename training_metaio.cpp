@@ -1,7 +1,11 @@
+
+
 #include "training_metaio.h"
 #include <QtGui>
 #include <QtOpenGL>
 #include <GL/gl.h>
+#include "business.h"
+#include <iostream>
 
 #ifndef GL_MULTISAMPLE
 #define GL_MULTISAMPLE  0x809D
@@ -9,6 +13,8 @@
 
 #include <metaioSDK/IMetaioSDKWin32.h>
 #include <metaioSDK/GestureHandler.h>
+
+using namespace std;
 
 /*
  *
@@ -32,19 +38,20 @@
 
 */
 
-TrainingMetaio::TrainingMetaio(int goX, int goY, ChordSet* inputChordSet) :
+TrainingMetaio::TrainingMetaio(int width_in, int height_in, Business * business_in, Ui::MainWindow * ui_in) :
     QGraphicsScene(),
     m_initialized(false),
     m_pGestureHandler(0),
     m_pMetaioSDK(0),
-    x(goX),
-    y(goY),
     offsetX(0),
     offsetY(-52),
     offsetZ(0),
     offsetString(8),
     currentChord(0),
-    chordSet(inputChordSet)
+    width(width_in),
+    height(height_in),
+    business(business_in),
+    ui(ui_in)
 {
     // ###############BUG DO CHORD#################
     /*ChordSet cs = ChordSet("CS");
@@ -77,12 +84,12 @@ TrainingMetaio::~TrainingMetaio()
 
 void TrainingMetaio::loadContent()
 {
-    if(!m_pMetaioSDK->setTrackingConfiguration("ra/TrackingData_PictureMarker.xml"))
+    if(!m_pMetaioSDK->setTrackingConfiguration(business->getDataBasePath().toStdString() + "ra\\TrackingData_MarkerlessFast.xml")
         qCritical("Failed to load tracking configuration");
 
     for (int i = 0; i < 6; i++)
     {
-        metaio::IGeometry * geometry = m_pMetaioSDK->createGeometryFromImage("ra/string" + QString::number(i + 1).toStdString() + ".png");
+        metaio::IGeometry * geometry = m_pMetaioSDK->createGeometryFromImage(business->getDataBasePath().toStdString() + "ra\\string" + QString::number(i + 1).toStdString() + "2.png");
         geometries.append(geometry);
         if(geometries.at(i))
         {
@@ -98,7 +105,7 @@ void TrainingMetaio::loadContent()
 void TrainingMetaio::drawBackground(QPainter* painter, const QRectF & rect)
 {
     painter->save();
-    if (painter->paintEngine()->type()	!= QPaintEngine::OpenGL2)
+    if (painter->paintEngine()->type()  != QPaintEngine::OpenGL2)
     {
         qWarning("GuitAR: drawBackground needs a QGLWidget to be set as viewport on the graphics view");
         return;
@@ -107,15 +114,14 @@ void TrainingMetaio::drawBackground(QPainter* painter, const QRectF & rect)
     if (!m_initialized)
     {
         m_pMetaioSDK = metaio::CreateMetaioSDKWin32();
-        m_pMetaioSDK->initializeRenderer(this->x, this->y, metaio::ESCREEN_ROTATION_0, metaio::ERENDER_SYSTEM_OPENGL_EXTERNAL);
+        m_pMetaioSDK->initializeRenderer(this->width, this->height, metaio::ESCREEN_ROTATION_0, metaio::ERENDER_SYSTEM_OPENGL_EXTERNAL);
 
         // activate 1st camera
         std::vector<metaio::Camera> cameras = m_pMetaioSDK->getCameraList();
         if(cameras.size() > 0)
         {
             // set the resolution to 640x480
-            qDebug() << x << " " << y;
-            cameras[0].resolution = metaio::Vector2di(640, 480 * this->y / this->x);
+            cameras[0].resolution = metaio::Vector2di(640, 480 * this->height / this->width);
             cameras[0].flip = metaio::Camera::FLIP_HORIZONTAL;
             m_pMetaioSDK->startCamera( cameras[0] );
         }
@@ -168,7 +174,7 @@ void TrainingMetaio::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 void TrainingMetaio::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 {
     // ###############DEBUGANDO#################
-    /*Qt::MouseButtons mouseButtons = mouseEvent->buttons();
+    Qt::MouseButtons mouseButtons = mouseEvent->buttons();
     if(mouseButtons == Qt::LeftButton)
     {
         offsetZ += 10;
@@ -181,6 +187,8 @@ void TrainingMetaio::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
 
     if(mouseButtons == Qt::LeftButton || mouseButtons == Qt::RightButton)
     {
+        fretOffsets = business->getChord(ui->trainingMainChordComboBox->currentText() + " " + ui->trainingChordModificatorComboBox->currentText()).getCurrentVariation();
+
         for (int i = 0; i < 6; i++)
         {
             if(geometries.at(i))
@@ -188,8 +196,12 @@ void TrainingMetaio::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
                 geometries.at(i)->setTranslation(metaio::Vector3d(offsetX, offsetY + (i * offsetString), offsetZ));
             }else
                 qCritical("Failed to translate");
+
         }
-    }*/
+        for(int i=0; i<6; i++)
+            cout << fretOffsets.at(i) << " ";
+        cout << endl;
+    }
     // ###############DEBUGANDO#################
 
     QGraphicsScene::mousePressEvent(mouseEvent);
@@ -252,6 +264,6 @@ QVarLengthArray<int> TrainingMetaio::currentAwesomeChord()
     retorno.append(0);
     retorno.append(1);
     retorno.append(0);
-    // resolver o bug do Chord
     return retorno;
 }
+

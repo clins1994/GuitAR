@@ -4,7 +4,12 @@
 #include <QGraphicsScene>
 #include <metaioSDK/IGestureHandlerCallback.h>
 #include <QVarLengthArray>
-#include "chordset.h"
+#include "business.h"
+#include "ui_mainwindow.h"
+
+namespace Ui {
+    class MainWindow;
+}
 
 namespace metaio
 {
@@ -17,12 +22,12 @@ class TrainingMetaio : public QGraphicsScene
     Q_OBJECT
 
 public:
-    TrainingMetaio(int x, int y, ChordSet* inputChordSet);
+    TrainingMetaio(int x_in, int y_in, Business * business_in, Ui::MainWindow * ui_in);
     ~TrainingMetaio();
 
 private:
-    int                         x;
-    int                         y;
+    int                         width;
+    int                         height;
 
     int                         offsetX;
     int                         offsetY;
@@ -30,21 +35,22 @@ private:
     int                         offsetString;
     int                         currentChord;
 
-    ChordSet*                   chordSet;
+    Business * business;
+    Ui::MainWindow * ui;
 
     QVarLengthArray<int>        fretOffsets;
-	
+
     QList<metaio::IGeometry *> geometries;
     //metaio::BoundingBox* auxBox;
 
     /// true if the tutorial has been initialized
-    bool						m_initialized;
+    bool                                                m_initialized;
 
     /// the mobile SDK
-    metaio::IMetaioSDKWin32*	m_pMetaioSDK;
+    metaio::IMetaioSDKWin32*    m_pMetaioSDK;
 
     /// Gesture handler for touch events, can optionally be used by tutorial implementation
-    metaio::GestureHandler*		m_pGestureHandler;
+    metaio::GestureHandler*             m_pGestureHandler;
 
     /**
     * Load demo content, like tracking configuration (different depending on tutorial number)
@@ -90,3 +96,4 @@ private:
 };
 
 #endif
+
