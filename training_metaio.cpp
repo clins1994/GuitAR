@@ -40,9 +40,9 @@ TrainingMetaio::TrainingMetaio(int goX, int goY, ChordSet* inputChordSet) :
     x(goX),
     y(goY),
     offsetX(0),
-    offsetY(0),
+    offsetY(-52),
     offsetZ(0),
-    offsetString(0),
+    offsetString(8),
     currentChord(0),
     chordSet(inputChordSet)
 {
@@ -77,17 +77,18 @@ TrainingMetaio::~TrainingMetaio()
 
 void TrainingMetaio::loadContent()
 {
-    if(!m_pMetaioSDK->setTrackingConfiguration("ra/TrackingData_MarkerlessFast.xml"))
+    if(!m_pMetaioSDK->setTrackingConfiguration("ra/TrackingData_PictureMarker.xml"))
         qCritical("Failed to load tracking configuration");
 
     for (int i = 0; i < 6; i++)
     {
-        metaio::IGeometry * geometry = m_pMetaioSDK->createGeometryFromImage("ra/string" + QString::number(i + 1).toStdString() + "2.png");
+        metaio::IGeometry * geometry = m_pMetaioSDK->createGeometryFromImage("ra/string" + QString::number(i + 1).toStdString() + ".png");
         geometries.append(geometry);
         if(geometries.at(i))
         {
             geometries.at(i)->setScale(metaio::Vector3d(0.3,0.3,0.3));
-            geometries.at(i)->setVisible(FALSE);
+            geometries.at(i)->setVisible(TRUE);
+            geometries.at(i)->setTranslation(metaio::Vector3d(offsetX, offsetY, offsetZ));
         }
         else
             qCritical("Failed to load MD2 model file");
