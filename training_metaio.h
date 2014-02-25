@@ -8,8 +8,8 @@
 
 namespace metaio
 {
-    class IMetaioSDKWin32;
-    class GestureHandler;
+class IMetaioSDKWin32;
+class GestureHandler;
 }
 
 class TrainingMetaio : public QGraphicsScene
@@ -22,6 +22,9 @@ public:
 
     void setTraining(QString chordSetName);
 
+    void pause();
+    void resume();
+
 private:
     int width;
     int height;
@@ -32,8 +35,10 @@ private:
     int offsetString;
     int currentChord;
 
-    Business * business;
+    bool is_trainingChordSet;
+    QString chordSetName;
 
+    Business * business;
     QVarLengthArray<int> fretOffsets;
 
     QList<metaio::IGeometry *> geometries;
@@ -50,10 +55,21 @@ private:
 
     void loadContent();
 
+    void disableChordSetTraining();
+
     void drawBackground(QPainter* painter, const QRectF & rect);
+
+    void prepareAwesomeGeometries(QString chord);
+    QVarLengthArray<int> currentAwesomeChord(QString chord);
+
+    void prepareAwesomeGeometries(int index);
+    QVarLengthArray<int> currentAwesomeChord(int index);
+
+    void prepareFretOffsets(double cordaSizeIn);
 
 public slots:
     void update(QString chord);
+    void update(int index);
 };
 
 #endif

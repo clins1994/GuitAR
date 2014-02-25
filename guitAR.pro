@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT += core gui xml opengl webkit network phonon
+QT += core gui xml opengl webkit network
 
 TARGET = guitAR
 TEMPLATE = app

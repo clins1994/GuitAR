@@ -114,7 +114,7 @@
 							image. 
 							These parameters are not required and are intended 
 							for expert use only. -->
-					<ReferenceImage>metaioman_target.png</ReferenceImage>
+                                        <ReferenceImage>marcador2.png</ReferenceImage>
 					<!-- <ReferenceImage WidthMM="100" HeightMM="100">metaioman.png</ReferenceImage> -->
 
 					<!--	Another similarity threshold can be specified here. 

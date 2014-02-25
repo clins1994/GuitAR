@@ -84,6 +84,7 @@ private slots:
 
 signals:
     void updateMetaioChord(QString chord);
+    void updateMetaioChordSet(int index);
 
 private:
     // Training
@@ -92,6 +93,7 @@ private:
     void updateTrainingChord();
 
     // Training ChordSet
+    TrainingMetaio *trainingChordSetWidget;
 
     // Dictionary
     void updateGraphics();

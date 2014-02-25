@@ -35,6 +35,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->trainigGraphicsView->setScene(trainingWidget);
     connect(this, SIGNAL(updateMetaioChord(QString)), trainingWidget, SLOT(update(QString)));
 
+    // Training ChordSet
+    QGLWidget *glWidgetChordSet = new QGLWidget(QGLFormat(QGL::SampleBuffers));
+    ui->trainigChordSetGraphicsView->setViewport(glWidgetChordSet);
+    ui->trainigChordSetGraphicsView->setFrameShape(QFrame::NoFrame);
+    ui->trainigChordSetGraphicsView->setContextMenuPolicy(Qt::NoContextMenu);
+    ui->trainigChordSetGraphicsView->setScene(trainingWidget);
+    connect(this, SIGNAL(updateMetaioChordSet(int)), trainingWidget, SLOT(update(int)));
+
     // Lists
     this->editListChordScene = new QGraphicsScene();
     ui->editChordGraphicsView->setScene(this->editListChordScene);
@@ -151,6 +159,8 @@ void MainWindow::updateTrainingChord()
 void MainWindow::on_startTrainingButton_clicked()
 {
     ui->pages->setCurrentWidget(ui->training);
+    if (!trainingWidget->isActive())
+        trainingWidget->resume();
 }
 
 void MainWindow::on_consultChordButton_clicked()
@@ -184,6 +194,7 @@ void MainWindow::on_backToMenuCreateList_clicked()
 void MainWindow::on_backToMenuTraining_clicked()
 {
     ui->pages->setCurrentWidget(ui->mainMenu);
+    trainingWidget->pause();
 }
 
 void MainWindow::on_backToMenuEditList_clicked()
@@ -196,7 +207,7 @@ void MainWindow::on_createNewListButton_clicked()
 {
     ui->pages->setCurrentWidget(ui->creatList);
     ui->newListText->clear();
-    ui->newListText->grabKeyboard();
+    ui->newListText->setFocus();
 }
 
 void MainWindow::on_createListButton_clicked()
@@ -243,19 +254,26 @@ void MainWindow::on_editListButton_clicked()
 
 void MainWindow::on_trainBtn_clicked()
 {
+//    if (trainingWidget->isActive())
+//        trainingWidget->pause();
+//    if (!trainingChordSetWidget->isActive())
+//        trainingChordSetWidget->resume();
+
     if (saveChordSet())
     {
+        businessManager->refreshChordsHash();
         ui->pages->setCurrentWidget(ui->trainingChordSet);
-        trainingWidget->setTraining(ui->listNameLabel->text());
+        QString chordSetName = ui->listNameLabel->text();
+        trainingWidget->setTraining(chordSetName);
 
         ui->trainingChordSetList->clear();
-        QList<QString> chordsNames = businessManager->getChordSetChordsNames(ui->listNameLabel->text());
+        QList<QString> chordsNames = businessManager->getChordSetChordsNames(chordSetName);
         for (int i = 0; i < chordsNames.size(); i++)
         {
             ui->trainingChordSetList->addItem(chordsNames.at(i));
         }
 
-        ui->trainingChordSetName->setText(ui->listNameLabel->text());
+        ui->trainingChordSetLabel->setText(chordSetName);
         ui->trainingChordSetList->setCurrentRow(0);
         ui->trainingChordSetList->setFocus();
     }
@@ -360,5 +378,5 @@ void MainWindow::on_backToMenuTrainingChordSet_clicked()
 
 void MainWindow::on_trainingChordSetList_currentRowChanged(int currentRow)
 {
-
+    emit updateMetaioChordSet(currentRow);
 }

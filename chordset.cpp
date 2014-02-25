@@ -79,9 +79,9 @@ Chord ChordSet::currentChord()
     return chords.at(current);
 }
 
-const Chord *ChordSet::getChord(int index) const
+Chord *ChordSet::getChord(int index)
 {
-    return &chords.at(index);
+    return const_cast<Chord*>(&chords.at(index));
 }
 
 void ChordSet::addBeforeCurrent(Chord chord)

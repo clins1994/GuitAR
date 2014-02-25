@@ -33,6 +33,11 @@
         <file>assets/ra/string52.png</file>
         <file>assets/ra/string62.png</file>
         <file>assets/ra/Thumbs.db</file>
+        <file>assets/ra/marcador.png</file>
+        <file>assets/ra/marcador_flip.png</file>
+        <file>assets/ra/marcador2.png</file>
+        <file>assets/ra/marcador2_flip.png</file>
+        <file>assets/ra/TrackingData_Marker.xml</file>
         <file>assets/ra/TrackingData_MarkerlessFast.xml</file>
         <file>assets/ra/TrackingData_PictureMarker.xml</file>
     </qresource>
