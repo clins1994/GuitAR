@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QtXml>
 #include <QGLWidget>
 #include <QDebug>
 #include <QMessageBox>
@@ -32,8 +31,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->trainigGraphicsView->setContextMenuPolicy(Qt::NoContextMenu);
     ui->trainingMainChordComboBox->addItems(businessManager->getMainChordsNames());
     updateTrainingChord();
-    trainingWidget = new TrainingMetaio(ui->trainigGraphicsView->width(), ui->trainigGraphicsView->height(), businessManager, ui);
+    trainingWidget = new TrainingMetaio(ui->trainigGraphicsView->width(), ui->trainigGraphicsView->height(), businessManager);
     ui->trainigGraphicsView->setScene(trainingWidget);
+    connect(this, SIGNAL(updateMetaioChord(QString)), trainingWidget, SLOT(update(QString)));
 
     // Lists
     this->editListChordScene = new QGraphicsScene();
@@ -74,7 +74,7 @@ void MainWindow::updateGraphics()
     QString modifier = ui->chordsModificatorsComboBox->currentText();
     QVarLengthArray<int> frets = getFrets(mainChord, modifier);
 
-    Braco * braco = new Braco(475, 10);
+    Braco * braco = new Braco(648, 6, 144);
     Point * point = NULL;
 
     for (int i = 0; i < frets.size(); i++)
@@ -98,7 +98,7 @@ void MainWindow::editListUpdateGraphics()
     QString modifier = ui->editChordsModificatorsComboBox->currentText();
     QVarLengthArray<int> frets = getFrets(mainChord, modifier);
 
-    Braco * braco = new Braco(475, 10);
+    Braco * braco = new Braco(648, 6, 144);
     Point * point = NULL;
 
     for (int i = 0; i < frets.size(); i++)
@@ -241,6 +241,26 @@ void MainWindow::on_editListButton_clicked()
     }
 }
 
+void MainWindow::on_trainBtn_clicked()
+{
+    if (saveChordSet())
+    {
+        ui->pages->setCurrentWidget(ui->trainingChordSet);
+        trainingWidget->setTraining(ui->listNameLabel->text());
+
+        ui->trainingChordSetList->clear();
+        QList<QString> chordsNames = businessManager->getChordSetChordsNames(ui->listNameLabel->text());
+        for (int i = 0; i < chordsNames.size(); i++)
+        {
+            ui->trainingChordSetList->addItem(chordsNames.at(i));
+        }
+
+        ui->trainingChordSetName->setText(ui->listNameLabel->text());
+        ui->trainingChordSetList->setCurrentRow(0);
+        ui->trainingChordSetList->setFocus();
+    }
+}
+
 void MainWindow::on_addChordToListButton_clicked()
 {
     QString chordName = ui->editNormalChordsComboBox->currentText() + " " + ui->editChordsModificatorsComboBox->currentText();
@@ -255,19 +275,27 @@ void MainWindow::on_removeChordFromListButton_clicked()
     ui->editListsList->takeItem(ui->editListsList->currentRow());
 }
 
-void MainWindow::saveChordSet()
+bool MainWindow::saveChordSet()
 {
-    if(ui->editListsList->count() > 0)
+    if (ui->editListsList->count() > 0)
     {
         businessManager->updateChordSet(editListAuxChordSet.name, editListAuxChordSet);
         updateListsList();
         businessManager->storeData();
+        return true;
     }
+    return false;
 }
 
 void MainWindow::on_trainingMainChordComboBox_activated(const QString &arg1)
 {
     updateTrainingChord();
+    emit updateMetaioChord(ui->trainingMainChordComboBox->currentText() + " " + ui->trainingChordModificatorComboBox->currentText());
+}
+
+void MainWindow::on_trainingChordModificatorComboBox_activated(const QString &arg1)
+{
+    emit updateMetaioChord(ui->trainingMainChordComboBox->currentText() + " " + ui->trainingChordModificatorComboBox->currentText());
 }
 
 void MainWindow::on_trainingPreviousVariation_clicked()
@@ -310,7 +338,7 @@ void MainWindow::editUpdateFromChord(QVarLengthArray<int> frets)
     editListChordScene->addPixmap(*guitarArm);
     ui->editChordGraphicsView->setTransform(QTransform());
 
-    Braco * braco = new Braco(475, 10);
+    Braco * braco = new Braco(648, 6, 144);
     Point * point = NULL;
 
     for (int i = 0; i < frets.size(); i++)
@@ -322,5 +350,15 @@ void MainWindow::editUpdateFromChord(QVarLengthArray<int> frets)
 
     delete point;
     delete braco;
+
+}
+
+void MainWindow::on_backToMenuTrainingChordSet_clicked()
+{
+    ui->pages->setCurrentWidget(ui->selectList);
+}
+
+void MainWindow::on_trainingChordSetList_currentRowChanged(int currentRow)
+{
 
 }

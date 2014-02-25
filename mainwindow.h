@@ -24,7 +24,6 @@ public:
     ~MainWindow();
 
 private slots:
-
     void on_startTrainingButton_clicked();
 
     void on_consultChordButton_clicked();
@@ -75,11 +74,24 @@ private slots:
 
     void on_editListNextChordVariation_clicked();
 
+    void on_trainingChordModificatorComboBox_activated(const QString &arg1);
+
+    void on_backToMenuTrainingChordSet_clicked();
+
+    void on_trainBtn_clicked();
+
+    void on_trainingChordSetList_currentRowChanged(int currentRow);
+
+signals:
+    void updateMetaioChord(QString chord);
+
 private:
     // Training
-    TrainingMetaio * trainingWidget;
+    TrainingMetaio *trainingWidget;
     void startTutorial();
     void updateTrainingChord();
+
+    // Training ChordSet
 
     // Dictionary
     void updateGraphics();
@@ -90,14 +102,14 @@ private:
     ChordSet editListAuxChordSet;
     void updateListsList();
     void editListUpdateGraphics();
-    void saveChordSet();
+    bool saveChordSet();
     void editUpdateFromChord(QVarLengthArray<int> frets);
 
-    Ui::MainWindow * ui;
-    Business * businessManager;
-    QGraphicsScene * chordScene;
-    QGraphicsScene * editListChordScene;
-    const QPixmap * guitarArm;
+    Ui::MainWindow *ui;
+    Business *businessManager;
+    QGraphicsScene *chordScene;
+    QGraphicsScene *editListChordScene;
+    const QPixmap *guitarArm;
     QList<QString> mainChords;
 
     struct Point {
@@ -111,10 +123,10 @@ private:
         double casaPosition[17];
         double cordaSize;
         double cordaDistance;
+        double start;
 
-        Braco(double cordaSizeIn, double cordaDistanceIn):
-            cordaSize(cordaSizeIn), cordaDistance(cordaDistanceIn) {
-
+        Braco(double cordaSizeIn, double cordaDistanceIn, double startIn):
+            cordaSize(cordaSizeIn), cordaDistance(cordaDistanceIn), start(startIn) {
             int trastes = 17;
             int casas = 17;
             for (int i = 0; i < trastes; i++)
@@ -125,7 +137,7 @@ private:
         }
 
         Point * getPoint(int corda, int casa) {
-            Point * point = new Point(40 + casaPosition[casa], 145 + corda * (cordaDistance + 1 - trastePosition[casa] / casaPosition[casa]));
+            Point * point = new Point(27 + casaPosition[casa], start - (casaPosition[casa] / 75) + corda * (cordaDistance +(trastePosition[casa]*1.5 - 15) / casaPosition[casa]) + corda * (trastePosition[casa]/150));
             return point;
         }
 

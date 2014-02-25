@@ -5,11 +5,6 @@
 #include <metaioSDK/IGestureHandlerCallback.h>
 #include <QVarLengthArray>
 #include "business.h"
-#include "ui_mainwindow.h"
-
-namespace Ui {
-    class MainWindow;
-}
 
 namespace metaio
 {
@@ -22,77 +17,43 @@ class TrainingMetaio : public QGraphicsScene
     Q_OBJECT
 
 public:
-    TrainingMetaio(int x_in, int y_in, Business * business_in, Ui::MainWindow * ui_in);
+    TrainingMetaio(int x_in, int y_in, Business * business_in);
     ~TrainingMetaio();
 
-private:
-    int                         width;
-    int                         height;
+    void setTraining(QString chordSetName);
 
-    int                         offsetX;
-    int                         offsetY;
-    int                         offsetZ;
-    int                         offsetString;
-    int                         currentChord;
+private:
+    int width;
+    int height;
+
+    int offsetX;
+    int offsetY;
+    int offsetZ;
+    int offsetString;
+    int currentChord;
 
     Business * business;
-    Ui::MainWindow * ui;
 
-    QVarLengthArray<int>        fretOffsets;
+    QVarLengthArray<int> fretOffsets;
 
     QList<metaio::IGeometry *> geometries;
     //metaio::BoundingBox* auxBox;
 
     /// true if the tutorial has been initialized
-    bool                                                m_initialized;
+    bool m_initialized;
 
     /// the mobile SDK
-    metaio::IMetaioSDKWin32*    m_pMetaioSDK;
+    metaio::IMetaioSDKWin32* m_pMetaioSDK;
 
     /// Gesture handler for touch events, can optionally be used by tutorial implementation
-    metaio::GestureHandler*             m_pGestureHandler;
+    metaio::GestureHandler* m_pGestureHandler;
 
-    /**
-    * Load demo content, like tracking configuration (different depending on tutorial number)
-    */
     void loadContent();
 
-    /**
-    * QGraphicsScene inherited drawBackground function
-    *
-    * \param painter pointer to the QPainter object
-    * \param rect the exposed rectangle
-    */
     void drawBackground(QPainter* painter, const QRectF & rect);
 
-    /**
-    * Inherited method for handling mouse move event
-    *
-    * \param mouseEvent the QGraphicsSceneMouseEvent mouse event
-    */
-    void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
-
-    /**
-    * Inherited method for handling mouse press event
-    *
-    * \param mouseEvent the QGraphicsSceneMouseEvent mouse event
-    */
-    void mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent);
-
-    /**
-    * Inherited method for handling mouse release event
-    *
-    * \param mouseEvent the QGraphicsSceneMouseEvent mouse event
-    */
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent);
-
-    void prepareAwesomeGeometries();
-
-    void previousAwesomeChord();
-
-    void nextAwesomeChord();
-
-    QVarLengthArray<int> currentAwesomeChord();
+public slots:
+    void update(QString chord);
 };
 
 #endif

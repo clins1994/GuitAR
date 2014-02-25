@@ -1,5 +1,3 @@
-
-
 #include "training_metaio.h"
 #include <QtGui>
 #include <QtOpenGL>
@@ -16,29 +14,7 @@
 
 using namespace std;
 
-/*
- *
- _____ ____      _    _   _ _  ___     ___ _   _
-|  ___|  _ \    / \  | \ | | |/ / |   |_ _| \ | |
-| |_  | |_) |  / _ \ |  \| | ' /| |    | ||  \| |
-|  _| |  _ <  / ___ \| |\  | . \| |___ | || |\  |_
-|_|   |_| \_\/_/   \_\_| \_|_|\_\_____|___|_| \_( )
-                                                |/
- ____  ____   ___   ____ _   _ ____  _____
-|  _ \|  _ \ / _ \ / ___| | | |  _ \| ____|
-| |_) | |_) | | | | |   | | | | |_) |  _|
-|  __/|  _ <| |_| | |___| |_| |  _ <| |___
-|_|   |_| \_\\___/ \____|\___/|_| \_\_____|
-
- _   _    _    ____  _   _ _____  _    ____ ____
-| | | |  / \  / ___|| | | |_   _|/ \  / ___/ ___|
-| |_| | / _ \ \___ \| |_| | | | / _ \| |  _\___ \
-|  _  |/ ___ \ ___) |  _  | | |/ ___ \ |_| |___) |
-|_| |_/_/   \_\____/|_| |_| |_/_/   \_\____|____/
-
-*/
-
-TrainingMetaio::TrainingMetaio(int width_in, int height_in, Business * business_in, Ui::MainWindow * ui_in) :
+TrainingMetaio::TrainingMetaio(int width_in, int height_in, Business * business_in) :
     QGraphicsScene(),
     m_initialized(false),
     m_pGestureHandler(0),
@@ -50,27 +26,8 @@ TrainingMetaio::TrainingMetaio(int width_in, int height_in, Business * business_
     currentChord(0),
     width(width_in),
     height(height_in),
-    business(business_in),
-    ui(ui_in)
+    business(business_in)
 {
-    // ###############BUG DO CHORD#################
-    /*ChordSet cs = ChordSet("CS");
-    Chord c = Chord("C");
-    QVarLengthArray<int> frets;
-    frets.append(-1);
-    frets.append(3);
-    frets.append(2);
-    frets.append(0);
-    frets.append(1);
-    frets.append(0);
-    QList<QVarLengthArray<int>> list;
-    list.append(frets);
-    c.setVariations(list);
-    cs.addOnFirstList(c);
-    chordSet = &cs;*/
-
-    // ###############CALCULAR OFFSETS E BOTAR NO fretOffsets#################
-    // fretOffsets = calculos doidao da formula de física
 }
 
 TrainingMetaio::~TrainingMetaio()
@@ -154,115 +111,38 @@ void TrainingMetaio::drawBackground(QPainter* painter, const QRectF & rect)
     glDisable(GL_DEPTH_TEST);
 }
 
-
-void TrainingMetaio::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
+void TrainingMetaio::setTraining(QString chordSetName)
 {
-    QGraphicsScene::mouseMoveEvent(mouseEvent);
-
-    // mouseEvent->screenPos() and mouseEvent->pos() seem to be always return (0,0) and scenePos()
-    // has its origin in the middle of the rendering pane
-    const int x = mouseEvent->pos().x();
-    const int y = mouseEvent->pos().y();
-
-    // Forward event to gesture handler (needed for drag gesture, just like the mouse press/release events)
-    if(m_pGestureHandler)
-        m_pGestureHandler->touchesMoved(x, y);
 }
 
-
-void TrainingMetaio::mousePressEvent(QGraphicsSceneMouseEvent* mouseEvent)
+void TrainingMetaio::update(QString chord)
 {
-    // ###############DEBUGANDO#################
-    Qt::MouseButtons mouseButtons = mouseEvent->buttons();
-    if(mouseButtons == Qt::LeftButton)
+    fretOffsets = business->getChord(chord).getCurrentVariation();
+
+    for (int i = 0; i < 6; i++)
     {
-        offsetZ += 10;
-        qDebug() << "left " << offsetZ;
-    } else if(mouseButtons == Qt::RightButton)
-    {
-        offsetZ -= 10;
-        qDebug() << "right " << offsetZ;
+        if (geometries.at(i))
+            geometries.at(i)->setTranslation(metaio::Vector3d(offsetX, offsetY + (i * offsetString), offsetZ));
+        else
+            qCritical("Failed to translate");
     }
 
-    if(mouseButtons == Qt::LeftButton || mouseButtons == Qt::RightButton)
-    {
-        fretOffsets = business->getChord(ui->trainingMainChordComboBox->currentText() + " " + ui->trainingChordModificatorComboBox->currentText()).getCurrentVariation();
-
-        for (int i = 0; i < 6; i++)
-        {
-            if(geometries.at(i))
-            {
-                geometries.at(i)->setTranslation(metaio::Vector3d(offsetX, offsetY + (i * offsetString), offsetZ));
-            }else
-                qCritical("Failed to translate");
-
-        }
-        for(int i=0; i<6; i++)
-            cout << fretOffsets.at(i) << " ";
-        cout << endl;
-    }
-    // ###############DEBUGANDO#################
-
-    QGraphicsScene::mousePressEvent(mouseEvent);
-
-    // See comment in mouseMoveEvent()
-    const int x = mouseEvent->pos().x();
-    const int y = mouseEvent->pos().y();
-
-    // Forward event to gesture handler
-    if(m_pGestureHandler)
-        m_pGestureHandler->touchesBegan(x, y);
+    for (int i = 0; i < 6; i++)
+        cout << fretOffsets.at(i) << " ";
+    cout << endl;
 }
 
-
-void TrainingMetaio::mouseReleaseEvent(QGraphicsSceneMouseEvent* mouseEvent)
-{
-    QGraphicsScene::mouseReleaseEvent(mouseEvent);
-
-    // See comment in mouseMoveEvent()
-    const int x = mouseEvent->pos().x();
-    const int y = mouseEvent->pos().y();
-
-    // Forward event to gesture handler
-    if(m_pGestureHandler)
-        m_pGestureHandler->touchesEnded(x, y);
-}
-
-void TrainingMetaio::prepareAwesomeGeometries()
-{
-    QVarLengthArray<int> aux = currentAwesomeChord();
-    for(int i = 0; i < aux.size(); i++)
-    {
-        if(aux.at(i) == -1)
-        {
-            geometries.at(i)->setVisible(FALSE);
-        } else
-        {
-            geometries.at(i)->setVisible(TRUE);
-            geometries.at(i)->setTranslation(metaio::Vector3d(offsetX + fretOffsets.at(aux.at(i)), offsetY + (i * offsetString), offsetZ));
-        }
-    }
-}
-
-void TrainingMetaio::previousAwesomeChord()
-{
-    //mudar entre acordes (resolver o bug do Chord / include "chord.h")
-}
-
-void TrainingMetaio::nextAwesomeChord()
-{
-    //mudar entre acordes (resolver o bug do Chord / include "chord.h")
-}
-
-QVarLengthArray<int> TrainingMetaio::currentAwesomeChord()
-{
-    QVarLengthArray<int> retorno;
-    retorno.append(-1);
-    retorno.append(3);
-    retorno.append(2);
-    retorno.append(0);
-    retorno.append(1);
-    retorno.append(0);
-    return retorno;
-}
-
+//void TrainingMetaio::prepareAwesomeGeometries()
+//{
+//    QVarLengthArray<int> aux = currentAwesomeChord();
+//    for (int i = 0; i < aux.size(); i++)
+//    {
+//        if (aux.at(i) == -1)
+//            geometries.at(i)->setVisible(FALSE);
+//        else
+//        {
+//            geometries.at(i)->setVisible(TRUE);
+//            geometries.at(i)->setTranslation(metaio::Vector3d(offsetX + fretOffsets.at(aux.at(i)), offsetY + (i * offsetString), offsetZ));
+//        }
+//    }
+//}

@@ -54,7 +54,7 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="training">
        <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -120,6 +120,142 @@
            </item>
            <item>
             <widget class="QPushButton" name="backToMenuTraining">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Voltar ao Menu</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="trainingChordSet">
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QGraphicsView" name="trainigChordSetGraphicsView"/>
+        </item>
+        <item>
+         <widget class="QWidget" name="widget_36" native="true">
+          <layout class="QHBoxLayout" name="horizontalLayout_15">
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="trainingChordSetName">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="margin">
+              <number>5</number>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QListWidget" name="trainingChordSetList">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+               <horstretch>100</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QListWidget#trainingChordSetList {
+	background-color: transparent;
+}
+
+QListWidget#trainingChordSetList::item {
+	margin: 0 15px;
+	padding: 7px;
+	text-align: center;
+	width: 30px;
+}
+
+QListWidget#trainingChordSetList::item:selected {
+	background-color: #000;
+	color: #FFF;
+}</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+             <property name="lineWidth">
+              <number>0</number>
+             </property>
+             <property name="horizontalScrollBarPolicy">
+              <enum>Qt::ScrollBarAlwaysOn</enum>
+             </property>
+             <property name="showDropIndicator" stdset="0">
+              <bool>false</bool>
+             </property>
+             <property name="textElideMode">
+              <enum>Qt::ElideMiddle</enum>
+             </property>
+             <property name="flow">
+              <enum>QListView::LeftToRight</enum>
+             </property>
+             <property name="uniformItemSizes">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_10">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="backToMenuTrainingChordSet">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>30</height>
+              </size>
+             </property>
              <property name="text">
               <string>Voltar ao Menu</string>
              </property>
@@ -786,13 +922,13 @@ border: none;</string>
               <item>
                <widget class="QListWidget" name="listsList">
                 <property name="styleSheet">
-                 <string notr="true">QListWidget {
+                 <string notr="true">QListWidget#listsList {
 	background: &quot;#424242&quot;;
 	border: none;
 	padding: 10px;
 }
 
-QListWidget::item {
+QListWidget#listsList::item {
 	text-align: center;
 	color: white;
 	padding: 5px 0;
@@ -853,7 +989,7 @@ QListWidget::item {
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton">
+                  <widget class="QPushButton" name="trainBtn">
                    <property name="text">
                     <string>Train!</string>
                    </property>
@@ -1530,13 +1666,13 @@ QRadioButton::indicator:checked {
                  </font>
                 </property>
                 <property name="styleSheet">
-                 <string notr="true">QListWidget {
+                 <string notr="true">QListWidget#editListsList {
 	background: &quot;#424242&quot;;
 	border: none;
 	padding: 10px;
 }
 
-QListWidget::item {
+QListWidget#editListsList::item {
 	background: &quot;#FF9900&quot;;
 	text-align: center;
 	color: white;
@@ -1545,7 +1681,7 @@ QListWidget::item {
 	margin: 0 5px 10px;
 }
 
-QListWidget::item:selected {
+QListWidget#editListsList::item:selected {
 	background: &quot;#AD6800&quot;;
 }</string>
                 </property>

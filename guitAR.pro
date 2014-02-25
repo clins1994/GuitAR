@@ -9,7 +9,7 @@ QT += core gui xml opengl webkit network phonon
 TARGET = guitAR
 TEMPLATE = app
 
-CONFIG += release static embed_manifest_exe
+CONFIG += release
 
 INCLUDEPATH += $$_PRO_FILE_PWD_/metaioSDK/include
 
