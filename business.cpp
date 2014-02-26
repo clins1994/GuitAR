@@ -32,11 +32,13 @@ void Business::createChordSet(QString chordSetName)
 {
     ChordSet chordSet(chordSetName);
     chordSetsTable.insert(chordSetName, chordSet);
+    storeData();
 }
 
 void Business::createChordSet(QString chordSetName, ChordSet chordSet)
 {
     chordSetsTable.insert(chordSetName, chordSet);
+    storeData();
 }
 
 ChordSet Business::getChordSet(QString chordSetName)
@@ -47,12 +49,14 @@ ChordSet Business::getChordSet(QString chordSetName)
 void Business::deleteChordSet(QString chordSetName)
 {
     chordSetsTable.remove(chordSetName);
+    storeData();
 }
 
 void Business::updateChordSet(QString chordSetName, ChordSet chordSet)
 {
     chordSetsTable.take(chordSetName);
     chordSetsTable.insert(chordSetName, chordSet);
+    storeData();
 }
 
 void Business::renameChordSet(QString oldName, QString newName)
@@ -60,6 +64,7 @@ void Business::renameChordSet(QString oldName, QString newName)
     ChordSet chordSet = chordSetsTable.take(oldName);
     chordSet.name = newName;
     chordSetsTable.insert(chordSet.name, chordSet);
+    storeData();
 }
 
 void Business::addChordToChordSet(QString chordSetName, QString chordName)
@@ -67,6 +72,7 @@ void Business::addChordToChordSet(QString chordSetName, QString chordName)
     ChordSet chordSet = chordSetsTable.take(chordSetName);
     chordSet.addOnEndList(chordsTable.value(chordName));
     chordSetsTable.insert(chordSet.name, chordSet);
+    storeData();
 }
 
 QList<QString> Business::getChordSetChordsNames(QString chordSetName)

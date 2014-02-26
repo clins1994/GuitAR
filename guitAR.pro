@@ -4,11 +4,10 @@
 #
 #-------------------------------------------------
 
-QT += core gui xml opengl webkit network
+QT += core gui opengl webkit network
 
 TARGET = guitAR
 TEMPLATE = app
-
 CONFIG += release
 
 INCLUDEPATH += $$_PRO_FILE_PWD_/metaioSDK/include
@@ -25,7 +24,6 @@ SOURCES += \
     datamanager.cpp \
     chordset.cpp \
     business.cpp \
-    serialize_hash.cpp \
     mainwindow.cpp
 
 HEADERS += \

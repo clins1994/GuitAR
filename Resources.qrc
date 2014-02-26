@@ -40,5 +40,8 @@
         <file>assets/ra/TrackingData_Marker.xml</file>
         <file>assets/ra/TrackingData_MarkerlessFast.xml</file>
         <file>assets/ra/TrackingData_PictureMarker.xml</file>
+        <file>assets/icone_setaPlay.png</file>
+        <file>assets/icone_delete.png</file>
+        <file>assets/icone_edit.png</file>
     </qresource>
 </RCC>

@@ -34,8 +34,6 @@ private:
     int offsetZ;
     int offsetString;
     int currentChord;
-
-    bool is_trainingChordSet;
     QString chordSetName;
 
     Business * business;
@@ -59,16 +57,12 @@ private:
 
     void drawBackground(QPainter* painter, const QRectF & rect);
 
-    void prepareAwesomeGeometries(QString chord);
-    QVarLengthArray<int> currentAwesomeChord(QString chord);
-
     void prepareAwesomeGeometries(int index);
     QVarLengthArray<int> currentAwesomeChord(int index);
 
     void prepareFretOffsets(double cordaSizeIn);
 
 public slots:
-    void update(QString chord);
     void update(int index);
 };
 

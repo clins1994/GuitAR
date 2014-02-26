@@ -54,10 +54,13 @@
        <bool>true</bool>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="training">
-       <layout class="QVBoxLayout" name="verticalLayout_7">
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <property name="spacing">
+         <number>6</number>
+        </property>
         <property name="leftMargin">
          <number>0</number>
         </property>
@@ -67,68 +70,302 @@
         <property name="rightMargin">
          <number>0</number>
         </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
         <item>
-         <widget class="QGraphicsView" name="trainigGraphicsView"/>
+         <widget class="QWidget" name="widget_31" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>300</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>300</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <widget class="QLabel" name="label_22">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>250</width>
+             <height>131</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>250</width>
+             <height>150</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="Resources.qrc">:/assets/guitAR.png</pixmap>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_23">
+           <property name="geometry">
+            <rect>
+             <x>220</x>
+             <y>0</y>
+             <width>71</width>
+             <height>450</height>
+            </rect>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>450</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="Resources.qrc">:/assets/vertical_lines.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <zorder>label_23</zorder>
+          <zorder>label_22</zorder>
+         </widget>
         </item>
         <item>
-         <widget class="QWidget" name="widget_33" native="true">
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <widget class="QWidget" name="widget_25" native="true">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_14">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>20</number>
+           </property>
            <item>
-            <widget class="QComboBox" name="trainingMainChordComboBox"/>
-           </item>
-           <item>
-            <widget class="QComboBox" name="trainingChordModificatorComboBox"/>
-           </item>
-           <item>
-            <widget class="QPushButton" name="trainingPreviousVariation">
-             <property name="maximumSize">
-              <size>
-               <width>40</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>&lt;&lt;</string>
-             </property>
+            <widget class="QWidget" name="widget_26" native="true">
+             <layout class="QHBoxLayout" name="horizontalLayout_21">
+              <item>
+               <widget class="QLabel" name="label_21">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="focusPolicy">
+                 <enum>Qt::NoFocus</enum>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/assets/orange_square.png&quot;/&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt; Escolha a lista!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+                <property name="scaledContents">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_11">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>186</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="backToMenuTrainingList">
+                <property name="minimumSize">
+                 <size>
+                  <width>40</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>40</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background: url(:/assets/seta_back.png) no-repeat center center transparent;
+border: none;</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="trainingNextVariation">
-             <property name="maximumSize">
-              <size>
-               <width>40</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>&gt;&gt;</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QPushButton" name="backToMenuTraining">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>Voltar ao Menu</string>
-             </property>
+            <widget class="QWidget" name="widget_32" native="true">
+             <layout class="QHBoxLayout" name="horizontalLayout_23">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QWidget" name="widget_29" native="true">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_15">
+                 <property name="leftMargin">
+                  <number>20</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>20</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QListWidget" name="selectListToTrain">
+                   <property name="styleSheet">
+                    <string notr="true">QListWidget#selectListToTrain {
+	background: &quot;#424242&quot;;
+	border: none;
+	padding: 10px;
+}
+
+QListWidget#selectListToTrain::item {
+	text-align: center;
+	color: white;
+	padding: 5px 0;
+}</string>
+                   </property>
+                   <property name="selectionBehavior">
+                    <enum>QAbstractItemView::SelectRows</enum>
+                   </property>
+                   <property name="currentRow">
+                    <number>-1</number>
+                   </property>
+                   <property name="sortingEnabled">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QWidget" name="widget_30" native="true">
+                   <layout class="QHBoxLayout" name="horizontalLayout_22">
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <widget class="QPushButton" name="goToListMaker">
+                      <property name="text">
+                       <string>Ir para o gerenciador de listas</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer_2">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>22</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QWidget" name="widget_33" native="true">
+                <layout class="QVBoxLayout" name="verticalLayout_7">
+                 <item>
+                  <spacer name="verticalSpacer_6">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="trainSelectedList">
+                   <property name="styleSheet">
+                    <string notr="true">border: none;
+background-image: url(:/assets/icone_setaPlay.png);
+width: 80px;
+height: 80px;</string>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer_5">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </item>
           </layout>
@@ -183,7 +420,7 @@
               <item>
                <widget class="QLabel" name="label_4">
                 <property name="text">
-                 <string>Training:</string>
+                 <string>Em treinamento:</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignCenter</set>
@@ -400,7 +637,7 @@ QPushButton:focus, QPushButton:hover {
            <item>
             <widget class="QPushButton" name="startTrainingButton">
              <property name="text">
-              <string>Start Training</string>
+              <string>Treinar Lista</string>
              </property>
              <property name="icon">
               <iconset resource="Resources.qrc">
@@ -414,7 +651,7 @@ QPushButton:focus, QPushButton:hover {
            <item>
             <widget class="QPushButton" name="consultChordButton">
              <property name="text">
-              <string>Consult Chord</string>
+              <string>Dicionário de Acordes</string>
              </property>
              <property name="icon">
               <iconset resource="Resources.qrc">
@@ -428,7 +665,7 @@ QPushButton:focus, QPushButton:hover {
            <item>
             <widget class="QPushButton" name="listMakerButton">
              <property name="text">
-              <string>List Maker</string>
+              <string>Gerenciar Listas</string>
              </property>
              <property name="icon">
               <iconset resource="Resources.qrc">
@@ -560,7 +797,7 @@ QPushButton:focus, QPushButton:hover {
               <item>
                <widget class="QLabel" name="label_9">
                 <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/assets/orange_square.png&quot;/&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt; Consult Chord&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/assets/orange_square.png&quot;/&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt; Dicionário de Acordes&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                </widget>
               </item>
@@ -880,7 +1117,7 @@ background-color: transparent;</string>
                  <enum>Qt::NoFocus</enum>
                 </property>
                 <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/assets/orange_square.png&quot;/&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt; Select List&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/assets/orange_square.png&quot;/&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt; Gerenciador de Listas&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                 <property name="scaledContents">
                  <bool>false</bool>
@@ -988,7 +1225,7 @@ QListWidget#listsList::item {
                  <item>
                   <widget class="QPushButton" name="createNewListButton">
                    <property name="text">
-                    <string>Create new</string>
+                    <string>Criar nova</string>
                    </property>
                   </widget>
                  </item>
@@ -1008,21 +1245,21 @@ QListWidget#listsList::item {
                  <item>
                   <widget class="QPushButton" name="editListButton">
                    <property name="text">
-                    <string>Edit</string>
+                    <string>Editar</string>
                    </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="QPushButton" name="deleteListButton">
                    <property name="text">
-                    <string>Delete</string>
+                    <string>Excluir</string>
                    </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="QPushButton" name="trainBtn">
                    <property name="text">
-                    <string>Train!</string>
+                    <string>Treinar!</string>
                    </property>
                   </widget>
                  </item>
@@ -1149,7 +1386,7 @@ QListWidget#listsList::item {
                  <enum>Qt::NoFocus</enum>
                 </property>
                 <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/assets/orange_square.png&quot;/&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt; Create List&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/assets/orange_square.png&quot;/&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt; Criar Lista&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                 <property name="scaledContents">
                  <bool>false</bool>
@@ -1244,7 +1481,7 @@ border: none;</string>
                     <string notr="true">margin: 0 10px 0 0;</string>
                    </property>
                    <property name="text">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Name&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Your&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;List&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Nome&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;da&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Lista&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                    </property>
                   </widget>
                  </item>
@@ -1277,7 +1514,7 @@ font-size: 16px;</string>
                     </font>
                    </property>
                    <property name="text">
-                    <string>Create!</string>
+                    <string>Criar!</string>
                    </property>
                   </widget>
                  </item>
@@ -1411,7 +1648,7 @@ font-size: 16px;</string>
               <item>
                <widget class="QLabel" name="label_12">
                 <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/assets/orange_square.png&quot;/&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt; Edit List:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/assets/orange_square.png&quot;/&gt;&lt;span style=&quot; font-size:26pt;&quot;&gt; Editar lista:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                </widget>
               </item>

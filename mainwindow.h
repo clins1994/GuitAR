@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <cmath>
-#include <QtXml>
 #include "business.h"
 #include "training_metaio.h"
 
@@ -40,8 +39,6 @@ private slots:
 
     void on_chordsModificatorsComboBox_activated(const QString &arg1);
 
-    void on_backToMenuTraining_clicked();
-
     void on_createNewListButton_clicked();
 
     void on_createListButton_clicked();
@@ -60,12 +57,6 @@ private slots:
 
     void on_removeChordFromListButton_clicked();
 
-    void on_trainingMainChordComboBox_activated(const QString &arg1);
-
-    void on_trainingPreviousVariation_clicked();
-
-    void on_trainingNextVariation_clicked();
-
     void on_editNormalChordsComboBox_activated(const QString &arg1);
 
     void on_editChordsModificatorsComboBox_activated(const QString &arg1);
@@ -74,26 +65,24 @@ private slots:
 
     void on_editListNextChordVariation_clicked();
 
-    void on_trainingChordModificatorComboBox_activated(const QString &arg1);
-
     void on_backToMenuTrainingChordSet_clicked();
 
     void on_trainBtn_clicked();
 
     void on_trainingChordSetList_currentRowChanged(int currentRow);
 
+    void on_goToListMaker_clicked();
+
+    void on_backToMenuTrainingList_clicked();
+
+    void on_trainSelectedList_clicked();
+
 signals:
-    void updateMetaioChord(QString chord);
     void updateMetaioChordSet(int index);
 
 private:
     // Training
     TrainingMetaio *trainingWidget;
-    void startTutorial();
-    void updateTrainingChord();
-
-    // Training ChordSet
-    TrainingMetaio *trainingChordSetWidget;
 
     // Dictionary
     void updateGraphics();

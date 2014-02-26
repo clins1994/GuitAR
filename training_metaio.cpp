@@ -24,7 +24,6 @@ TrainingMetaio::TrainingMetaio(int width_in, int height_in, Business * business_
     offsetZ(0),
     offsetString(27),
     currentChord(0),
-    is_trainingChordSet(false),
     width(width_in),
     height(height_in),
     business(business_in)
@@ -60,27 +59,6 @@ void TrainingMetaio::loadContent()
     }
 
     prepareFretOffsets(2400);
-    update("A M");
-}
-
-void TrainingMetaio::pause()
-{
-    m_pMetaioSDK->pause();
-    m_pMetaioSDK->stopCamera();
-}
-
-void TrainingMetaio::resume()
-{
-    std::vector<metaio::Camera> cameras = m_pMetaioSDK->getCameraList();
-    if(cameras.size() > 0)
-    {
-        // set the resolution to 640x480
-        cameras[0].resolution = metaio::Vector2di(640, 480 * this->height / this->width);
-        cameras[0].flip = metaio::Camera::FLIP_HORIZONTAL;
-        m_pMetaioSDK->startCamera( cameras[0] );
-    }
-
-    m_pMetaioSDK->resume();
 }
 
 void TrainingMetaio::drawBackground(QPainter* painter, const QRectF & rect)
@@ -136,28 +114,9 @@ void TrainingMetaio::drawBackground(QPainter* painter, const QRectF & rect)
     glDisable(GL_DEPTH_TEST);
 }
 
-void TrainingMetaio::disableChordSetTraining()
-{
-    is_trainingChordSet = false;
-}
-
 void TrainingMetaio::setTraining(QString chordSetName)
 {
-    is_trainingChordSet = true;
     this->chordSetName = chordSetName;
-}
-
-void TrainingMetaio::update(QString chord)
-{
-    for (int i = 0; i < 6; i++)
-    {
-        if (geometries.at(i))
-            geometries.at(i)->setTranslation(metaio::Vector3d(offsetX, offsetY + (i * offsetString), offsetZ));
-        else
-            qCritical("Failed to translate");
-    }
-
-    prepareAwesomeGeometries(chord);
 }
 
 void TrainingMetaio::update(int index)
@@ -195,36 +154,9 @@ void TrainingMetaio::prepareAwesomeGeometries(int index)
     }
 }
 
-void TrainingMetaio::prepareAwesomeGeometries(QString chord)
-{
-    QVarLengthArray<int> aux = currentAwesomeChord(chord);
-    for (int i = 0; i < aux.size(); i++)
-    {
-        if(aux.at(i) == -1 || aux.at(i) == 0)
-        {
-            geometries.at(i)->setVisible(FALSE);
-        }
-        else if(aux.at(i) == 1)
-        {
-            geometries.at(i)->setVisible(TRUE);
-            geometries.at(i)->setTranslation(metaio::Vector3d(offsetX, offsetY + (-i * offsetString), offsetZ));
-        }
-        else
-        {
-            geometries.at(i)->setVisible(TRUE);
-            geometries.at(i)->setTranslation(metaio::Vector3d(offsetX + fretOffsets.at(aux.at(i) - 1), offsetY + (-i * offsetString), offsetZ));
-        }
-    }
-}
-
-QVarLengthArray<int> TrainingMetaio::currentAwesomeChord(QString chord)
-{
-    return business->getChord(chord).getCurrentVariation();
-}
-
 QVarLengthArray<int> TrainingMetaio::currentAwesomeChord(int index)
 {
-    return business->getChordSet("lol").getChord(index)->getCurrentVariation();
+    return business->getChordSet(chordSetName).getChord(index)->getCurrentVariation();
 }
 
 void TrainingMetaio::prepareFretOffsets(double cordaSizeIn)
